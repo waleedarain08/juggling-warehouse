@@ -6,7 +6,7 @@ import Signup from './pages/signup/signup';
 import { NavigationContainer } from '@react-navigation/native';
 import NotificationsScreen from './pages/notificationsScreen/notificationScreen';
 import React from 'react';
-import TabA from './pages/home/tabA';
+import HomeScreen from './pages/home/HomeScreen';
 import TabADetails from './pages/home/tabADetails';
 import { connect } from 'react-redux';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -18,7 +18,7 @@ const drawerButton = navigation => {
     <Icon
       name="menu"
       size={24}
-      style={{ marginLeft: 10 }}
+      style={{ marginLeft: 10, color: "#fff" }}
       onPress={() => navigation.toggleDrawer()}
     />
   );
@@ -32,8 +32,8 @@ function LoginStack() {
     <LoginStackNav.Navigator screenOptions={{
       headerShown: false
     }} initialRouteName="Login">
-      <LoginStackNav.Screen  name="Login" component={Login} />
-      <LoginStackNav.Screen  name="Signup" component={Signup} />
+      <LoginStackNav.Screen name="Login" component={Login} />
+      <LoginStackNav.Screen name="Signup" component={Signup} />
     </LoginStackNav.Navigator>
   );
 }
@@ -41,12 +41,26 @@ function LoginStack() {
 const HomeTabAStackNav = createStackNavigator();
 function HomeTabAStack() {
   return (
-    <HomeTabAStackNav.Navigator initialRouteName="TabA">
+    <HomeTabAStackNav.Navigator initialRouteName="HomeScreen" screenOptions={{
+      headerStyle: {
+        backgroundColor: '#0e101f',
+        shadowOpacity: 0.85,
+        shadowRadius: 0,
+        shadowOffset: {
+          width: 0,
+          height: 0,
+        },
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }}>
       <HomeTabAStackNav.Screen
-        name="TabA"
-        component={TabA}
+        name="Home"
+        component={HomeScreen}
         options={({ navigation }) => ({
-          headerLeft: () => drawerButton(navigation),
+          headerLeft: () => drawerButton(navigation)
         })}
       />
       <HomeTabAStackNav.Screen name="TabADetails" component={TabADetails} />
@@ -75,8 +89,16 @@ function HomeTab() {
   return (
     <HomeTabNav.Navigator
       tabBarOptions={{
-        activeTintColor: 'tomato',
-        inactiveTintColor: 'gray',
+        style: {
+          backgroundColor: '#0e101f98',
+          position: 'absolute',
+          borderTopWidth: 0.1,
+          elevation: 0,
+        },
+        //   activeTintColor: 'tomato',
+        //   inactiveTintColor: 'gray',
+          activeBackgroundColor: '#fff',
+         inactiveBackgroundColor: '#0e101f',
       }}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
@@ -133,7 +155,11 @@ function RootContainer({ user }) {
   if (user?.loggedin)
     return (
       <NavigationContainer>
-        <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Navigator initialRouteName="Home" drawerStyle={{
+          backgroundColor: '#0e101f',
+          width: 240,
+          color:"#fff"
+        }}>
           <Drawer.Screen name="Home" component={HomeTab} />
           <Drawer.Screen name="Notifications" component={NotificationsStack} />
         </Drawer.Navigator>

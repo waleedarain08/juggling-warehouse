@@ -1,91 +1,96 @@
-import { Text, View, StyleSheet, Image, TouchableOpacity,ScrollView,SafeAreaView } from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
 import React, { useState } from 'react';
 import { Input, Button } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { userLogin } from '../../redux/actions';
 
-function Signup({navigation, userInfo, userLogin }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+function Signup({ navigation, userInfo, userLogin }) {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
-  return (
-      <SafeAreaView style={{flex:1}}>
-    <ScrollView contentContainerStyle={styles.container}>
-                    <View onPress={()=>alert("hello")} style={styles.box1}>
-                        <TouchableOpacity onPress={()=>navigation.goBack()}>
+    return (
+        <SafeAreaView style={styles.safeArea}>
+            <ScrollView contentContainerStyle={styles.container}>
+            {/* <View style={{flex:1}}> */}
+                <View style={styles.box1}>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
                         <Image style={styles.back} source={require('../../assets/back.png')} />
-                        </TouchableOpacity>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.box2}>
+                    <Image style={styles.logo} source={require('../../assets/juggling.png')} />
+                    <Text style={styles.logindv}>SignUp</Text>
+                    <View style={styles.loginline}></View>
+                </View>
+                <View style={styles.box3}>
+                    <View>
+                        <Image style={styles.logo02} source={require('../../assets/user.png')} />
+                        <Input style={styles.email} placeholder="First Name" />
                     </View>
-                    <View style={styles.box2}>
-                        <Image style={styles.logo} source={require('../../assets/juggling.png')} />
-                        <Text style={styles.logindv}>SignUp</Text>
-                        <View style={styles.loginline}></View>
+                    <View>
+                        <Image style={styles.logo02} source={require('../../assets/user.png')} />
+                        <Input style={styles.password} placeholder="Last Name" />
                     </View>
-                    <View style={styles.box3}>
-                        <View>
-                            <Image style={styles.logo02} source={require('../../assets/user.png')} />
-                            <Input style={styles.email} placeholder="First Name"/>
-                        </View>
-                        <View>
-                            <Image style={styles.logo02} source={require('../../assets/user.png')} />
-                            <Input style={styles.password} placeholder="Last Name" />
-                        </View>
-                        <View>
-                            <Image style={styles.logo022} source={require('../../assets/email.png')} />
-                            <Input style={styles.email} placeholder="Email Address" />
-                        </View>
-                        <View>
-                            <Image style={styles.logo02} source={require('../../assets/phone.png')} />
-                            <Input style={styles.password} placeholder="Phone No." />
-                        </View>
-                        <View>
-                            <Image style={styles.logo02} source={require('../../assets/lock.png')} />
-                            <Input style={styles.email} placeholder="Password" secureTextEntry={true} />
-                        </View>
-                        <View>
-                            <Image style={styles.logo02} source={require('../../assets/lock.png')} />
-                            <Input style={styles.password} placeholder="Comfirm Password" secureTextEntry={true} />
-                        </View>
+                    <View>
+                        <Image style={styles.logo022} source={require('../../assets/email.png')} />
+                        <Input style={styles.email} placeholder="Email Address" />
                     </View>
-                    <View style={styles.box4}>
+                    <View>
+                        <Image style={styles.logo02} source={require('../../assets/phone.png')} />
+                        <Input style={styles.password} placeholder="Phone No." />
+                    </View>
+                    <View>
+                        <Image style={styles.logo02} source={require('../../assets/lock.png')} />
+                        <Input style={styles.email} placeholder="Password" secureTextEntry={true} />
+                    </View>
+                    <View>
+                        <Image style={styles.logo02} source={require('../../assets/lock.png')} />
+                        <Input style={styles.password} placeholder="Comfirm Password" secureTextEntry={true} />
+                    </View>
+                </View>
+                <View style={styles.box4}>
                     <TouchableOpacity
-            activeOpacity={0.8}
-            style={styles.LoginButton}
-            onPress={() => userLogin(username, password)}
-          >
-            <Text style={styles.LoginButtonInside}>LOGIN</Text>
-          </TouchableOpacity>
-                    </View>
-                    <View style={styles.box5}>
+                        activeOpacity={0.8}
+                        style={styles.LoginButton}
+                        onPress={() => navigation.goBack()}
+                    >
+                        <Text style={styles.LoginButtonInside}>SIGN UP</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.box5}>
                     <View style={styles.loginhere}>
-                    <Text style={styles.account}> Already have an account</Text>
-                        <Text onPress={()=>navigation.goBack()} style={styles.singup}>LOGIN HERE</Text>
-                        </View>
-                        <View style={styles.line}>
-                            <View style={styles.singupline}>
-                            </View>
+                        <Text style={styles.account}> Already have an account</Text>
+                        <Text onPress={() => navigation.goBack()} style={styles.singup}>LOGIN HERE</Text>
+                    </View>
+                    <View style={styles.line}>
+                        <View style={styles.singupline}>
                         </View>
                     </View>
+                </View>
+                {/* </View> */}
             </ScrollView>
-            </SafeAreaView>
-  );
+        </SafeAreaView>
+    );
 }
 
 
 const mapStateToProps = state => {
-  return { userInfo: state?.userInfo };
+    return { userInfo: state?.userInfo };
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ userLogin }, dispatch);
+    bindActionCreators({ userLogin }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);
 
 const styles = StyleSheet.create({
-    container: {
+    safeArea: {
         flex: 1,
-        backgroundColor: "#0e101f",
+        backgroundColor: '#0e101f'
+    },
+    container: {
+        flexGrow:1,
     },
     logindv: {
         fontSize: 13,
@@ -99,11 +104,11 @@ const styles = StyleSheet.create({
         height: 1,
         backgroundColor: "white",
         marginTop: 10,
-        marginBottom:10,
+        marginBottom: 10,
     },
     logo: {
-        height: "50%",
-        width: "45%",
+        height: 100,
+        width: 200,
     },
     back: {
         height: 17,
@@ -111,47 +116,46 @@ const styles = StyleSheet.create({
 
     },
     box1: {
-        flex: .7,
-        paddingLeft:"5%",
-        paddingTop:"1%"
+        flex: .5,
+        paddingLeft: "5%",
+        paddingTop: "1%",
     },
     box2: {
-        flex: 4,
+        flex: 3,
         justifyContent: "center",
         alignItems: "center",
     },
     email: {
-        paddingTop: 30,
-        paddingLeft: "18%",
-        paddingBottom: 10,
+        paddingTop: 12,
+        paddingLeft: 35,
+        fontSize: 12,
     },
     box3: {
-        flex: 5,
+        flex: 3,
+        paddingHorizontal: 27,
     },
     password: {
-        paddingTop: 30,
-        paddingLeft: "18%",
-        paddingBottom: 10,
+        paddingTop: 12,
+        paddingLeft: 35,
+        fontSize: 12,
     },
     logo02: {
-        height: 20,
-        width: 15,
+        height: 14,
+        width: 10,
         position: "absolute",
-        top: 31,
-        left: 41,
+        top: 16,
+        left: 20,
     },
     logo022: {
-        height: 16,
-        width: 22,
+        height: 12,
+        width: 12,
         position: "absolute",
-        top: 34,
-        left: 36,
+        top: 17,
+        left: 18,
     },
     box4: {
-        flex: 0.9,
-        paddingBottom: 25,
-        paddingTop: 25,
-        backgroundColor:"red"
+        flex: 0.5,
+        justifyContent:"center",
     },
     button: {
         alignItems: "center",
@@ -168,42 +172,45 @@ const styles = StyleSheet.create({
         color: "#ffffff",
         fontWeight: "bold",
         fontSize: 12,
-      },
+    },
     LoginButton: {
         alignItems: "center",
         backgroundColor: "#1974ba",
         padding: 16,
         marginHorizontal: 40,
         borderRadius: 3,
-      },
+    },
     box5: {
-        flex: 2,
-        paddingVertical:20,
+        flex: 1.2,
+        justifyContent:"center",
+        alignItems:"center",
+        paddingVertical:8,
     },
     account: {
         textAlign: "center",
         color: "#dedee0",
-        fontSize: 18,
+        fontSize: 10,
     },
     singup: {
         textAlign: "center",
         color: "#1b73bd",
         fontWeight: 'bold',
+        fontSize:12,
     },
     singupline: {
         width: 82,
         height: 2,
         backgroundColor: "#17619c",
     },
-    loginhere:{
-        flex:1,
-        justifyContent:"flex-start",
-        alignItems:"center",
+    loginhere: {
+        flex: 1,
+        justifyContent: "flex-start",
+        alignItems: "center",
     },
-    line:{
-        flex:1,
-        justifyContent:"flex-start",
-        alignItems:"center",
+    line: {
+        flex: 1,
+        justifyContent: "flex-start",
+        alignItems: "center",
     }
 
 })
