@@ -130,7 +130,6 @@ const styles = StyleSheet.create({
     // flex: 1,
   },
   setdv: {
-    //flex:1,
     height: 350,
     flexGrow: 1,
     backgroundColor: "blue"
@@ -164,9 +163,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-    paddingHorizontal: 10
-    // paddingTop: 18,
-    // paddingBottom: 15,
+    paddingHorizontal: 10,
   },
   categores: {
     color: "#fffffd",
@@ -242,7 +239,6 @@ const styles = StyleSheet.create({
     height: 100,
     width: "80%",
     resizeMode: "stretch",
-    elevation: 5,
     marginLeft: 6,
   },
   box5: {

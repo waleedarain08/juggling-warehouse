@@ -3,6 +3,10 @@ import { TabB, TabBDetails } from './pages/home/tabB';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Login from './pages/login/login';
 import Signup from './pages/signup/signup';
+import search, { Search } from './pages/search/search';
+// import profile from './pages/profile/profile';
+// import download from './pages/doenload/download';
+import list, { List } from './pages/list/list';
 import { NavigationContainer } from '@react-navigation/native';
 import NotificationsScreen from './pages/notificationsScreen/notificationScreen';
 import React from 'react';
@@ -84,6 +88,38 @@ function HomeTabBStack() {
   );
 }
 
+const HomeSearchStackNav = createStackNavigator();
+function HomeSearchStack() {
+  return (
+    <HomeSearchStackNav.Navigator initialRouteName="search">
+      <HomeSearchStackNav.Screen
+        name="search"
+        component={Search}
+        options={({ navigation }) => ({
+          headerLeft: () => drawerButton(navigation),
+        })}
+      />
+      <HomeSearchStackNav.Screen name="TabBDetails" component={TabBDetails} />
+    </HomeSearchStackNav.Navigator>
+  );
+}
+const HomeListStackNav = createStackNavigator();
+function HomeListStack() {
+  return (
+    <HomeListStackNav.Navigator initialRouteName="list">
+      <HomeListStackNav.Screen
+        name="list"
+        component={List}
+        options={({ navigation }) => ({
+          headerLeft: () => drawerButton(navigation),
+        })}
+      />
+      <HomeListStackNav.Screen name="TabBDetails" component={TabBDetails} />
+    </HomeListStackNav.Navigator>
+  );
+}
+
+
 const HomeTabNav = createBottomTabNavigator();
 function HomeTab() {
   return (
@@ -105,19 +141,19 @@ function HomeTab() {
           let iconName;
 
           switch (route.name) {
-            case 'Tab A':
+            case 'Download':
               iconName = focused ? 'home-circle' : 'home-circle-outline';
               break;
-            case 'Tab B':
+            case 'Search':
               iconName = focused ? 'account-circle' : 'account-circle-outline';
               break;
-            case 'Tab C':
+            case 'Home':
               iconName = focused ? 'account-circle' : 'account-circle-outline';
               break;
-            case 'Tab D':
+            case 'List':
               iconName = focused ? 'account-circle' : 'account-circle-outline';
               break;
-            case 'Tab E':
+            case 'Profile':
               iconName = focused ? 'account-circle' : 'account-circle-outline';
               break;
             default:
@@ -126,11 +162,11 @@ function HomeTab() {
           return <Icon name={iconName} size={size} color={color} />;
         },
       })}>
-      <HomeTabNav.Screen name="Tab A" component={HomeTabAStack} />
-      <HomeTabNav.Screen name="Tab B" component={HomeTabBStack} />
-      <HomeTabNav.Screen name="Tab C" component={HomeTabAStack} />
-      <HomeTabNav.Screen name="Tab D" component={HomeTabAStack} />
-      <HomeTabNav.Screen name="Tab E" component={HomeTabAStack} />
+      <HomeTabNav.Screen name="Download" component={HomeTabBStack} />
+      <HomeTabNav.Screen name="Search" component={HomeSearchStack} />
+      <HomeTabNav.Screen name="Home" component={HomeTabAStack} />
+      <HomeTabNav.Screen name="List" component={HomeListStack} />
+      <HomeTabNav.Screen name="Profile" component={HomeSearchStack} />
 
     </HomeTabNav.Navigator>
   );

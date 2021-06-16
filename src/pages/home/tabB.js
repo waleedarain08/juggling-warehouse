@@ -12,14 +12,13 @@ export function TabB({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.box1}>
+      <View>
         <Text style={styles.down}>Downloads</Text>
       </View>
-      <View style={styles.box2}>
+      <View>
         <Image style={styles.search} source={require('../../assets/search.png')} />
         <Input style={styles.vlogers} placeholder="Vlogers" />
       </View>
-      <View style={styles.box3}>
         <FlatList
           keyExtractor={(item, index) => index}
           data={reason4}
@@ -28,7 +27,7 @@ export function TabB({ navigation }) {
           renderItem={({ item }) => {
             return (
                 <View style={styles.card}>
-                  <View style={{ flex: 1 ,backgroundColor:"red",flexWrap:"wrap"}}>
+                  <View style={{ flex: 1 ,flexWrap:"wrap"}}>
                     <Image style={styles.tile} source={item.image} />
                   </View>
                   <View style={{ flex: 3 }}>
@@ -42,9 +41,8 @@ export function TabB({ navigation }) {
             )
           }}>
         </FlatList>
-        <View style={{height:200,backgroundColor:"red"}}></View>
+        <View style={{height:70,}}></View>
 
-      </View>
     </View>
   );
 }
@@ -62,12 +60,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#0e101f",
-    paddingHorizontal: 10,
+    paddingHorizontal: 14,
     
-  },
-  box1: {
-    // flex: 4,
-    // backgroundColor:"black",
   },
   down: {
     color: "#ffffff",
@@ -75,10 +69,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     paddingTop: 26,
     paddingLeft: 6,
-  },
-  box2: {
-    // flex: 4,
-    // backgroundColor:"blue",
   },
   vlogers: {
     paddingTop: 10,
@@ -95,10 +85,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 30,
     left: "85%",
-  },
-  box3: {
-    // paddingTop:30,
-    // marginLeft:10
   },
   tile: {
     width:"100%",
