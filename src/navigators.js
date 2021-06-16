@@ -75,7 +75,22 @@ function HomeTabAStack() {
 const HomeTabBStackNav = createStackNavigator();
 function HomeTabBStack() {
   return (
-    <HomeTabBStackNav.Navigator initialRouteName="TabB">
+    <HomeTabBStackNav.Navigator initialRouteName="TabB" screenOptions={{
+      headerStyle: {
+        backgroundColor: '#0e101f',
+        shadowOpacity: 0.85,
+        shadowRadius: 0,
+        shadowOffset: {
+          width: 0,
+          height: 0,
+        },
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }}>
+      
       <HomeTabBStackNav.Screen
         name="TabB"
         component={TabB}
@@ -91,7 +106,21 @@ function HomeTabBStack() {
 const HomeSearchStackNav = createStackNavigator();
 function HomeSearchStack() {
   return (
-    <HomeSearchStackNav.Navigator initialRouteName="search">
+    <HomeSearchStackNav.Navigator initialRouteName="search" screenOptions={{
+      headerStyle: {
+        backgroundColor: '#0e101f',
+        shadowOpacity: 0.85,
+        shadowRadius: 0,
+        shadowOffset: {
+          width: 0,
+          height: 0,
+        },
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }}>
       <HomeSearchStackNav.Screen
         name="search"
         component={Search}
@@ -106,9 +135,23 @@ function HomeSearchStack() {
 const HomeListStackNav = createStackNavigator();
 function HomeListStack() {
   return (
-    <HomeListStackNav.Navigator initialRouteName="list">
+    <HomeListStackNav.Navigator initialRouteName="list" screenOptions={{
+      headerStyle: {
+        backgroundColor: '#0e101f',
+        shadowOpacity: 0.85,
+        shadowRadius: 0,
+        shadowOffset: {
+          width: 0,
+          height: 0,
+        },
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }}>
       <HomeListStackNav.Screen
-        name="list"
+        name="List"
         component={List}
         options={({ navigation }) => ({
           headerLeft: () => drawerButton(navigation),
@@ -131,9 +174,9 @@ function HomeTab() {
           borderTopWidth: 0.1,
           elevation: 0,
         },
-        //   activeTintColor: 'tomato',
-        //   inactiveTintColor: 'gray',
-          activeBackgroundColor: '#fff',
+          activeTintColor: "#fff",
+          inactiveTintColor: 'gray',
+          activeBackgroundColor: '#1a72b9',
          inactiveBackgroundColor: '#0e101f',
       }}
       screenOptions={({ route }) => ({
@@ -148,7 +191,7 @@ function HomeTab() {
               iconName = focused ? 'account-circle' : 'account-circle-outline';
               break;
             case 'Home':
-              iconName = focused ? 'account-circle' : 'account-circle-outline';
+              iconName = focused ? 'home-circle' : 'home-circle-outline';
               break;
             case 'List':
               iconName = focused ? 'account-circle' : 'account-circle-outline';
@@ -175,7 +218,21 @@ function HomeTab() {
 const NotificationStackNav = createStackNavigator();
 function NotificationsStack() {
   return (
-    <NotificationStackNav.Navigator>
+    <NotificationStackNav.Navigator screenOptions={{
+      headerStyle: {
+        backgroundColor: '#0e101f',
+        shadowOpacity: 0.85,
+        shadowRadius: 0,
+        shadowOffset: {
+          width: 0,
+          height: 0,
+        },
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }}>
       <NotificationStackNav.Screen
         name="Notfications"
         component={NotificationsScreen}

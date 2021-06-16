@@ -21,27 +21,22 @@ export default function NotificationsScreen() {
     </View>
     <View style={styles.today}>
         <Text style={styles.textdv}>Today</Text>
-        <View style={styles.card}>
-            <Image style={styles.icon} source={require('../../assets/04.png')} />
-            <View>
-                <Text style={styles.disney}>New Vlog From Disney</Text>
-                <Text style={styles.pm}>11.35 PM</Text>
-            </View>
-        </View>
-        <View style={styles.card}>
-            <Image style={styles.icon} source={require('../../assets/03.png')} />
-            <View>
-                <Text style={styles.disney}>New Vlog From Disney</Text>
-                <Text style={styles.pm}>11.35 PM</Text>
-            </View>
-        </View>
-        <View style={styles.card}>
-            <Image style={styles.icon} source={require('../../assets/02.png')} />
-            <View>
-                <Text style={styles.disney}>New Vlog From Disney</Text>
-                <Text style={styles.pm}>11.35 PM</Text>
-            </View>
-        </View>
+        <FlatList
+            data={reason}
+            vertical={true}
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item }) => {
+                return (
+                    <View style={styles.card2}>
+                        <Image style={styles.icon2} source={item.image} />
+                        <View>
+                            <Text style={styles.disney2}>New Vlog From Disney</Text>
+                            <Text style={styles.pm2}>11.35 PM</Text>
+                        </View>
+                    </View>
+                )
+            }}>
+        </FlatList>
     </View>
     <View style={styles.week}>
         <Text style={styles.textdd}>This Week</Text>
