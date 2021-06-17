@@ -87,8 +87,9 @@ const styles = StyleSheet.create({
     left: "85%",
   },
   tile: {
-    width:"100%",
-    height: "100%",
+    width:60,
+    height: 60,
+    resizeMode:"cover"
   },
   card: {
     flex: 1,

@@ -4,6 +4,7 @@ import { Input, Button, Card } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { userLogout } from '../../redux/actions';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 function HomeScreen({ navigation, user, userLogout }) {
@@ -12,6 +13,9 @@ function HomeScreen({ navigation, user, userLogout }) {
   const [reason2, setReason2] = useState([{ title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }, { title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }, { title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }]);
   const [reason3, setReason3] = useState([{ title: "abc", image: require('../../assets/serial1.jpg') }, { title: "abc", image: require('../../assets/serial2.jpg') }, { title: "abc", image: require('../../assets/serial1.jpg') }, { title: "abc", image: require('../../assets/serial2.jpg') }]);
 
+  goNext = () => {
+    navigation.navigate("DetailScreen");
+  }
 
   return (
     <View style={styles.container}>
@@ -33,12 +37,12 @@ function HomeScreen({ navigation, user, userLogout }) {
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => {
                 return (
-                  <View style={{ width: 280 }}>
+                  <TouchableOpacity  activeOpacity={0.9} onPress={()=>goNext()} style={{ width: 290 }}>
                     <Image style={styles.live} source={require('../../assets/live.png')} />
                     <Image
                       style={{ width: "100%", height: "100%", marginLeft: 0, resizeMode: "contain", }}
                       source={item.image} />
-                  </View>
+                  </TouchableOpacity>
                 )
               }}>
             </FlatList>
@@ -52,7 +56,6 @@ function HomeScreen({ navigation, user, userLogout }) {
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => {
                 return (
-                  // <View style={{ flex:1}}>
                   <View style={styles.carddv}>
                     <View style={{ flex: 2 }}>
                       <Image style={styles.tile} source={item.image} />
@@ -66,7 +69,6 @@ function HomeScreen({ navigation, user, userLogout }) {
                       <Image style={styles.dots} source={require('../../assets/3-dots.png')} />
                     </View>
                   </View>
-                  // </View>
                 )
               }}>
             </FlatList>
@@ -126,22 +128,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#0e101f",
     paddingHorizontal: 10
   },
-  box1: {
-    // flex: 1,
-  },
-  setdv: {
-    height: 350,
-    flexGrow: 1,
-    backgroundColor: "blue"
-  },
-  manu: {
-    flexDirection: "row",
-    marginTop: 34,
-  },
-  logo: {
-    width: 12,
-    height: 12,
-  },
   drop: {
     width: 10,
     height: 20,
@@ -154,16 +140,16 @@ const styles = StyleSheet.create({
   },
   home: {
     fontSize: 12,
-    fontWeight: '500',
+    fontWeight: '600',
     color: "white",
     paddingLeft: 20,
   },
   cate: {
-    flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
     paddingHorizontal: 10,
+    paddingBottom:"2%",
   },
   categores: {
     color: "#fffffd",
@@ -187,9 +173,9 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   tile: {
-    width: 90,
-    height: 90,
-    resizeMode: "contain"
+    width: 80,
+    height: 80,
+    resizeMode: "cover"
   },
   mark: {
     width: 12,

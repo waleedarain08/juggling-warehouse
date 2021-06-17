@@ -11,6 +11,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import NotificationsScreen from './pages/notificationsScreen/notificationScreen';
 import React from 'react';
 import HomeScreen from './pages/home/HomeScreen';
+import DetailScreen from './pages/home/DetailScreen';
 import TabADetails from './pages/home/tabADetails';
 import { connect } from 'react-redux';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -67,7 +68,7 @@ function HomeTabAStack() {
           headerLeft: () => drawerButton(navigation)
         })}
       />
-      <HomeTabAStackNav.Screen name="TabADetails" component={TabADetails} />
+      <HomeTabAStackNav.Screen name="DetailScreen" component={DetailScreen} />
     </HomeTabAStackNav.Navigator>
   );
 }
@@ -164,6 +165,7 @@ function HomeListStack() {
 
 
 const HomeTabNav = createBottomTabNavigator();
+
 function HomeTab() {
   return (
     <HomeTabNav.Navigator

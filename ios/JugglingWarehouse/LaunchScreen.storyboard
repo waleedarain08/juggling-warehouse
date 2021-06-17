@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -12,18 +11,34 @@
         <scene sceneID="EHf-IW-A2E">
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HwZ-Ot-Wgd"/>
+                        <viewControllerLayoutGuide type="bottom" id="g4R-8D-LUY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="DsY-VL-Acu">
-                                <rect key="frame" x="0.0" y="0.0" width="366" height="667"/>
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="DsY-VL-Acu">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="DsY-VL-Acu" secondAttribute="height" multiplier="375:667" id="5g7-qx-eGX"/>
+                                </constraints>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                             </imageView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
+                        <color key="backgroundColor" red="0.024844591669999999" green="0.05798865835" blue="0.1115204016" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                         <constraints>
-                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="DsY-VL-Acu" secondAttribute="trailing" id="iYn-EA-rcj"/>
+                            <constraint firstItem="g4R-8D-LUY" firstAttribute="top" secondItem="DsY-VL-Acu" secondAttribute="bottom" id="1Bk-J8-lhf"/>
+                            <constraint firstAttribute="trailing" secondItem="DsY-VL-Acu" secondAttribute="trailing" id="iYn-EA-rcj"/>
+                            <constraint firstAttribute="trailing" secondItem="DsY-VL-Acu" secondAttribute="trailing" id="ioc-0L-RQ8"/>
+                            <constraint firstItem="DsY-VL-Acu" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="lJO-OO-Wr5"/>
+                            <constraint firstItem="DsY-VL-Acu" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="firstBaseline" id="maA-ix-wSf"/>
+                            <constraint firstItem="DsY-VL-Acu" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="mlb-rI-NVC"/>
+                            <constraint firstAttribute="trailing" secondItem="DsY-VL-Acu" secondAttribute="trailing" id="niB-RJ-c7l"/>
+                            <constraint firstItem="DsY-VL-Acu" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="xa8-QO-F0U"/>
+                            <constraint firstItem="DsY-VL-Acu" firstAttribute="top" secondItem="HwZ-Ot-Wgd" secondAttribute="bottom" id="z9V-1V-6L1"/>
                         </constraints>
                     </view>
                 </viewController>

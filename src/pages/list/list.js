@@ -45,6 +45,7 @@ export function List({ navigation }) {
                     <Image style={styles.moviepng} source={require('../../assets/03-tile.png')} />
                     </View>
                 </ScrollView>
+                <View style={{height:70,}}></View>
             </View>
   );
 }
