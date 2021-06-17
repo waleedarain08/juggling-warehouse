@@ -9,7 +9,7 @@ import { userLogout } from '../redux/actions';
 
 function DetailScreen({ navigation }) {
 
-    const [reason, setReason] = useState([{ title: "abc", image: require('../../assets/vedio.png') }, { title: "def", image: require('../../assets/vedio.png') }, { title: "ghi", image: require('../../assets/vedio.png') },]);
+    const [reason, setReason] = useState([{ title: "abc", image: require('../../assets/01-tile.png') }, { title: "def", image: require('../../assets/02-tile.png') }, { title: "ghi", image: require('../../assets/03-tile.png') },{ title: "ghi", image: require('../../assets/01-tile.png') },{ title: "ghi", image: require('../../assets/02-tile.png') },{ title: "ghi", image: require('../../assets/03-tile.png') }]);
 
 
     return (
@@ -23,9 +23,14 @@ function DetailScreen({ navigation }) {
                     </View>
                     <View style={styles.box3}>
                         <View style={styles.downsec}>
-                            <Text style={styles.motivation2}>About Motivations</Text>
+                        <View style={{flex:2,}}>
+                            <Text style={styles.motivation2}>About Motivations</Text></View>
+                            <View style={{flex:1.5,alignItems:"flex-end",paddingLeft:1,}}>
                             <Image style={styles.list} source={require('../../assets/list.png')} />
+                            </View>
+                            <View style={{flex:1,alignItems:"center",paddingLeft:3,}}>
                             <Image style={styles.download} source={require('../../assets/download.png')} />
+                            </View>
                         </View>
                         <View style={styles.rating}>
                             <Text style={styles.rats}>2021</Text>
@@ -57,7 +62,7 @@ function DetailScreen({ navigation }) {
                             renderItem={({ item }) => {
                                 return (
                                     <View style={{ height: 100, width: 100 }}>
-                                        <Image style={styles.tile} source={require('../../assets/02-tile.png')} />
+                                        <Image style={styles.tile} source={item.image} />
                                     </View>
                                 )
                             }}>
@@ -138,13 +143,14 @@ const styles = StyleSheet.create({
     },
     hdsc: {
         color: "#ffffff",
-        fontSize: 12,
+        fontSize: 10,
+        borderWidth:1,
+        borderColor:"#ffffff"
     },
     list: {
         width: 18,
         height: 18,
         marginVertical: 10,
-        marginRight: 15,
     },
     star: {
         width: 12,
@@ -152,8 +158,8 @@ const styles = StyleSheet.create({
         marginTop: 2,
     },
     download: {
-        width: 18,
-        height: 18,
+        width: 20,
+        height: 20,
         marginVertical: 10,
     },
     box4: {

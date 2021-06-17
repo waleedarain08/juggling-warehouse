@@ -1,5 +1,5 @@
+import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { TabB, TabBDetails } from './pages/home/tabB';
-
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Login from './pages/login/login';
 import Signup from './pages/signup/signup';
@@ -170,16 +170,23 @@ function HomeTab() {
   return (
     <HomeTabNav.Navigator
       tabBarOptions={{
+        tabStyle:{ //Add this 
+          // borderTopRightRadius:10,
+          // borderTopLeftRadius:10,
+          paddingVertical:3,
+          borderRadius:8
+      },
         style: {
           backgroundColor: '#0e101f98',
           position: 'absolute',
           borderTopWidth: 0.1,
           elevation: 0,
+         
         },
           activeTintColor: "#fff",
           inactiveTintColor: 'gray',
           activeBackgroundColor: '#1a72b9',
-         inactiveBackgroundColor: '#0e101f',
+          inactiveBackgroundColor: '#0e101f',
       }}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
@@ -187,24 +194,23 @@ function HomeTab() {
 
           switch (route.name) {
             case 'Download':
-              iconName = focused ? 'home-circle' : 'home-circle-outline';
-              break;
+              return   <Image style={{height:18,width:18,resizeMode:"contain"}} source={require('./assets/downloadicon.png')} />
             case 'Search':
-              iconName = focused ? 'account-circle' : 'account-circle-outline';
+              return   <Image style={{height:18,width:18,resizeMode:"contain"}} source={require('./assets/Search.png')} />
               break;
             case 'Home':
-              iconName = focused ? 'home-circle' : 'home-circle-outline';
+              return   <Image style={{height:18,width:18,resizeMode:"contain"}} source={require('./assets/homeicon.png')} />
               break;
             case 'List':
-              iconName = focused ? 'account-circle' : 'account-circle-outline';
+              return   <Image style={{height:18,width:18,resizeMode:"contain"}} source={require('./assets/Play-List.png')} />
               break;
             case 'Profile':
-              iconName = focused ? 'account-circle' : 'account-circle-outline';
+              return   <Image style={{height:18,width:18,resizeMode:"contain"}} source={require('./assets/Profile.png')} />
               break;
             default:
               break;
           }
-          return <Icon name={iconName} size={size} color={color} />;
+          // return <Icon name={iconName} size={size} color={color} />;  
         },
       })}>
       <HomeTabNav.Screen name="Download" component={HomeTabBStack} />
@@ -250,12 +256,16 @@ function RootContainer({ user }) {
   if (user?.loggedin)
     return (
       <NavigationContainer>
-        <Drawer.Navigator initialRouteName="Home" drawerStyle={{
+        <Drawer.Navigator    drawerContentOptions={{
+                activeTintColor: '#fff',
+                inactiveTintColor:'blue',
+                itemStyle: { marginVertical: 8, marginHorizontal: 8 },
+            }} initialRouteName="Home" drawerStyle={{
           backgroundColor: '#0e101f',
-          width: 240,
-          color:"#fff"
+          width: 280,
+          color:"#fff",
         }}>
-          <Drawer.Screen name="Home" component={HomeTab} />
+          <Drawer.Screen options={{ activeTintColor:"#fff" }} name="Home" component={HomeTab} />
           <Drawer.Screen name="Notifications" component={NotificationsStack} />
         </Drawer.Navigator>
       </NavigationContainer>
