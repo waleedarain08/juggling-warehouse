@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, Dimensions, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image ,TouchableOpacity} from 'react-native';
 import { Input, Button, Card, SearchBar } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -7,16 +7,16 @@ import { userLogout } from '../../redux/actions';
 
 
 
-export default function NotificationsScreen() {
+export default function NotificationsScreen({navigation}) {
   const [reason, setReason] = useState([{ title: "abc", image: require('../../assets/01.png') }, { title: "abc", image: require('../../assets/02.png') }, { title: "abc", image: require('../../assets/03.png') }, { title: "abc", image: require('../../assets/04.png') }, { title: "abc", image: require('../../assets/01.png') }, { title: "abc", image: require('../../assets/02.png') }]);
 
   return (
     <View style={styles.container}>
     <View style={styles.notification}>
-        <View style={styles.imgcard} >
+        <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.goBack()} style={styles.imgcard} >
             <Image style={styles.backpng} source={require('../../assets/back.png')} />
-        </View>
-        <Image style={styles.search} source={require('../../assets/search.png')} />
+        </TouchableOpacity>
+        <Image style={styles.search} source={require('../../assets/Search.png')} />
         <Input style={styles.vlogers} placeholder="Notification" />
     </View>
     <View style={styles.today}>
@@ -32,6 +32,9 @@ export default function NotificationsScreen() {
                         <View>
                             <Text style={styles.disney2}>New Vlog From Disney</Text>
                             <Text style={styles.pm2}>11.35 PM</Text>
+                        </View>
+                        <View style={styles.righticon}>
+                        <Image style={styles.iconpng} source={require('../../assets/right-arrow.png')}></Image>
                         </View>
                     </View>
                 )
@@ -52,6 +55,9 @@ export default function NotificationsScreen() {
                             <Text style={styles.disney2}>New Vlog From Disney</Text>
                             <Text style={styles.pm2}>11.35 PM</Text>
                         </View>
+                        <View style={styles.righticon}>
+                             <Image style={styles.iconpng} source={require('../../assets/right-arrow.png')}></Image>
+                             </View>
                     </View>
                 )
             }}>
@@ -89,13 +95,24 @@ const styles = StyleSheet.create({
       color: "white",
       position: "relative",
   },
+  iconpng:{
+      width:20,
+      height:20,
+  },
+  righticon:{
+      flex:1,
+      alignItems:"flex-end",
+      paddingHorizontal:10,
+      paddingVertical:10,
+  },
   imgcard: {
       backgroundColor: "#1b1b33",
       width: 30,
       height: 30,
       position: "absolute",
-      top: 28,
+      top: 17,
       left: 12,
+      zIndex:1
   },
   search: {
       width: 18,

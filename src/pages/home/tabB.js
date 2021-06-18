@@ -16,7 +16,7 @@ export function TabB({ navigation }) {
         <Text style={styles.down}>Downloads</Text>
       </View>
       <View>
-        <Image style={styles.search} source={require('../../assets/search.png')} />
+        <Image style={styles.search} source={require('../../assets/Search.png')} />
         <Input style={styles.vlogers} placeholder="Vlogers" />
       </View>
         <FlatList
