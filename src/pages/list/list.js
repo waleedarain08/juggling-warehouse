@@ -15,7 +15,7 @@ export function List({ navigation }) {
                 <Text style={styles.mylist}>My List</Text>
                 </View>
                 <View style={styles.searchopt}>
-                <Image style={styles.search} source={require('../../assets/Search.png')} />
+                <Image style={styles.search} source={require('../../assets/search.png')} />
                 <Input style={styles.vlogers}  placeholder="Vlogers" />
                 </View>
                 <ScrollView contentContainerStyle={{flexGrow:1,paddingBottom:20, }}>

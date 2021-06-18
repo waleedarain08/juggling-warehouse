@@ -7,16 +7,17 @@ import org.devio.rn.splashscreen.SplashScreen; // here \
 
 public class MainActivity extends ReactActivity {
 
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+      SplashScreen.show(this);  // here 
+      super.onCreate(savedInstanceState);
+  }
+
  @Override
    protected String getMainComponentName() {
      return "JugglingWarehouse";
    }
 
- @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        SplashScreen.show(this);  // here 
-        super.onCreate(savedInstanceState);
-    }
 }
 // package com.jugglingwarehouse;
 

@@ -196,7 +196,7 @@ function HomeTab() {
             case 'Download':
               return   <Image style={{height:18,width:18,resizeMode:"contain"}} source={require('./assets/downloadicon.png')} />
             case 'Search':
-              return   <Image style={{height:18,width:18,resizeMode:"contain"}} source={require('./assets/Search.png')} />
+              return   <Image style={{height:18,width:18,resizeMode:"contain"}} source={require('./assets/search.png')} />
               break;
             case 'Home':
               return   <Image style={{height:18,width:18,resizeMode:"contain"}} source={require('./assets/homeicon.png')} />
