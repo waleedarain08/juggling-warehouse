@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, Modal, ScrollView, Pressable } from 'react-native';
-import { Input, Button,CheckBox } from 'react-native-elements';
+import { Input, Button, CheckBox } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { userLogout } from '../redux/actions';
@@ -30,7 +30,7 @@ function DetailScreen({ navigation }) {
                             <Image style={styles.list} source={require('../../assets/list.png')} />
                         </View>
                         <View style={{ flex: 1, alignItems: "center", paddingLeft: 3, }}>
-                            <Image style={styles.download} source={require('../../assets/download.png')} />
+                            <Image style={styles.download} source={require('../../assets/downloadicon.png')} />
                         </View>
                     </View>
                     <View style={styles.rating}>
@@ -79,54 +79,54 @@ function DetailScreen({ navigation }) {
                 onRequestClose={() => {
                     setModalVisible(!modalVisible);
                 }}
-            > 
+            >
                 <View style={styles.centeredView}>
-                        <View style={{backgroundColor:"#24243c",paddingHorizontal:58,paddingVertical:40}}>
-                         <View style={styles.popupicon}>
-                        <Image style={styles.popup} source={require("../../assets/popdownload.png")} />
+                    <View style={{ backgroundColor: "#24243c", paddingHorizontal: 58, paddingVertical: 40 }}>
+                        <View style={styles.popupicon}>
+                            <Image style={styles.popup} source={require("../../assets/popdownload.png")} />
                         </View>
                         <Text style={styles.modalText}>Download Film</Text>
-                        </View>
-                        <View style={{backgroundColor:"#191931",padding:20}}>
-                            <View style={{flexDirection:"row", paddingVertical:10}}>
+                    </View>
+                    <View style={{ backgroundColor: "#191931", padding: 20 }}>
+                        <View style={{ flexDirection: "row", paddingVertical: 10 }}>
                             <View>
-                            <Image style={styles.tick} source={require("../../assets/tick.png")} />
+                                <Image style={styles.tick} source={require("../../assets/tick.png")} />
                             </View>
-                            <View style={{flexDirection:"row",paddingRight:8}}>
+                            <View style={{ flexDirection: "row", paddingRight: 8 }}>
                                 <Text style={styles.hihtdv}>High</Text>
                                 <Text style={styles.rate}>720</Text>
                             </View>
                             <Text style={styles.soundgb}>3.5 GB</Text>
-                            </View>
-                            <View style={{flexDirection:"row",paddingVertical:10}}>
+                        </View>
+                        <View style={{ flexDirection: "row", paddingVertical: 10 }}>
                             <View>
-                            <Image style={styles.tick} source={require("../../assets/tick.png")} />
+                                <Image style={styles.tick} source={require("../../assets/tick.png")} />
                             </View>
-                            <View style={{flexDirection:"row",paddingRight:8}}>
-                            <Text style={styles.hihtdv}>High</Text>
+                            <View style={{ flexDirection: "row", paddingRight: 8 }}>
+                                <Text style={styles.hihtdv}>High</Text>
                                 <Text style={styles.rate}>720</Text>
                             </View>
                             <Text style={styles.soundgb}>3.5 GB</Text>
-                            </View>
-                            <View style={{flexDirection:"row",paddingVertical:10}}>
+                        </View>
+                        <View style={{ flexDirection: "row", paddingVertical: 10 }}>
                             <View>
-                            <Image style={styles.tick} source={require("../../assets/tick.png")} />
+                                <Image style={styles.tick} source={require("../../assets/tick.png")} />
                             </View>
-                            <View style={{flexDirection:"row",paddingRight:8}}>
-                            <Text style={styles.hihtdv}>High</Text>
+                            <View style={{ flexDirection: "row", paddingRight: 8 }}>
+                                <Text style={styles.hihtdv}>High</Text>
                                 <Text style={styles.rate}>720</Text>
                             </View>
                             <View>
                                 <Text style={styles.soundgb}>3.5 GB</Text>
                             </View>
-                            </View>
-                            <Pressable
+                        </View>
+                        <Pressable
                             style={[styles.button, styles.buttonClose]}
                             onPress={() => setModalVisible(!modalVisible)}
                         >
                             <Text style={styles.textStyle}>Download</Text>
                         </Pressable>
-                        </View>
+                    </View>
                 </View>
             </Modal>
         </View>
@@ -265,9 +265,10 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor:"#0e101f90"
-      },
-      modalView: {
+        backgroundColor: "#0e101f90",
+
+    },
+    modalView: {
         margin: 20,
         backgroundColor: "white",
         borderRadius: 20,
@@ -275,62 +276,60 @@ const styles = StyleSheet.create({
         // alignItems: "center",
         shadowColor: "#000",
         shadowOffset: {
-          width: 0,
-          height: 2
+            width: 0,
+            height: 2
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5
-      },
-      button: {
+    },
+    button: {
         borderRadius: 8,
         elevation: 2,
         // marginHorizontal:18
-      },
-      buttonOpen: {
+    },
+    buttonOpen: {
         backgroundColor: "#F194FF",
-      },
-      buttonClose: {
+    },
+    buttonClose: {
         backgroundColor: "#2196F3",
-        marginHorizontal:20,
-      },
-      textStyle: {
+        marginHorizontal: 20,
+    },
+    textStyle: {
         color: "white",
         fontWeight: "bold",
         textAlign: "center",
-        padding:10,
-      
-      },
-      modalText: {
+        padding: 10,
+
+    },
+    modalText: {
         textAlign: "center",
-        color:"#fff"
-        
-      },
-      tick:{
-          width:15,
-          height:15,
-          marginRight:12,
-      },
-      soundgb:{
-          paddingLeft:44,
-          color:"#b2b1b6",
-          fontSize:12
-      },
-      hihtdv:{
-        color:"#b2b1b6",
-        fontSize:12
-      },
-      rate:{
-        color:"#b2b1b6",
-        paddingLeft:4,
-        fontSize:12
-      },
-      popup:{
-        width:30,
-        height:30,
-      },
-    //   popupicon:{
-    //       flex:1,
-    //   }
+        color: "#fff"
+
+    },
+    tick: {
+        width: 15,
+        height: 15,
+        marginRight: 12,
+    },
+    soundgb: {
+        paddingLeft: 44,
+        color: "#b2b1b6",
+        fontSize: 12
+    },
+    hihtdv: {
+        color: "#b2b1b6",
+        fontSize: 12
+    },
+    rate: {
+        color: "#b2b1b6",
+        paddingLeft: 4,
+        fontSize: 12
+    },
+    popup: {
+        width: 30,
+        height: 30,
+        marginLeft: 30
+    },
 })
 
