@@ -9,9 +9,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 function HomeScreen({ navigation, user, userLogout }) {
   const [reason, setReason] = useState([{ title: "abc", image: require('../../assets/vedio.png') }, { title: "def", image: require('../../assets/vedio.png') }, { title: "ghi", image: require('../../assets/vedio.png') },]);
-  const [reason1, setReason1] = useState([{ title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }, { title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }]);
+  const [reason1, setReason1] = useState([{ title: "abc", image: require('../../assets/Img01.png') }, { title: "abc", image: require('../../assets/Img04.png') }, { title: "abc", image: require('../../assets/Img01.png') }, { title: "abc", image: require('../../assets/Img04.png') }, { title: "abc", image: require('../../assets/Img01.png') }, { title: "abc", image: require('../../assets/Img04.png') }]);
   const [reason2, setReason2] = useState([{ title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }, { title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }, { title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }]);
-  const [reason3, setReason3] = useState([{ title: "abc", image: require('../../assets/serial1.jpg') }, { title: "abc", image: require('../../assets/serial2.jpg') }, { title: "abc", image: require('../../assets/serial1.jpg') }, { title: "abc", image: require('../../assets/serial2.jpg') }]);
+  const [reason3, setReason3] = useState([{ title: "abc", image: require('../../assets/Img05.png') }, { title: "abc", image: require('../../assets/Img06.png') }, { title: "abc", image: require('../../assets/Img05.png') }, { title: "abc", image: require('../../assets/Img06.png') }]);
 
   goNext = () => {
     navigation.navigate("DetailScreen");
@@ -173,8 +173,8 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   tile: {
-    width: 80,
-    height: 80,
+    width: 100,
+    height: 100,
     resizeMode: "cover"
   },
   mark: {
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
   },
   untitled: {
     width: 230,
-    height: 150,
+    height: 130,
     marginLeft: 10,
   },
   recomend: {
