@@ -15,7 +15,7 @@ export function Search({ navigation }) {
         <Text style={styles.serc}>Search</Text>
     </View>
     <View style={styles.inputfield}>
-    <Image style={styles.logo} source={require('../../assets/search.png')} />
+    <Image style={styles.logo} source={require('../../assets/Search.png')} />
     <Input style={styles.vlogers}  placeholder="Vlogers" />
     </View>
     <View style={styles.volages}>

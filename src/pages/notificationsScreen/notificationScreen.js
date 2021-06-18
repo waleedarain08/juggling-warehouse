@@ -1,10 +1,9 @@
 import React, { Component, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, Dimensions, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image ,TouchableOpacity} from 'react-native';
 import { Input, Button, Card, SearchBar } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { userLogout } from '../../redux/actions';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 
@@ -14,12 +13,10 @@ export default function NotificationsScreen({navigation}) {
   return (
     <View style={styles.container}>
     <View style={styles.notification}>
-        <TouchableOpacity>
-        <View style={styles.imgcard} >
+        <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.goBack()} style={styles.imgcard} >
             <Image style={styles.backpng} source={require('../../assets/back.png')} />
-        </View>
         </TouchableOpacity>
-        <Image style={styles.search} source={require('../../assets/search.png')} />
+        <Image style={styles.search} source={require('../../assets/Search.png')} />
         <Input style={styles.vlogers} placeholder="Notification" />
     </View>
     <View style={styles.today}>
@@ -115,6 +112,7 @@ const styles = StyleSheet.create({
       position: "absolute",
       top: 17,
       left: 12,
+      zIndex:1
   },
   search: {
       width: 18,
