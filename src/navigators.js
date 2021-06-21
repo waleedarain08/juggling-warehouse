@@ -46,7 +46,8 @@ function LoginStack() {
 const HomeTabAStackNav = createStackNavigator();
 function HomeTabAStack() {
   return (
-    <HomeTabAStackNav.Navigator initialRouteName="HomeScreen" screenOptions={{
+    <HomeTabAStackNav.Navigator  initialRouteName="HomeScreen" screenOptions={{
+      headerBackTitleVisible:false,
       headerStyle: {
         backgroundColor: '#0e101f',
         shadowOpacity: 0.85,
@@ -68,7 +69,7 @@ function HomeTabAStack() {
           headerLeft: () => drawerButton(navigation)
         })}
       />
-      <HomeTabAStackNav.Screen name="DetailScreen" component={DetailScreen} />
+      <HomeTabAStackNav.Screen name="About Motivation"  component={DetailScreen} />
     </HomeTabAStackNav.Navigator>
   );
 }

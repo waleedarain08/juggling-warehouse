@@ -14,7 +14,7 @@ function HomeScreen({ navigation, user, userLogout }) {
   const [reason3, setReason3] = useState([{ title: "abc", image: require('../../assets/Img05.png') }, { title: "abc", image: require('../../assets/Img06.png') }, { title: "abc", image: require('../../assets/Img05.png') }, { title: "abc", image: require('../../assets/Img06.png') }]);
 
   goNext = () => {
-    navigation.navigate("DetailScreen");
+    navigation.navigate("About Motivation");
   }
 
   return (

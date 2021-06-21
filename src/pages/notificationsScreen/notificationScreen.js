@@ -23,6 +23,7 @@ export default function NotificationsScreen({navigation}) {
         <FlatList
             data={reason}
             vertical={true}
+            keyExtractor={(item, index) => index}
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => {
                 if(item.title=="Today"){
