@@ -7,18 +7,38 @@ import { userLogout } from '../../redux/actions';
 
 
 
-export function List({ navigation }) {
-
+export default function List({ navigation }) {
+    const [search, setSearch] = useState("");
   return (
     <View style={styles.container}>
-                <View style={styles.list}>
-                <Text style={styles.mylist}>My List</Text>
-                </View>
+                {/* <View style={styles.list}> */}
+                {/* <Text style={styles.mylist}>My List</Text> */}
+                {/* </View> */}
                 <View style={styles.searchopt}>
-                <Image style={styles.search} source={require('../../assets/Search.png')} />
-                <Input style={styles.vlogers}  placeholder="Vlogers" />
+                <SearchBar
+                    platform="ios"
+                    placeholder="Vlogers"
+                    placeholderTextColor="#fff"
+                    searchIcon={{ iconStyle: { color: "#fff" } }}
+                    inputStyle={{ color: "#fff", fontSize: 12 }}
+                    containerStyle={{ backgroundColor: "#0e101f" }}
+                    inputContainerStyle={{
+                        backgroundColor: "#0e101f", shadowColor: "#aeaeae",
+                        shadowOffset: {
+                            width: 0.5,
+                            height: 0.5,
+                        },
+                        shadowOpacity: 0.23,
+                        shadowRadius: 1.12,
+                        elevation: 6
+                    }}
+                    onChangeText={setSearch}
+                    value={search}
+                />
                 </View>
-                <ScrollView contentContainerStyle={{flexGrow:1,paddingBottom:20, }}>
+                <ScrollView contentContainerStyle={{flexGrow:1,paddingBottom:20, }}
+                showsVerticalScrollIndicator="none"
+                >
                     <View style={styles.movie}>
                     <Image style={styles.moviepng} source={require('../../assets/01-tile.png')} />
                     <Image style={styles.moviepng} source={require('../../assets/02-tile.png')} />

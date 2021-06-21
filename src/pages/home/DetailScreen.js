@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, Modal, ScrollView, Pressable } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, Modal, ScrollView, Pressable, TouchableOpacity } from 'react-native';
 import { Input, Button, CheckBox } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -15,8 +15,7 @@ function DetailScreen({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <ScrollView contentContainerStyl={{ height: 700 }}>
-                {/* <View style={{ flexGrow: 1 }}> */}
+            <ScrollView>
                 <View style={styles.box2}>
                     <Image
                         style={{ width: "100%", height: 200 }}
@@ -30,7 +29,10 @@ function DetailScreen({ navigation }) {
                             <Image style={styles.list} source={require('../../assets/list.png')} />
                         </View>
                         <View style={{ flex: 1, alignItems: "center", paddingLeft: 3, }}>
-                            <Image style={styles.download} source={require('../../assets/downloadicon.png')} />
+                            <TouchableOpacity onPress={() => setModalVisible(true)}>
+                                <Image
+                                    style={styles.download} source={require('../../assets/downloadicon.png')} />
+                            </TouchableOpacity>
                         </View>
                     </View>
                     <View style={styles.rating}>
@@ -47,7 +49,6 @@ function DetailScreen({ navigation }) {
                 </View>
                 <View style={styles.box5}>
                     <Button
-                        onPress={() => setModalVisible(true)}
                         title="Watch Now"
                     />
                 </View>
@@ -230,6 +231,7 @@ const styles = StyleSheet.create({
         color: "#ffffff",
         paddingVertical: 20,
         paddingHorizontal: 10,
+        lineHeight:20,
     },
     box5: {
         flex: 1.5,
@@ -329,7 +331,8 @@ const styles = StyleSheet.create({
     popup: {
         width: 30,
         height: 30,
-        marginLeft: 30
+        marginLeft: 30,
+        marginBottom: 8,
     },
 })
 

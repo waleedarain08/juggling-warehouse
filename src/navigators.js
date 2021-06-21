@@ -3,10 +3,10 @@ import { TabB, TabBDetails } from './pages/home/tabB';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Login from './pages/login/login';
 import Signup from './pages/signup/signup';
-import search, { Search } from './pages/search/search';
+import search from './pages/search/search';
 // import profile from './pages/profile/profile';
-// import download from './pages/doenload/download';
-import list, { List } from './pages/list/list';
+import download from './pages/download/download';
+import  list  from './pages/list/list';
 import { NavigationContainer } from '@react-navigation/native';
 import NotificationsScreen from './pages/notificationsScreen/notificationScreen';
 import React from 'react';
@@ -73,10 +73,10 @@ function HomeTabAStack() {
   );
 }
 
-const HomeTabBStackNav = createStackNavigator();
-function HomeTabBStack() {
+const HomeDownloadStackNav = createStackNavigator();
+function HomeDownloadStack() {
   return (
-    <HomeTabBStackNav.Navigator initialRouteName="TabB" screenOptions={{
+    <HomeDownloadStackNav.Navigator initialRouteName="download" screenOptions={{
       headerStyle: {
         backgroundColor: '#0e101f',
         shadowOpacity: 0.85,
@@ -92,15 +92,15 @@ function HomeTabBStack() {
       },
     }}>
       
-      <HomeTabBStackNav.Screen
-        name="TabB"
-        component={TabB}
+      <HomeDownloadStackNav.Screen
+        name="Downloads"
+        component={download}
         options={({ navigation }) => ({
           headerLeft: () => drawerButton(navigation),
         })}
       />
-      <HomeTabBStackNav.Screen name="TabBDetails" component={TabBDetails} />
-    </HomeTabBStackNav.Navigator>
+      {/* <HomeDownloadStackNav.Screen name="TabBDetails" component={TabBDetails} /> */}
+    </HomeDownloadStackNav.Navigator>
   );
 }
 
@@ -123,13 +123,13 @@ function HomeSearchStack() {
       },
     }}>
       <HomeSearchStackNav.Screen
-        name="search"
-        component={Search}
+        name="Search"
+        component={search}
         options={({ navigation }) => ({
           headerLeft: () => drawerButton(navigation),
         })}
       />
-      <HomeSearchStackNav.Screen name="TabBDetails" component={TabBDetails} />
+      {/* <HomeSearchStackNav.Screen name="TabBDetails" component={TabBDetails} /> */}
     </HomeSearchStackNav.Navigator>
   );
 }
@@ -152,13 +152,12 @@ function HomeListStack() {
       },
     }}>
       <HomeListStackNav.Screen
-        name="List"
-        component={List}
+        name="My List"
+        component={list}
         options={({ navigation }) => ({
           headerLeft: () => drawerButton(navigation),
         })}
       />
-      <HomeListStackNav.Screen name="TabBDetails" component={TabBDetails} />
     </HomeListStackNav.Navigator>
   );
 }
@@ -169,10 +168,9 @@ const HomeTabNav = createBottomTabNavigator();
 function HomeTab() {
   return (
     <HomeTabNav.Navigator
+    initialRouteName={"Home"}
       tabBarOptions={{
-        tabStyle:{ //Add this 
-          // borderTopRightRadius:10,
-          // borderTopLeftRadius:10,
+        tabStyle:{ 
           paddingVertical:3,
           borderRadius:8
       },
@@ -213,7 +211,7 @@ function HomeTab() {
           // return <Icon name={iconName} size={size} color={color} />;  
         },
       })}>
-      <HomeTabNav.Screen name="Download" component={HomeTabBStack} />
+      <HomeTabNav.Screen name="Download" component={HomeDownloadStack} />
       <HomeTabNav.Screen name="Search" component={HomeSearchStack} />
       <HomeTabNav.Screen name="Home" component={HomeTabAStack} />
       <HomeTabNav.Screen name="List" component={HomeListStack} />
@@ -258,7 +256,7 @@ function RootContainer({ user }) {
       <NavigationContainer>
         <Drawer.Navigator    drawerContentOptions={{
                 activeTintColor: '#fff',
-                inactiveTintColor:'blue',
+                inactiveTintColor:'#aeaeae',
                 itemStyle: { marginVertical: 8, marginHorizontal: 8 },
             }} initialRouteName="Home" drawerStyle={{
           backgroundColor: '#0e101f',

@@ -5,9 +5,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { userLogin } from '../../redux/actions';
 
-function Login({navigation, userInfo, userLogin }) {
+function Login({ navigation, userInfo, userLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [open, setOpen] = useState(0);
+
 
   return (
     <View style={styles.MainContainer}>
@@ -54,7 +56,7 @@ function Login({navigation, userInfo, userLogin }) {
       </View>
       <View style={styles.orLoginContainer}>
         <View style={styles.linedv}></View>
-        <Text style={{ paddingHorizontal: "1.5%", color: "#87888F",fontSize:12 }}>Or Login with</Text>
+        <Text style={{ paddingHorizontal: "1.5%", color: "#87888F", fontSize: 12 }}>Or Login with</Text>
         <View style={styles.linedv}></View>
       </View>
       <View style={styles.SocialButtons}>
@@ -73,10 +75,10 @@ function Login({navigation, userInfo, userLogin }) {
       </View>
 
       <View style={styles.AccountContainer}>
-
+   
         <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "center" }}>
           <Text style={styles.account}>If you don't have an account</Text>
-          <Text onPress={()=>navigation.navigate("Signup")} style={styles.singup}>SIGNUP HERE</Text>
+          <Text onPress={() => navigation.navigate("Signup")} style={styles.singup}>SIGNUP HERE</Text>
         </View>
         <View style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}>
           <View style={styles.singupline}></View>
@@ -165,7 +167,7 @@ const styles = StyleSheet.create({
 
     flex: .5,
     flexDirection: "row",
-    marginHorizontal:"7%",
+    marginHorizontal: "7%",
 
   },
   remeberview: {
@@ -191,7 +193,7 @@ const styles = StyleSheet.create({
   forgetview: {
     flex: .8,
     alignItems: "flex-end",
-    paddingRight:"4%"
+    paddingRight: "4%"
   },
   forgettext: {
     color: "#FFFFFF",

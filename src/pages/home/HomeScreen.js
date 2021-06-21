@@ -50,6 +50,7 @@ function HomeScreen({ navigation, user, userLogout }) {
           <View style={styles.box3}>
             <Text style={styles.trending}>Trending Now</Text>
             <FlatList
+            showsVerticalScrollIndicator="none"
               data={reason1}
               keyExtractor={(item, index) => index}
               horizontal={true}
@@ -239,6 +240,7 @@ const styles = StyleSheet.create({
     color: "#fffffd",
     fontSize: 14,
     paddingLeft: 10,
-    paddingVertical: 12,
+    paddingVertical: 2,
+    marginBottom:8,
   }
 })

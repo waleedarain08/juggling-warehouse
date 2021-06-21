@@ -8,7 +8,7 @@ import { userLogout } from '../../redux/actions';
 
 
 export default function NotificationsScreen({navigation}) {
-  const [reason, setReason] = useState([{ title: "abc", image: require('../../assets/01.png') }, { title: "abc", image: require('../../assets/02.png') }, { title: "abc", image: require('../../assets/03.png') }, { title: "abc", image: require('../../assets/04.png') }, { title: "abc", image: require('../../assets/01.png') }, { title: "abc", image: require('../../assets/02.png') }]);
+  const [reason, setReason] = useState([{ title: "Today", image: require('../../assets/01.png') },{ title: "def", image: require('../../assets/01.png') }, { title: "def", image: require('../../assets/02.png') }, { title: "jhi", image: require('../../assets/03.png') }, { title: "This Week", image: require('../../assets/04.png') }, { title: "abc", image: require('../../assets/01.png') }, { title: "abc", image: require('../../assets/02.png') },{ title: "abc", image: require('../../assets/02.png') },{ title: "abc", image: require('../../assets/02.png') },{ title: "abc", image: require('../../assets/02.png') }]);
 
   return (
     <View style={styles.container}>
@@ -20,12 +20,21 @@ export default function NotificationsScreen({navigation}) {
         <Input style={styles.vlogers} placeholder="Notification" />
     </View>
     <View style={styles.today}>
-        <Text style={styles.textdv}>Today</Text>
         <FlatList
             data={reason}
             vertical={true}
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => {
+                if(item.title=="Today"){
+                    return (
+                        <Text style={styles.textdv}>Today</Text>
+                    )
+                }
+                else if(item.title=="This Week"){
+                    return (
+                        <Text style={styles.textdv}>This Week</Text>
+                    )
+                }
                 return (
                     <View style={styles.card2}>
                         <Image style={styles.icon2} source={item.image} />
@@ -41,7 +50,7 @@ export default function NotificationsScreen({navigation}) {
             }}>
         </FlatList>
     </View>
-    <View style={styles.week}>
+    {/* <View style={styles.week}>
         <Text style={styles.textdd}>This Week</Text>
         <FlatList
             data={reason}
@@ -62,7 +71,7 @@ export default function NotificationsScreen({navigation}) {
                 )
             }}>
         </FlatList>
-    </View>
+    </View> */}
 </View>
 );
 }
@@ -110,7 +119,7 @@ const styles = StyleSheet.create({
       width: 30,
       height: 30,
       position: "absolute",
-      top: 17,
+      top: 26,
       left: 12,
       zIndex:1
   },
@@ -127,7 +136,7 @@ const styles = StyleSheet.create({
       fontSize: 10,
   },
   today: {
-      flex: 2.5,
+      flex: 7.5,
       paddingHorizontal: 2,
       paddingVertical: 10,
   },
