@@ -8,7 +8,7 @@ import { userLogout } from '../../redux/actions';
 
 
 export default function NotificationsScreen({navigation}) {
-  const [reason, setReason] = useState([{ title: "Today", image: require('../../assets/01.png') },{ title: "def", image: require('../../assets/01.png') }, { title: "def", image: require('../../assets/02.png') }, { title: "jhi", image: require('../../assets/03.png') }, { title: "This Week", image: require('../../assets/04.png') }, { title: "abc", image: require('../../assets/01.png') }, { title: "abc", image: require('../../assets/02.png') },{ title: "abc", image: require('../../assets/02.png') },{ title: "abc", image: require('../../assets/02.png') },{ title: "abc", image: require('../../assets/02.png') }]);
+  const [reason, setReason] = useState([{ title: "Today", image: require('../../assets/01.png') },{ title: "def", image: require('../../assets/01.png') }, { title: "def", image: require('../../assets/02.png') }, { title: "jhi", image: require('../../assets/03.png') }, { title: "This Week", image: require('../../assets/04.png') }, { title: "abc", image: require('../../assets/01.png') }, { title: "abc", image: require('../../assets/02.png') },{ title: "abc", image: require('../../assets/03.png') },{ title: "abc", image: require('../../assets/04.png') },{ title: "abc", image: require('../../assets/01.png') }]);
 
   return (
     <View style={styles.container}>
@@ -44,35 +44,13 @@ export default function NotificationsScreen({navigation}) {
                             <Text style={styles.pm2}>11.35 PM</Text>
                         </View>
                         <View style={styles.righticon}>
-                        <Image style={styles.iconpng} source={require('../../assets/right-arrow.png')}></Image>
+                        <Image style={styles.iconpng} source={require('../../assets/rightarrow1.png')}></Image>
                         </View>
                     </View>
                 )
             }}>
         </FlatList>
     </View>
-    {/* <View style={styles.week}>
-        <Text style={styles.textdd}>This Week</Text>
-        <FlatList
-            data={reason}
-            vertical={true}
-            showsVerticalScrollIndicator={false}
-            renderItem={({ item }) => {
-                return (
-                    <View style={styles.card2}>
-                        <Image style={styles.icon2} source={item.image} />
-                        <View>
-                            <Text style={styles.disney2}>New Vlog From Disney</Text>
-                            <Text style={styles.pm2}>11.35 PM</Text>
-                        </View>
-                        <View style={styles.righticon}>
-                             <Image style={styles.iconpng} source={require('../../assets/right-arrow.png')}></Image>
-                             </View>
-                    </View>
-                )
-            }}>
-        </FlatList>
-    </View> */}
 </View>
 );
 }
@@ -104,10 +82,12 @@ const styles = StyleSheet.create({
       fontSize: 12,
       color: "white",
       position: "relative",
+      fontFamily:'Raleway-Regular'
   },
   iconpng:{
-      width:20,
-      height:20,
+      width:14,
+      height:14,
+      resizeMode:"contain"
   },
   righticon:{
       flex:1,
@@ -135,6 +115,7 @@ const styles = StyleSheet.create({
       color: "#bbbbbd",
       paddingLeft: 14,
       fontSize: 10,
+      fontFamily:'Raleway-Regular'
   },
   today: {
       flex: 7.5,
@@ -146,6 +127,7 @@ const styles = StyleSheet.create({
       paddingLeft: 14,
       paddingTop: 6,
       fontSize: 12,
+      fontFamily:'Raleway-Regular'
   },
   icon: {
       width: 40,
@@ -157,6 +139,7 @@ const styles = StyleSheet.create({
       fontSize: 18,
       fontWeight: "bold",
       paddingLeft: 10,
+      fontFamily:'Raleway-Regular'
 
   },
   card: {
@@ -177,6 +160,7 @@ const styles = StyleSheet.create({
       fontSize: 18,
       fontWeight: "bold",
       paddingLeft: 10,
+      fontFamily:'Raleway-Regular'
   }, 
   pm2: {
       color: "#bbbbbd",
@@ -188,6 +172,7 @@ const styles = StyleSheet.create({
       paddingLeft: 14,
       paddingTop: 6,
       fontSize: 12,
+      fontFamily:'Raleway-Regular'
   },
   icon2: {
       width: 40,

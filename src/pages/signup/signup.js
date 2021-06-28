@@ -4,6 +4,7 @@ import { Input, Button } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { userLogin } from '../../redux/actions';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
 
 function Signup({ navigation, userInfo, userLogin }) {
     const [username, setUsername] = useState('');
@@ -11,6 +12,8 @@ function Signup({ navigation, userInfo, userLogin }) {
 
     return (
         <SafeAreaView style={styles.safeArea}>
+             <KeyboardAwareScrollView style={styles.MainContainer}>
+             <View style={{ height: 700 }}>
             <ScrollView contentContainerStyle={styles.container}>
             {/* <View style={{flex:1}}> */}
                 <View style={styles.box1}>
@@ -70,7 +73,10 @@ function Signup({ navigation, userInfo, userLogin }) {
                 </View>
                 {/* </View> */}
             </ScrollView>
+            </View>
+            </KeyboardAwareScrollView>
         </SafeAreaView>
+  
     );
 }
 
@@ -98,6 +104,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: "white",
         borderBottomColor: "white",
+        fontFamily:'Raleway-Regular'
     },
     loginline: {
         width: 24,
@@ -129,6 +136,8 @@ const styles = StyleSheet.create({
         paddingTop: 12,
         paddingLeft: 35,
         fontSize: 12,
+        fontFamily:'Raleway-Regular',
+        color:"#fff"
     },
     box3: {
         flex: 3,
@@ -138,6 +147,8 @@ const styles = StyleSheet.create({
         paddingTop: 12,
         paddingLeft: 35,
         fontSize: 12,
+        fontFamily:'Raleway-Regular',
+        color:"#fff"
     },
     logo02: {
         height: 14,
@@ -147,8 +158,9 @@ const styles = StyleSheet.create({
         left: 20,
     },
     logo022: {
-        height: 12,
-        width: 12,
+        height: 13,
+        width: 13,
+        resizeMode:"contain",
         position: "absolute",
         top: 17,
         left: 18,
@@ -167,11 +179,13 @@ const styles = StyleSheet.create({
         marginRight: 36,
         fontWeight: 'bold',
         fontSize: 16,
+        fontFamily:'Raleway-Regular'
     },
     LoginButtonInside: {
         color: "#ffffff",
         fontWeight: "bold",
         fontSize: 12,
+        fontFamily:'Raleway-Regular'
     },
     LoginButton: {
         alignItems: "center",
@@ -190,12 +204,14 @@ const styles = StyleSheet.create({
         textAlign: "center",
         color: "#dedee0",
         fontSize: 10,
+        fontFamily:'Raleway-Regular'
     },
     singup: {
         textAlign: "center",
         color: "#1b73bd",
         fontWeight: 'bold',
         fontSize:12,
+        fontFamily:'Raleway-Regular',
     },
     singupline: {
         width: 82,

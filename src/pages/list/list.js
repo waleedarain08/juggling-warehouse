@@ -20,7 +20,7 @@ export default function List({ navigation }) {
                     placeholder="Vlogers"
                     placeholderTextColor="#fff"
                     searchIcon={{ iconStyle: { color: "#fff" } }}
-                    inputStyle={{ color: "#fff", fontSize: 12 }}
+                    inputStyle={{ color: "#fff", fontSize: 12,    fontFamily:'Raleway-Regular'}}
                     containerStyle={{ backgroundColor: "#0e101f" }}
                     inputContainerStyle={{
                         backgroundColor: "#0e101f", shadowColor: "#aeaeae",
@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         paddingTop: 26,
         paddingLeft: 6,
+        fontFamily:'Raleway-Regular'
     },
     searchopt: {
         height: 68
@@ -107,7 +108,9 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderColor:"#495058",
         fontSize:12,
-        color:"white"
+        color:"white",
+        fontFamily:'Raleway-Regular'
+
     },
     search:{
         width:18,

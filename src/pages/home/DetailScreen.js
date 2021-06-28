@@ -11,7 +11,27 @@ function DetailScreen({ navigation }) {
 
     const [reason, setReason] = useState([{ title: "abc", image: require('../../assets/01-tile.png') }, { title: "def", image: require('../../assets/02-tile.png') }, { title: "ghi", image: require('../../assets/03-tile.png') }, { title: "ghi", image: require('../../assets/01-tile.png') }, { title: "ghi", image: require('../../assets/02-tile.png') }, { title: "ghi", image: require('../../assets/03-tile.png') }]);
     const [modalVisible, setModalVisible] = useState(false);
+    const [checked, setChecked] = useState(true);
+    const [checked1, setChecked1] = useState(false);
+    const [checked2, setChecked2] = useState(false);
 
+    handleCheckBox = (checkBox) => {
+        setChecked(1);
+        setChecked1(0);
+        setChecked2(0);
+    }
+
+    handleCheckBox1 = (checkBox) => {
+        setChecked(0);
+        setChecked1(1);
+        setChecked2(0);
+    }
+
+    handleCheckBox2 = (checkBox) => {
+        setChecked(0);
+        setChecked1(0);
+        setChecked2(1);
+    }
 
     return (
         <View style={styles.container}>
@@ -29,10 +49,10 @@ function DetailScreen({ navigation }) {
                             <Image style={styles.list} source={require('../../assets/list.png')} />
                         </View>
                         <View style={{ flex: 1, alignItems: "center", paddingLeft: 3, }}>
-                            <TouchableOpacity onPress={() => setModalVisible(true)}>
+                            <Pressable onPress={() => setModalVisible(!modalVisible)}>
                                 <Image
                                     style={styles.download} source={require('../../assets/downloadicon.png')} />
-                            </TouchableOpacity>
+                            </Pressable>
                         </View>
                     </View>
                     <View style={styles.rating}>
@@ -47,7 +67,8 @@ function DetailScreen({ navigation }) {
                 <View style={styles.box4}>
                     <Text style={styles.para}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero nulla temporibus ratione doloremque. Vero cum esse blanditiis quisquam omnis repellendus recusandae distinctio.Vel, quasi dolores blanditiis delectus nihil, Lorem ipsum dolor</Text>
                 </View>
-                <View style={styles.box5}>
+                <View  style={styles.box5}>
+                <Image style={styles.play} source={require('../../assets/Play.png')} />
                     <Button
                         title="Watch Now"
                     />
@@ -82,40 +103,64 @@ function DetailScreen({ navigation }) {
                 }}
             >
                 <View style={styles.centeredView}>
-                    <View style={{ backgroundColor: "#24243c", paddingHorizontal: 58, paddingVertical: 40 }}>
+                <TouchableOpacity  style={styles.cancel} onPress={() => setModalVisible(false)}>
+                <Image style={styles.cancel02} source={require("../../assets/cancel.png")} />
+                </TouchableOpacity>
+                    <View style={{ backgroundColor: "#24243c", paddingHorizontal: 61, paddingVertical: 28 }}>
                         <View style={styles.popupicon}>
                             <Image style={styles.popup} source={require("../../assets/popdownload.png")} />
                         </View>
                         <Text style={styles.modalText}>Download Film</Text>
                     </View>
-                    <View style={{ backgroundColor: "#191931", padding: 20 }}>
-                        <View style={{ flexDirection: "row", paddingVertical: 10 }}>
-                            <View>
-                                <Image style={styles.tick} source={require("../../assets/tick.png")} />
-                            </View>
-                            <View style={{ flexDirection: "row", paddingRight: 8 }}>
+                    <View style={{ backgroundColor: "#191931", padding: 10 }}>
+                    <View style={{ flexDirection: "row", alignItems:"center",paddingVertical:6}}>
+                            <CheckBox 
+                            size={20}
+                            containerStyle={{ padding:0,width:18,height:20, }}
+                            checked={checked}
+                            onPress={()=>handleCheckBox()}
+                            />
+                            <View style={{ flexDirection: "row", paddingRight: 20 }}>
                                 <Text style={styles.hihtdv}>High</Text>
+                                <View style={{borderRightColor:"#fff",borderRightWidth:1,borderLeftWidth:1,borderLeftColor:"#fff",borderRadius:5}}>
                                 <Text style={styles.rate}>720</Text>
+                                </View>
                             </View>
-                            <Text style={styles.soundgb}>3.5 GB</Text>
+                            <View>
+                                <Text style={styles.soundgb}>3.5 GB</Text>
+                            </View>
                         </View>
-                        <View style={{ flexDirection: "row", paddingVertical: 10 }}>
+                        <View style={{ flexDirection: "row", alignItems:"center",paddingVertical:6}}>
+                            <CheckBox 
+                            size={20}
+                            containerStyle={{ padding:0,width:18,height:20, }}
+                            checked={checked1}
+                            onPress={()=>handleCheckBox1()}
+                            />
+                            <View style={{ flexDirection: "row", paddingRight: 20 }}>
+                                <Text style={styles.hihtdv}>Med</Text>
+                                <View style={{borderRightColor:"#fff",borderRightWidth:1,borderLeftWidth:1,borderLeftColor:"#fff",borderRadius:5}}>
+                                <Text style={styles.rate}>360</Text>
+                                </View>
+                            </View>
                             <View>
-                                <Image style={styles.tick} source={require("../../assets/tick.png")} />
+                                <Text style={styles.soundgb}>3.5 GB</Text>
                             </View>
-                            <View style={{ flexDirection: "row", paddingRight: 8 }}>
-                                <Text style={styles.hihtdv}>High</Text>
-                                <Text style={styles.rate}>720</Text>
-                            </View>
-                            <Text style={styles.soundgb}>3.5 GB</Text>
                         </View>
-                        <View style={{ flexDirection: "row", paddingVertical: 10 }}>
-                            <View>
-                                <Image style={styles.tick} source={require("../../assets/tick.png")} />
-                            </View>
-                            <View style={{ flexDirection: "row", paddingRight: 8 }}>
-                                <Text style={styles.hihtdv}>High</Text>
-                                <Text style={styles.rate}>720</Text>
+                        <View style={{ flexDirection: "row", alignItems:"center",paddingVertical:6}}>
+                            <CheckBox
+                            checked={useState.isChecked}
+                            onPress={useState.handlePressCheckedBox}
+                            size={20}
+                            containerStyle={{ padding:0,width:18,height:20, }}
+                            checked={checked2}
+                            onPress={()=>handleCheckBox2()}
+                            />
+                            <View style={{ flexDirection: "row", paddingRight: 20 }}>
+                                <Text style={styles.hihtdv}>Low</Text>
+                                <View style={{borderRightColor:"#fff",borderRightWidth:1,borderLeftWidth:1,borderLeftColor:"#fff",borderRadius:5}}>
+                                <Text style={styles.rate}>144</Text>
+                                </View>
                             </View>
                             <View>
                                 <Text style={styles.soundgb}>3.5 GB</Text>
@@ -167,6 +212,7 @@ const styles = StyleSheet.create({
         color: "#ffffff",
         fontSize: 16,
         fontWeight: "bold",
+        fontFamily:'Raleway-Regular'
     },
     dots: {
         width: 4, height: 16,
@@ -188,6 +234,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         paddingLeft: 10,
+        fontFamily:'Raleway-Regular'
     },
     downsec: {
         flexDirection: "row",
@@ -207,7 +254,8 @@ const styles = StyleSheet.create({
         color: "#ffffff",
         fontSize: 10,
         borderWidth: 1,
-        borderColor: "#ffffff"
+        borderColor: "#ffffff",fontFamily:'Raleway-Regular'
+
     },
     list: {
         width: 18,
@@ -220,8 +268,8 @@ const styles = StyleSheet.create({
         marginTop: 2,
     },
     download: {
-        width: 20,
-        height: 20,
+        width: 17,
+        height: 17,
         marginVertical: 10,
     },
     box4: {
@@ -236,6 +284,15 @@ const styles = StyleSheet.create({
     box5: {
         flex: 1.5,
         paddingTop: 20,
+        position:"relative",
+    },
+    play:{
+        position:"absolute",
+        zIndex:1,
+        height:10,width:10,
+        top:35,
+        left:"32%",
+        resizeMode:"contain"
     },
     btn: {
         color: "#ffffff",
@@ -288,6 +345,7 @@ const styles = StyleSheet.create({
     button: {
         borderRadius: 8,
         elevation: 2,
+        marginTop:10,
         // marginHorizontal:18
     },
     buttonOpen: {
@@ -296,18 +354,17 @@ const styles = StyleSheet.create({
     buttonClose: {
         backgroundColor: "#2196F3",
         marginHorizontal: 20,
+        marginVertical:8
     },
     textStyle: {
         color: "white",
         fontWeight: "bold",
         textAlign: "center",
         padding: 10,
-
     },
     modalText: {
         textAlign: "center",
         color: "#fff"
-
     },
     tick: {
         width: 15,
@@ -317,22 +374,34 @@ const styles = StyleSheet.create({
     soundgb: {
         paddingLeft: 44,
         color: "#b2b1b6",
-        fontSize: 12
+        fontSize: 12,
     },
     hihtdv: {
         color: "#b2b1b6",
-        fontSize: 12
+        fontSize: 12,
+        fontFamily:'Raleway-Regular',
+        paddingRight:5
     },
     rate: {
         color: "#b2b1b6",
-        paddingLeft: 4,
-        fontSize: 12
+        paddingLeft: 2,
+        fontSize: 12,
     },
     popup: {
         width: 30,
-        height: 30,
-        marginLeft: 30,
+        height: 33,
+        marginLeft: 32,
         marginBottom: 8,
     },
+    cancel:{
+        marginLeft:"45%",
+        top:22,
+        zIndex:1
+    },
+    cancel02:{
+        width: 10,
+        height: 10,
+        resizeMode:"contain",
+    }
 })
 

@@ -19,7 +19,7 @@ export default function download({ navigation }) {
                     placeholder="Vlogers"
                     placeholderTextColor="#fff"
                     searchIcon={{ iconStyle: { color: "#fff" } }}
-                    inputStyle={{ color: "#fff", fontSize: 12 }}
+                    inputStyle={{ color: "#fff", fontSize: 12,fontFamily:'Raleway-Regular' }}
                     containerStyle={{ backgroundColor: "#0e101f" }}
                     inputContainerStyle={{
                         backgroundColor: "#0e101f", shadowColor: "#aeaeae",
@@ -65,13 +65,6 @@ export default function download({ navigation }) {
     );
 }
 
-// export function TabBDetails() {
-//   return (
-//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//       <Text>Tab B Details</Text>
-//     </View>
-//   );
-// }
 
 
 const styles = StyleSheet.create({
@@ -87,6 +80,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         paddingTop: 26,
         paddingLeft: 6,
+        fontFamily:'Raleway-Regular'
     },
     vlogers: {
         paddingTop: 10,
@@ -105,36 +99,38 @@ const styles = StyleSheet.create({
         left: "85%",
     },
     tile: {
-        width: 60,
+        width: 50,
         height: 60,
-        resizeMode: "cover"
+        resizeMode: "contain",
+        marginLeft:6
     },
     card: {
         flex: 1,
         flexDirection: "row",
-        padding: 10,
+        padding: 8,
         backgroundColor: "#171928",
         marginVertical: 8,
     },
     may: {
         color: "#a8a8aa",
-        paddingLeft: 10,
+        paddingLeft: 1,
         fontSize: 10,
     },
     about: {
         color: "#ffffff",
-        paddingLeft: 12,
+        paddingLeft: 1,
         paddingTop: 16,
         fontSize: 12,
+        fontFamily:'Raleway-Regular'
     },
     epi: {
-        color: "#717171",
+        color: "#717171",fontFamily:'Raleway-Regular'
     },
     downpng: {
         width: 30,
         height: 30,
         marginVertical: 10,
-        marginLeft: 30,
+        marginLeft: 20,
         marginTop: 18,
     },
 })
