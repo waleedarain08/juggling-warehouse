@@ -13,9 +13,7 @@ function Signup({ navigation, userInfo, userLogin }) {
     return (
         <SafeAreaView style={styles.safeArea}>
              <KeyboardAwareScrollView style={styles.MainContainer}>
-             <View style={{ height: 700 }}>
-            <ScrollView contentContainerStyle={styles.container}>
-            {/* <View style={{flex:1}}> */}
+                 <View style={{height:850}}>
                 <View style={styles.box1}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
                         <Image style={styles.back} source={require('../../assets/back.png')} />
@@ -71,12 +69,9 @@ function Signup({ navigation, userInfo, userLogin }) {
                         </View>
                     </View>
                 </View>
-                {/* </View> */}
-            </ScrollView>
-            </View>
-            </KeyboardAwareScrollView>
-        </SafeAreaView>
-  
+                </View>
+            </KeyboardAwareScrollView>  
+            </SafeAreaView>
     );
 }
 
@@ -91,6 +86,10 @@ const mapDispatchToProps = dispatch =>
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);
 
 const styles = StyleSheet.create({
+    MainContainer:{
+        flex:1,
+        backgroundColor:"#0e101f"
+    },
     safeArea: {
         flex: 1,
         backgroundColor: '#0e101f'
@@ -107,11 +106,11 @@ const styles = StyleSheet.create({
         fontFamily:'Raleway-Regular'
     },
     loginline: {
-        width: 24,
+        width: 22,
         height: 1,
         backgroundColor: "white",
-        marginTop: 10,
-        marginBottom: 10,
+        marginTop: 6,
+       
     },
     logo: {
         height: 100,
@@ -123,12 +122,11 @@ const styles = StyleSheet.create({
 
     },
     box1: {
-        flex: .5,
+        flex: 0,
         paddingLeft: "5%",
-        paddingTop: "1%",
     },
     box2: {
-        flex: 3,
+        flex: 0.3,
         justifyContent: "center",
         alignItems: "center",
     },
@@ -140,7 +138,7 @@ const styles = StyleSheet.create({
         color:"#fff"
     },
     box3: {
-        flex: 3,
+        flex: 0.5,
         paddingHorizontal: 27,
     },
     password: {
@@ -166,7 +164,7 @@ const styles = StyleSheet.create({
         left: 18,
     },
     box4: {
-        flex: 0.5,
+        flex: 0,
         justifyContent:"center",
     },
     button: {
@@ -195,7 +193,7 @@ const styles = StyleSheet.create({
         borderRadius: 3,
     },
     box5: {
-        flex: 1.2,
+        flex: 0.08,
         justifyContent:"center",
         alignItems:"center",
         paddingVertical:8,

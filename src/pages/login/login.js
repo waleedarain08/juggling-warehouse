@@ -14,8 +14,8 @@ function Login({ navigation, userInfo, userLogin }) {
 
 
   return (
-    <KeyboardAwareScrollView style={styles.MainContainer}>
-      <View style={{ height: 800 }}>
+    <View style={styles.MainContainer}>
+      {/* <View style={{ height: 750 }}> */}
         <View style={styles.LogoContainer}>
           <Image style={styles.TitleLogo} source={require("../../assets/juggling.png")} />
         </View>
@@ -40,8 +40,8 @@ function Login({ navigation, userInfo, userLogin }) {
           <View style={styles.remeberview}>
             <CheckBox
               center
-              size={16}
-              containerStyle={{ position:"absolute",padding:0,top:-6}}
+              size={20}
+              containerStyle={{ position:"absolute",padding:0,top:-7}}
               checked={checked}
               onPress={() => setChecked(!checked)}
             />
@@ -94,8 +94,8 @@ function Login({ navigation, userInfo, userLogin }) {
           </View>
 
         </View>
-      </View >
-    </KeyboardAwareScrollView>
+      {/* </View > */}
+    </View>
   );
 }
 
@@ -116,10 +116,10 @@ const styles = StyleSheet.create({
   },
 
   LogoContainer: {
-    flex: 2.2,
+    flex: 2,
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: "15%"
+    paddingTop: "8%"
   },
   BackArrow: {
     height: 12,

@@ -15,12 +15,12 @@ import {
     DrawerItem,
 } from '@react-navigation/drawer';
 import { Switch } from 'react-native-elements';
-import { userLogout } from './redux/actions';
+import {userLogout}  from './redux/actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 
-const CustomSidebarMenu = ({props,userLogout}) => {
+function CustomDrawer({navigation,userLogout}) {
     const BASE_PATH =
         'https://raw.githubusercontent.com/AboutReact/sampleresource/master/';
     const proileImage = 'react_logo.png';
@@ -34,7 +34,7 @@ const CustomSidebarMenu = ({props,userLogout}) => {
                 <Text style={styles.setting}>APP SETTINGS</Text>
                 <View style={{ borderBottomWidth: 2, borderBottomColor: "#666670", paddingTop: 4, width: 22, }}></View>
             </View>
-            <DrawerContentScrollView {...props}>
+            <DrawerContentScrollView >
                 {/* <DrawerItemList {...props} />
                 <DrawerItem
                     label=" "
@@ -47,9 +47,9 @@ const CustomSidebarMenu = ({props,userLogout}) => {
                             <Image style={styles.iconlogo1} source={require('./assets/notification03.png')} />
                         </View>
                         <View style={{ flex: 3 }}>
-                            <Text style={{ color: "#fff", fontSize: 12, fontWeight: "bold"}}
+                            <Text style={{ color: "#fff", fontSize: 13, fontWeight: "bold"}}
                                 onPress={() => {
-                                    props.navigation.navigate("Notifications")
+                                    navigation.navigate("Notifications")
                                 }}>
                                 Notification
                   </Text>
@@ -63,10 +63,7 @@ const CustomSidebarMenu = ({props,userLogout}) => {
                             <Image style={styles.iconlogo1} source={require('./assets/wifi.png')} />
                         </View>
                         <View style={{ flex: 3 }}>
-                            <Text style={{ color: "#fff", fontSize: 12, fontWeight: "bold", }}
-                                onPress={() => {
-                                    Linking.openURL('https://aboutreact.com/');
-                                }}>
+                            <Text style={{ color: "#fff", fontSize: 12, fontWeight: "bold", }}>
                                 Wi-fi Only
                   </Text>
                         </View>
@@ -123,14 +120,14 @@ const CustomSidebarMenu = ({props,userLogout}) => {
                     </View>
                     <View style={{ borderBottomWidth: 1, borderBottomColor: "#282a37", paddingTop: 4 }}></View>
                     <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                        <Text style={styles.password}>Changes Password</Text>
+                        <Text style={styles.password}>Change Password</Text>
                         <Image style={styles.dropdownright} source={require('./assets/dropdown01.png')} />
                     </View>
                 </View>
             </DrawerContentScrollView>
             <View style={{ paddingLeft: 14, }}>
                 <View style={{ borderBottomWidth: 2, borderBottomColor: "#666670", width: 22, marginBottom: 4 }}></View>
-                <TouchableOpacity activeOpacity={0.8} onPress={()=>userLogout(null)} style={{ flexDirection: "row", }}>
+                <TouchableOpacity activeOpacity={0.8} onPress={()=>userLogout()} style={{ flexDirection: "row", }}>
                     <Image style={styles.logout} source={require('./assets/logout05.png')} />
                     <Text
                         style={{
@@ -176,9 +173,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: "bold",
         paddingTop: 20,
-        fontFamily: 'Raleway-Regular'
-
-        //   paddingLeft:12
+        fontFamily: 'Raleway-Regular',
     },
     line: {
         color: "#ffffff",
@@ -257,4 +252,4 @@ const mapStateToProps = state => {
   const mapDispatchToProps = dispatch =>
     bindActionCreators({ userLogout }, dispatch);
   
-  export default connect(mapStateToProps, mapDispatchToProps)(CustomSidebarMenu);
+  export default connect(mapStateToProps, mapDispatchToProps)(CustomDrawer);

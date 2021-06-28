@@ -149,8 +149,8 @@ const styles = StyleSheet.create({
     profiledetail: {
         flex: 4, backgroundColor: "#0d0f1c",
         paddingHorizontal: 20,
-        borderTopLeftRadius: 8,
-        borderTopRightRadius: 8,
+        borderTopLeftRadius: 12,
+        borderTopRightRadius: 12,
         shadowColor: "#ffffff80",
         shadowOffset: {
             width: 0.5,
