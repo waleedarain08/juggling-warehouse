@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { userLogout } from '../../redux/actions';
 
 
-
+ 
 export function Search({ navigation }) {
 
   return (
