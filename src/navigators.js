@@ -271,10 +271,10 @@ function HomeTab() {
               return <View style={focused ? styles.focusedTab : styles.notFocusedTab}><Image style={{ height: 18, width: 18, resizeMode: "contain" }} source={require('./assets/homeicon.png')} /></View>
               break;
             case 'List':
-              return <View style={focused ? styles.focusedTab : styles.notFocusedTab}><Image style={{ height: 18, width: 18, resizeMode: "contain" }} source={require('./assets/play-list.png')} /></View>
+              return <View style={focused ? styles.focusedTab : styles.notFocusedTab}><Image style={{ height: 18, width: 18, resizeMode: "contain" }} source={require('./assets/playlisticon.png')} /></View>
               break;
             case 'Profile':
-              return <View style={focused ? styles.focusedTab : styles.notFocusedTab}><Image style={{ height: 18, width: 18, resizeMode: "contain" }} source={require('./assets/profile.png')} /></View>
+              return <View style={focused ? styles.focusedTab : styles.notFocusedTab}><Image style={{ height: 18, width: 18, resizeMode: "contain" }} source={require('./assets/profileicon.png')} /></View>
               break;
             default:    
               break;
