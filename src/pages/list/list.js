@@ -37,7 +37,7 @@ export default function List({ navigation }) {
                 />
                 </View>
                 <ScrollView contentContainerStyle={{flexGrow:1,paddingBottom:20, }}
-                showsVerticalScrollIndicator="none"
+                showsVerticalScrollIndicator={false}
                 >
                     <View style={styles.movie}>
                     <Image style={styles.moviepng} source={require('../../assets/01-tile.png')} />
