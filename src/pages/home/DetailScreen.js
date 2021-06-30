@@ -68,7 +68,7 @@ function DetailScreen({ navigation }) {
                     <Text style={styles.para}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero nulla temporibus ratione doloremque. Vero cum esse blanditiis quisquam omnis repellendus recusandae distinctio.Vel, quasi dolores blanditiis delectus nihil, Lorem ipsum dolor</Text>
                 </View>
                 <View  style={styles.box5}>
-                <Image style={styles.play} source={require('../../assets/Play.png')} />
+                <Image style={styles.play} source={require('../../assets/play.png')} />
                     <Button
                         title="Watch Now"
                     />

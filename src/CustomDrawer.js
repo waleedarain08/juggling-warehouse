@@ -161,7 +161,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 5,
     },
     customItem: {
-        padding: 10,
+        paddingHorizontal:14,
+        paddingVertical:10,
     },
     para: {
         color: "#b2b2b4",
@@ -236,7 +237,7 @@ const styles = StyleSheet.create({
         width: 8,
         height: 12,
         marginVertical: 25,
-        marginRight: 16
+        marginRight: 18
     },
     deletelogo: {
         width: 10,

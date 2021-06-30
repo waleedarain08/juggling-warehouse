@@ -16,7 +16,7 @@ export default function NotificationsScreen({navigation}) {
         <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.goBack()} style={styles.imgcard} >
             <Image style={styles.backpng} source={require('../../assets/back.png')} />
         </TouchableOpacity>
-        <Image style={styles.search} source={require('../../assets/Search.png')} />
+        <Image style={styles.search} source={require('../../assets/search.png')} />
         <Input style={styles.vlogers} placeholder="Notification" />
     </View>
     <View style={styles.today}>

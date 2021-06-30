@@ -10,10 +10,9 @@ function HomeScreen({ navigation, user, userLogout }) {
   const [reason, setReason] = useState([{ title: "abc", image: require('../../assets/vedio.png') }, { title: "def", image: require('../../assets/vedio.png') }, { title: "ghi", image: require('../../assets/vedio.png') },]);
   const [reason1, setReason1] = useState([{ title: "abc", image: require('../../assets/050.png') }, { title: "abc", image: require('../../assets/030.png') }, { title: "abc", image: require('../../assets/040.png') }, { title: "abc", image: require('../../assets/020.png') }, { title: "abc", image: require('../../assets/050.png') }, { title: "abc", image: require('../../assets/030.png') }]);
   const [reason2, setReason2] = useState([{ title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }, { title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }, { title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }]);
-  const [reason3, setReason3] = useState([{ title: "abc", image: require('../../assets/Img05.png') }, { title: "abc", image: require('../../assets/Img06.png') }, { title: "abc", image: require('../../assets/Img05.png') }, { title: "abc", image: require('../../assets/Img06.png') }]);
+  const [reason3, setReason3] = useState([{ title: "abc", image: require('../../assets/img05.png') }, { title: "abc", image: require('../../assets/img06.png') }, { title: "abc", image: require('../../assets/img05.png') }, { title: "abc", image: require('../../assets/img06.png') }]);
   const [modalVisible, setModalVisible] = useState(false);
   const [listhome, setlisthome] = useState([{ title: "abc", Text: "Home" }, { title: "def", Text: "My List" }, { title: "ghi", Text: "Available for Download" }, { title: "jkl", Text: "Action" }, { title: "mno", Text: "Anime" }, { title: "pqr", Text: "Children & Family" }, { title: "stu", Text: "Documentaries" }, { title: "vwx", Text: "Fantasy" }, { title: "yza", Text: "Reality" }, { title: "bcd", Text: "Stan-up" }, { title: "efg", Text: "Audio Description" }]);
-
   goNext = () => {
     navigation.navigate("About Motivation");
   }
@@ -298,7 +297,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 14,
     paddingVertical: 20,
-    fontFamily:'Raleway-Regular'
+    fontFamily:'Raleway-Regular',
+    
   },
   firstHeading: {
     textAlign: "center",
@@ -316,5 +316,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
    backgroundColor:"#0e101f70"
-  }
+  },
+  
 })

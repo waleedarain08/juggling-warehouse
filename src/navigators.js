@@ -265,18 +265,18 @@ function HomeTab() {
             case 'Download':
               return <View style={focused ? styles.focusedTab : styles.notFocusedTab}><Image style={{ height: 18, width: 18, resizeMode: "contain" }} source={require('./assets/downloadicon.png')} /></View>
             case 'Search':
-              return <View style={focused ? styles.focusedTab : styles.notFocusedTab}><Image style={{ height: 18, width: 18, resizeMode: "contain" }} source={require('./assets/Search.png')} /></View>
+              return <View style={focused ? styles.focusedTab : styles.notFocusedTab}><Image style={{ height: 18, width: 18, resizeMode: "contain" }} source={require('./assets/search.png')} /></View>
               break;
             case 'Home':
               return <View style={focused ? styles.focusedTab : styles.notFocusedTab}><Image style={{ height: 18, width: 18, resizeMode: "contain" }} source={require('./assets/homeicon.png')} /></View>
               break;
             case 'List':
-              return <View style={focused ? styles.focusedTab : styles.notFocusedTab}><Image style={{ height: 18, width: 18, resizeMode: "contain" }} source={require('./assets/Play-List.png')} /></View>
+              return <View style={focused ? styles.focusedTab : styles.notFocusedTab}><Image style={{ height: 18, width: 18, resizeMode: "contain" }} source={require('./assets/play-list.png')} /></View>
               break;
             case 'Profile':
-              return <View style={focused ? styles.focusedTab : styles.notFocusedTab}><Image style={{ height: 18, width: 18, resizeMode: "contain" }} source={require('./assets/Profile.png')} /></View>
+              return <View style={focused ? styles.focusedTab : styles.notFocusedTab}><Image style={{ height: 18, width: 18, resizeMode: "contain" }} source={require('./assets/profile.png')} /></View>
               break;
-            default:
+            default:    
               break;
           }
           // return <Icon name={iconName} size={size} color={color} />;  
