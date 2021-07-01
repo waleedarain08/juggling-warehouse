@@ -14,7 +14,7 @@ function Login({ navigation, userInfo, userLogin }) {
 
 
   return (
-    <KeyboardAvoidingView behavior={(Platform.OS === 'ios') ? "padding" : null} keyboardVerticalOffset={Platform.select({ ios: -250, android: 500 })}
+    <KeyboardAvoidingView behavior={(Platform.OS === 'ios') ? "padding" : null} keyboardVerticalOffset={Platform.select({ ios: -250, android: -100 })}
       style={styles.MainContainer}>
       {/* <View style={{ height: 750 }}> */}
       <View style={styles.LogoContainer}>
