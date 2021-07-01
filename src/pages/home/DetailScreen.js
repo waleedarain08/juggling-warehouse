@@ -163,7 +163,7 @@ function DetailScreen({ navigation }) {
                                 </View>
                             </View>
                             <View>
-                                <Text style={styles.soundgb}>3.5 GB</Text>
+                                <Text  style={{paddingLeft:47,  color: "#b2b1b6", fontSize: 12,}}>3.5 GB</Text>
                             </View>
                         </View>
                         <Pressable

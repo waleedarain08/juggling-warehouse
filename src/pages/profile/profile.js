@@ -11,6 +11,7 @@ export default function profile({ navigation }) {
     const [search, setSearch] = useState("");
     return (
         <View style={styles.container}>
+            <ScrollView contentContainerStyle={{ height: 800,backgroundColor:"#0e101f" }}>
             <View style={{ flex: 4, }}>
                 <View style={styles.profilpage}>
                     <Image style={styles.man} source={require('../../assets/02-tile.png')} />
@@ -76,7 +77,9 @@ export default function profile({ navigation }) {
                 </View>
             </View>
             <View style={{ flex: 1 }}></View>
+            </ScrollView>
         </View>
+     
     );
 }
 
@@ -149,8 +152,9 @@ const styles = StyleSheet.create({
     profiledetail: {
         flex: 4, backgroundColor: "#0d0f1c",
         paddingHorizontal: 20,
-        borderTopLeftRadius: 12,
-        borderTopRightRadius: 12,
+        // borderTopLeftRadius: 12,
+        // borderTopRightRadius: 12,
+        borderRadius:12,
         shadowColor: "#ffffff80",
         shadowOffset: {
             width: 0.5,
@@ -160,6 +164,7 @@ const styles = StyleSheet.create({
         shadowRadius: 0.84,
 
         elevation: 5,
+        paddingTop:30
     },
     user: {
         width: 13,

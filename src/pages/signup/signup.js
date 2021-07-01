@@ -98,12 +98,12 @@ const styles = StyleSheet.create({
         flexGrow:1,
     },
     logindv: {
-        fontSize: 13,
+        fontSize: 12,
         paddingTop: 30,
         fontWeight: 'bold',
         color: "white",
         borderBottomColor: "white",
-        fontFamily:'Raleway-Regular'
+        // fontFamily:'Raleway-Regular'
     },
     loginline: {
         width: 22,
