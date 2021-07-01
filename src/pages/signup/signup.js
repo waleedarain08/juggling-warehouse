@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
         color:"#fff"
     },
     box3: {
-        flex: 0.6,
+        flex: 0.8,
         paddingHorizontal: 27,
     },
     password: {
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
         left: 18,
     },
     box4: {
-        flex: 0,
+        flex: 0.1,
         justifyContent:"center",
     },
     button: {
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
         fontFamily:'Raleway-Regular',
     },
     singupline: {
-        width: 82,
+        width: 75,
         height: 2,
         backgroundColor: "#17619c",
     },
@@ -221,8 +221,8 @@ const styles = StyleSheet.create({
     },
     line: {
         flex: 1,
-        justifyContent: "flex-start",
         alignItems: "center",
+        marginTop:18
     }
 
 })
