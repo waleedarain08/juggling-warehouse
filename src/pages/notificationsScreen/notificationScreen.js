@@ -75,9 +75,9 @@ const styles = StyleSheet.create({
       left: 6,
   },
   vlogers: {
-      paddingTop: 12,
+      paddingTop: 10,
       paddingLeft: 38,
-      paddingBottom: 12,
+      paddingBottom: 4,
       marginVertical: 12,
       fontSize: 12,
       color: "white",
