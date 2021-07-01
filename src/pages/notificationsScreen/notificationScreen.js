@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
       width: 30,
       height: 30,
       position: "absolute",
-      top: 26,
+      top: 32,
       left: 12,
       zIndex:1
   },
