@@ -35,7 +35,7 @@ function DetailScreen({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <ScrollView>
+            <ScrollView contentContainerStyle={{ height: 700 }}>
                 <View style={styles.box2}>
                     <Image
                         style={{ width: "100%", height: 200 }}
@@ -113,10 +113,11 @@ function DetailScreen({ navigation }) {
                         <Text style={styles.modalText}>Download Film</Text>
                     </View>
                     <View style={{ backgroundColor: "#191931", padding: 10 }}>
-                    <View style={{ flexDirection: "row", alignItems:"center",paddingVertical:6}}>
-                            <CheckBox 
+                    <View style={{ flexDirection: "row", alignItems:"center",paddingVertical:6,}}>
+                        <View style={{flexDirection:"row",justifyContent:"center",alignItems:"center",right:9}}>
+                            <CheckBox
                             size={20}
-                            containerStyle={{ padding:0,width:18,height:20, }}
+                            containerStyle={{ padding:0,width:18,height:20 }}
                             checked={checked}
                             onPress={()=>handleCheckBox()}
                             />
@@ -126,11 +127,13 @@ function DetailScreen({ navigation }) {
                                 <Text style={styles.rate}>720</Text>
                                 </View>
                             </View>
+                            </View>
                             <View>
                                 <Text style={styles.soundgb}>3.5 GB</Text>
                             </View>
                         </View>
                         <View style={{ flexDirection: "row", alignItems:"center",paddingVertical:6}}>
+                        <View style={{flexDirection:"row",justifyContent:"center",alignItems:"center",right:9}}>
                             <CheckBox 
                             size={20}
                             containerStyle={{ padding:0,width:18,height:20, }}
@@ -143,11 +146,13 @@ function DetailScreen({ navigation }) {
                                 <Text style={styles.rate}>360</Text>
                                 </View>
                             </View>
+                            </View>
                             <View>
                                 <Text style={styles.soundgb}>3.5 GB</Text>
                             </View>
                         </View>
                         <View style={{ flexDirection: "row", alignItems:"center",paddingVertical:6}}>
+                        <View style={{flexDirection:"row",justifyContent:"center",alignItems:"center",right:9}}>
                             <CheckBox
                             checked={useState.isChecked}
                             onPress={useState.handlePressCheckedBox}
@@ -161,6 +166,7 @@ function DetailScreen({ navigation }) {
                                 <View style={{borderRightColor:"#fff",borderRightWidth:1,borderLeftWidth:1,borderLeftColor:"#fff",borderRadius:5}}>
                                 <Text style={styles.rate}>144</Text>
                                 </View>
+                            </View>
                             </View>
                             <View>
                                 <Text  style={{paddingLeft:47,  color: "#b2b1b6", fontSize: 12,}}>3.5 GB</Text>
@@ -282,7 +288,7 @@ const styles = StyleSheet.create({
         lineHeight:20,
     },
     box5: {
-        flex: 1.5,
+        flex: 1.3,
         paddingTop: 20,
         position:"relative",
     },

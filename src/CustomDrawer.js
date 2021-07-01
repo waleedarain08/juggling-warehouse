@@ -241,8 +241,9 @@ const styles = StyleSheet.create({
     },
     deletelogo: {
         width: 10,
-        height: 12,
+        height: 16,
         marginVertical: 16,
+        resizeMode:"contain",
     }
 });
 

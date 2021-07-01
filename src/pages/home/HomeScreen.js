@@ -22,7 +22,7 @@ function HomeScreen({ navigation, user, userLogout }) {
       <View style={styles.cate}>
         <Text style={styles.categores}>Livestreaming</Text>
         <Text style={styles.categores}>Vlogs</Text>
-        <TouchableOpacity onPress={() => setModalVisible(true)} style={{ flexDirection: "row" }}>
+        <TouchableOpacity onPress={() => setModalVisible(true)} style={{ flexDirection: "row",alignItems:"center" }}>
           <Text style={styles.categores}>Categories</Text>
           <Image style={styles.drop} source={require('../../assets/drop-down.png')} />
         </TouchableOpacity>
@@ -160,7 +160,8 @@ const styles = StyleSheet.create({
     width: 10,
     height: 20,
     resizeMode: "contain",
-    marginLeft: 7
+    marginLeft: 7,
+    marginTop:4
   },
   menupng: {
     width: 14,
@@ -235,10 +236,11 @@ const styles = StyleSheet.create({
   rowdv: {
     flex: 0,
     padding: 10,
-    paddingHorizontal: 6,
+    paddingHorizontal: 4,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    paddingVertical:5,
   },
   live: {
     width: 65,

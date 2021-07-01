@@ -13,7 +13,7 @@ function Signup({ navigation, userInfo, userLogin }) {
     return (
         <SafeAreaView style={styles.safeArea}>
              <KeyboardAwareScrollView style={styles.MainContainer}>
-                 <View style={{height:1020}}>
+                 <View style={{height:770}}>
                 <View style={styles.box1}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
                         <Image style={styles.back} source={require('../../assets/back.png')} />
@@ -103,7 +103,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: "white",
         borderBottomColor: "white",
-        // fontFamily:'Raleway-Regular'
     },
     loginline: {
         width: 22,
@@ -118,8 +117,7 @@ const styles = StyleSheet.create({
     },
     back: {
         height: 17,
-        width: 23,
-
+        width: 23,marginTop:15
     },
     box1: {
         flex: 0,
@@ -138,7 +136,7 @@ const styles = StyleSheet.create({
         color:"#fff"
     },
     box3: {
-        flex: 0.5,
+        flex: 0.6,
         paddingHorizontal: 27,
     },
     password: {

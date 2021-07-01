@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   today: {
       flex: 7.5,
       paddingHorizontal: 2,
-      paddingVertical: 10,
+      paddingVertical: 13,
   },
   disney: {
       color: "#ffffff",

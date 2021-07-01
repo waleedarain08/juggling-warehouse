@@ -152,8 +152,6 @@ const styles = StyleSheet.create({
     profiledetail: {
         flex: 4, backgroundColor: "#0d0f1c",
         paddingHorizontal: 20,
-        // borderTopLeftRadius: 12,
-        // borderTopRightRadius: 12,
         borderRadius:12,
         shadowColor: "#ffffff80",
         shadowOffset: {

@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import React, { useState } from 'react';
 import { Input, CheckBox } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
@@ -14,88 +14,89 @@ function Login({ navigation, userInfo, userLogin }) {
 
 
   return (
-    <View style={styles.MainContainer}>
+    <KeyboardAvoidingView behavior={(Platform.OS === 'ios') ? "padding" : null} keyboardVerticalOffset={Platform.select({ ios: -250, android: 500 })}
+      style={styles.MainContainer}>
       {/* <View style={{ height: 750 }}> */}
-        <View style={styles.LogoContainer}>
-          <Image style={styles.TitleLogo} source={require("../../assets/juggling.png")} />
-        </View>
+      <View style={styles.LogoContainer}>
+        <Image style={styles.TitleLogo} source={require("../../assets/juggling.png")} />
+      </View>
 
-        <View style={styles.LoginText}>
-          <Text style={styles.Login1}>Login</Text>
-          <View style={styles.LoginLine}></View>
-        </View>
+      <View style={styles.LoginText}>
+        <Text style={styles.Login1}>Login</Text>
+        <View style={styles.LoginLine}></View>
+      </View>
 
-        <View style={styles.Inputs}>
-          <View>
-            <Image style={styles.InputLogo} source={require("../../assets/user.png")} />
-            <Input style={styles.TextField} placeholder="Email Address" />
-          </View>
-          <View>
-            <Image style={styles.InputLogo} source={require("../../assets/lock.png")} />
-            <Input style={styles.TextField} placeholder="Password" secureTextEntry={true} />
-          </View>
+      <View style={styles.Inputs}>
+        <View>
+          <Image style={styles.InputLogo} source={require("../../assets/user.png")} />
+          <Input style={styles.TextField} placeholder="Email Address" />
         </View>
+        <View>
+          <Image style={styles.InputLogo} source={require("../../assets/lock.png")} />
+          <Input style={styles.TextField} placeholder="Password" secureTextEntry={true} />
+        </View>
+      </View>
 
-        <View style={styles.CheckBoxField}>
-          <View style={styles.remeberview}>
-            <CheckBox
-              center
-              size={20}
-              containerStyle={{ position:"absolute",padding:0,top:-7}}
-              checked={checked}
-              onPress={() => setChecked(!checked)}
-            />
-            <Text style={styles.remember}>Remember</Text>
-          </View>
-          <View style={styles.forgetview}>
-            <Text style={styles.forgettext}>Forget Password</Text>
-          </View>
+      <View style={styles.CheckBoxField}>
+        <View style={styles.remeberview}>
+          <CheckBox
+            center
+            size={20}
+            containerStyle={{ position: "absolute", padding: 0, top: -7 }}
+            checked={checked}
+            onPress={() => setChecked(!checked)}
+          />
+          <Text style={styles.remember}>Remember</Text>
         </View>
+        <View style={styles.forgetview}>
+          <Text style={styles.forgettext}>Forget Password</Text>
+        </View>
+      </View>
 
-        <View style={styles.LoginButtonContainer}>
-          <View>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              style={styles.LoginButton}
-              onPress={() => userLogin(username, password)}
-            >
-              <Text style={styles.LoginButtonInside}>LOGIN</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.orLoginContainer}>
-          <View style={styles.linedv}></View>
-          <Text style={{ paddingHorizontal: "1.5%", color: "#87888F", fontSize: 12, fontFamily: 'Raleway-Regular' }}>Or Login with</Text>
-          <View style={styles.linedv}></View>
-        </View>
-        <View style={styles.SocialButtons}>
+      <View style={styles.LoginButtonContainer}>
+        <View>
           <TouchableOpacity
             activeOpacity={0.8}
-            style={styles.Buttonfb}>
-            <Image style={styles.logo40} source={require("../../assets/facebook.png")} />
-            <Text style={styles.ButtonInfb}>FACEBOOK</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            style={styles.Buttongoogle}>
-            <Image style={styles.logo50} source={require("../../assets/google.png")} />
-            <Text style={styles.ButtonIngoogle}>GOOGLE</Text>
+            style={styles.LoginButton}
+            onPress={() => userLogin(username, password)}
+          >
+            <Text style={styles.LoginButtonInside}>LOGIN</Text>
           </TouchableOpacity>
         </View>
+      </View>
+      <View style={styles.orLoginContainer}>
+        <View style={styles.linedv}></View>
+        <Text style={{ paddingHorizontal: "1.5%", color: "#87888F", fontSize: 12, fontFamily: 'Raleway-Regular' }}>Or Login with</Text>
+        <View style={styles.linedv}></View>
+      </View>
+      <View style={styles.SocialButtons}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={styles.Buttonfb}>
+          <Image style={styles.logo40} source={require("../../assets/facebook.png")} />
+          <Text style={styles.ButtonInfb}>FACEBOOK</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={styles.Buttongoogle}>
+          <Image style={styles.logo50} source={require("../../assets/google.png")} />
+          <Text style={styles.ButtonIngoogle}>GOOGLE</Text>
+        </TouchableOpacity>
+      </View>
 
-        <View style={styles.AccountContainer}>
+      <View style={styles.AccountContainer}>
 
-          <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "center" }}>
-            <Text style={styles.account}>If you don't have an account</Text>
-            <Text onPress={() => navigation.navigate("Signup")} style={styles.singup}>SIGNUP HERE</Text>
-          </View>
-          <View style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}>
-            <View style={styles.singupline}></View>
-          </View>
-
+        <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "center" }}>
+          <Text style={styles.account}>If you don't have an account</Text>
+          <Text onPress={() => navigation.navigate("Signup")} style={styles.singup}>SIGNUP HERE</Text>
         </View>
+        <View style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}>
+          <View style={styles.singupline}></View>
+        </View>
+
+      </View>
       {/* </View > */}
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -178,13 +179,13 @@ const styles = StyleSheet.create({
     flex: .5,
     flexDirection: "row",
     marginHorizontal: "7%",
-    alignItems:"flex-start",
-    justifyContent:"center",
+    alignItems: "flex-start",
+    justifyContent: "center",
 
   },
   remeberview: {
-    flex:1,
-    alignItems:"flex-start",
+    flex: 1,
+    alignItems: "flex-start",
     flexDirection: "row",
   },
 
@@ -193,7 +194,7 @@ const styles = StyleSheet.create({
     fontSize: 11,
     flex: 1,
     fontFamily: 'Raleway-Regular',
-    marginLeft:"20%"
+    marginLeft: "20%"
 
   },
   tick: {
