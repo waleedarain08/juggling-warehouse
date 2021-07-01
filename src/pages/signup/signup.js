@@ -13,7 +13,7 @@ function Signup({ navigation, userInfo, userLogin }) {
     return (
         <SafeAreaView style={styles.safeArea}>
              <KeyboardAwareScrollView style={styles.MainContainer}>
-                 <View style={{height:850}}>
+                 <View style={{height:1020}}>
                 <View style={styles.box1}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
                         <Image style={styles.back} source={require('../../assets/back.png')} />
