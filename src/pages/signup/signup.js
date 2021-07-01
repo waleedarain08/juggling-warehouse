@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
         color:"#fff"
     },
     box3: {
-        flex: 0.8,
+        flex: 0.6,
         paddingHorizontal: 27,
     },
     password: {
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     },
     box4: {
         flex: 0.1,
-        justifyContent:"center",
+        justifyContent:"flex-start",
     },
     button: {
         alignItems: "center",
@@ -222,7 +222,6 @@ const styles = StyleSheet.create({
     line: {
         flex: 1,
         alignItems: "center",
-        marginTop:18
     }
 
 })

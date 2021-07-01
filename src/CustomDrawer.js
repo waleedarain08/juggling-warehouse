@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
         color: "#ffffff",
         fontSize: 12,
         fontWeight: "bold",
-        paddingVertical: 16,
+        paddingVertical: 18,
         fontFamily: 'Raleway-Regular',
         paddingLeft: 10
     },

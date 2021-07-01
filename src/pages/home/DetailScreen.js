@@ -240,7 +240,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         paddingLeft: 10,
-        fontFamily:'Raleway-Regular'
+        fontFamily:'Raleway-Regular',
+        paddingTop:6
     },
     downsec: {
         flexDirection: "row",
@@ -264,9 +265,10 @@ const styles = StyleSheet.create({
 
     },
     list: {
-        width: 18,
-        height: 18,
-        marginVertical: 10,
+        width: 24,
+        height: 24,
+        marginTop: 10,
+        resizeMode:"contain",
     },
     star: {
         width: 12,
@@ -277,6 +279,7 @@ const styles = StyleSheet.create({
         width: 17,
         height: 17,
         marginVertical: 10,
+        resizeMode:"contain",
     },
     box4: {
         flex: 2.5,
