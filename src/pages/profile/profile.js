@@ -11,7 +11,7 @@ export default function profile({ navigation }) {
     const [search, setSearch] = useState("");
     return (
         <View style={styles.container}>
-            <ScrollView contentContainerStyle={{ height: 800,backgroundColor:"#0e101f" }}>
+            <ScrollView contentContainerStyle={{ height: 800,backgroundColor:"#0e101f" }}  showsVerticalScrollIndicator={false}>
             <View style={{ flex: 4, }}>
                 <View style={styles.profilpage}>
                     <Image style={styles.man} source={require('../../assets/02-tile.png')} />

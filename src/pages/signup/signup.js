@@ -12,7 +12,7 @@ function Signup({ navigation, userInfo, userLogin }) {
 
     return (
         <SafeAreaView style={styles.safeArea}>
-             <KeyboardAwareScrollView style={styles.MainContainer}>
+             <KeyboardAwareScrollView style={styles.MainContainer} showsVerticalScrollIndicator={false}>
                  <View style={{height:Platform.OS==="ios"?750:"70%"}}>
                 <View style={styles.box1}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>

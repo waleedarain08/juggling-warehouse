@@ -28,7 +28,7 @@ function HomeScreen({ navigation, user, userLogout }) {
         </TouchableOpacity>
       </View>
 
-      <ScrollView contentContainerStyle={{ height: 700 }}>
+      <ScrollView contentContainerStyle={{ height: 700 }}  showsVerticalScrollIndicator={false}>
         <View style={{ flex: 1, flexGrow: 1 }}>
 
           <View style={styles.box2}>

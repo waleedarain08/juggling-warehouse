@@ -35,7 +35,7 @@ function DetailScreen({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <ScrollView contentContainerStyle={{ height: 700 }}>
+            <ScrollView contentContainerStyle={{ height: 700 }}  showsVerticalScrollIndicator={false}>
                 <View style={styles.box2}>
                     <Image
                         style={{ width: "100%", height: 200 }}
@@ -94,6 +94,7 @@ function DetailScreen({ navigation }) {
                 </View>
                 {/* </View> */}
             </ScrollView>
+            <View style={{height:90,}}></View>
             <Modal
                 animationType="fade"
                 transparent={true}
