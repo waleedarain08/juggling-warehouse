@@ -59,8 +59,6 @@ export default function download({ navigation }) {
                     }}>
                 </FlatList>
             </View>
-            <View style={{ height: 70, }}></View>
-
         </View>
     );
 }

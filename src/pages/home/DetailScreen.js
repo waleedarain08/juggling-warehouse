@@ -292,15 +292,15 @@ const styles = StyleSheet.create({
         lineHeight:20,
     },
     box5: {
-        flex: 1.3,
-        paddingTop: 20,
+        flex: 1,
+        paddingTop: 10,
         position:"relative",
     },
     play:{
         position:"absolute",
         zIndex:1,
         height:10,width:10,
-        top:35,
+        top:26,
         left:"32%",
         resizeMode:"contain"
     },
@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
     },
     box6: {
         flex: 3,
-        paddingTop: 30
+        paddingTop: 10,
     },
     video: {
         flexDirection: "row",

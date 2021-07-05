@@ -13,7 +13,7 @@ function Signup({ navigation, userInfo, userLogin }) {
     return (
         <SafeAreaView style={styles.safeArea}>
              <KeyboardAwareScrollView style={styles.MainContainer} showsVerticalScrollIndicator={false}>
-                 <View style={{height:Platform.OS==="ios"?750:"70%"}}>
+                <View style={{height:Platform.OS==="ios"?750:"70%"}}>
                 <View style={styles.box1}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
                         <Image style={styles.back} source={require('../../assets/back.png')} />
@@ -43,7 +43,7 @@ function Signup({ navigation, userInfo, userLogin }) {
                     </View>
                     <View>
                         <Image style={styles.logo02} source={require('../../assets/lock.png')} />
-                        <Input style={styles.email} placeholder="Password" secureTextEntry={true} />
+                        <Input style={styles.email} placeholder="Password" secureTextEntry={true} onChangeText={(text)=> setPassword(text)}/>
                     </View>
                     <View>
                         <Image style={styles.logo02} source={require('../../assets/lock.png')} />
@@ -63,15 +63,13 @@ function Signup({ navigation, userInfo, userLogin }) {
                     <View style={styles.loginhere}>
                         <Text style={styles.account}> Already have an account</Text>
                         <Text onPress={() => navigation.goBack()} style={styles.singup}>LOGIN HERE</Text>
-                    </View>
-                    <View style={styles.line}>
                         <View style={styles.singupline}>
-                        </View>
+                    </View>
                     </View>
                 </View>
                 </View>
-            </KeyboardAwareScrollView>  
-            </SafeAreaView>
+            </KeyboardAwareScrollView>
+        </SafeAreaView>
     );
 }
 
@@ -191,8 +189,8 @@ const styles = StyleSheet.create({
         borderRadius: 3,
     },
     box5: {
-        flex: 0.08,
-        justifyContent:"center",
+        flex: 0.09,
+        justifyContent:"flex-end",
         alignItems:"center",
         paddingVertical:8,
     },
@@ -216,12 +214,8 @@ const styles = StyleSheet.create({
     },
     loginhere: {
         flex: 1,
-        justifyContent: "flex-start",
+        justifyContent: "flex-end",
         alignItems: "center",
     },
-    line: {
-        flex: 1,
-        alignItems: "center",
-    }
 
 })

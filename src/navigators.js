@@ -19,6 +19,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import { bindActionCreators } from 'redux';
 import { userLogout } from '../../redux/actions';
+import CustomTabBar from './CustomTabBar';
 
 const drawerButton = navigation => {
   return (
@@ -236,58 +237,24 @@ function HomeTab() {
   return (
     <HomeTabNav.Navigator
       initialRouteName={"Home"}
-      tabBarOptions={
-        {
-          showLabel: false,
-          tabStyle: {
-            paddingVertical: 3,
-            borderRadius: 8,
-          },
-          style: {
-            borderWidth:1,
-            borderTopColor:"#fff",
-            backgroundColor: '#0e101f',
-            position: 'absolute',
-            borderTopWidth: 0.1,
-            elevation: 0,
-
-          },
-          activeTintColor: "#fff",
-          inactiveTintColor: 'gray',
-          //activeBackgroundColor: '#1a72b9',
-          ///inactiveBackgroundColor: '#0e101f',
+        tabBar={props => {
+          return (
+            <View style={{
+              position: 'absolute',
+              left: 0,
+              right: 0,
+              bottom: 0}}
+            >
+              <CustomTabBar {...props} />
+            </View>
+          )
         }}
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-
-          switch (route.name) {
-            case 'Download':
-              return <View style={focused ? styles.focusedTab : styles.notFocusedTab}><Image style={{ height: 18, width: 18, resizeMode: "contain" }} source={require('./assets/downloadicon.png')} /></View>
-            case 'Search':
-              return <View style={focused ? styles.focusedTab : styles.notFocusedTab}><Image style={{ height: 18, width: 18, resizeMode: "contain" }} source={require('./assets/search.png')} /></View>
-              break;
-            case 'Home':
-              return <View style={focused ? styles.focusedTab : styles.notFocusedTab}><Image style={{ height: 18, width: 18, resizeMode: "contain" }} source={require('./assets/homeicon.png')} /></View>
-              break;
-            case 'List':
-              return <View style={focused ? styles.focusedTab : styles.notFocusedTab}><Image style={{ height: 18, width: 18, resizeMode: "contain" }} source={require('./assets/playlisticon.png')} /></View>
-              break;
-            case 'Profile':
-              return <View style={focused ? styles.focusedTab : styles.notFocusedTab}><Image style={{ height: 18, width: 18, resizeMode: "contain" }} source={require('./assets/profileicon.png')} /></View>
-              break;
-            default:    
-              break;
-          }
-          // return <Icon name={iconName} size={size} color={color} />;  
-        },
-      })}>
+      >
       <HomeTabNav.Screen name="Download" component={HomeDownloadStack} />
       <HomeTabNav.Screen name="Search" component={HomeSearchStack} />
       <HomeTabNav.Screen name="Home" component={HomeTabAStack} />
       <HomeTabNav.Screen name="List" component={HomeListStack} />
       <HomeTabNav.Screen name="Profile" component={HomeProfileStack} />
-
     </HomeTabNav.Navigator>
   );
 }
@@ -322,34 +289,35 @@ function NotificationsStack() {
 }
 
 function RootContainer({ user }) {
-  if (user?.loggedin)
+  if(user?.loggedin) {
     return (
-      <NavigationContainer>
-        <Drawer.Navigator
-          drawerContent={props => <CustomDrawer {...props} />}
-          drawerContentOptions={{
-            activeTintColor: '#fff',
-            inactiveTintColor: '#aeaeae',
-            itemStyle: { marginVertical: 8, marginHorizontal: 8 },
-          }}
-          initialRouteName="Home"
-          drawerStyle={{
-            backgroundColor: '#0e101f',
-            opacity: 0.9,
-            width: 300,
-            color: "#fff",
-          }}>
-          <Drawer.Screen options={{ activeTintColor: "#fff" }} name="Home" component={HomeTab} />
-          <Drawer.Screen name="Notifications" component={NotificationsStack} />
-        </Drawer.Navigator>
-      </NavigationContainer>
-    );
-  else
+      <Drawer.Navigator
+        drawerContent={props => <CustomDrawer {...props} />}
+        drawerContentOptions={{
+          activeTintColor: '#fff',
+          inactiveTintColor: '#aeaeae',
+          itemStyle: { marginVertical: 8, marginHorizontal: 8 },
+        }}
+        initialRouteName="Home"
+        drawerStyle={{
+          backgroundColor: '#0e101f',
+          opacity: 0.9,
+          // display: initRender ? 'none' : 'flex',
+          width: 280,
+          // height: initRender ? 0 : "90%",
+          // color: "#fff",
+        }}
+        drawerType="front"
+      >
+        <Drawer.Screen options={{ activeTintColor: "#fff" }} name="Home" component={HomeTab} />
+        <Drawer.Screen name="Notifications" component={NotificationsStack} />
+      </Drawer.Navigator>
+    )
+  } else {
     return (
-      <NavigationContainer>
-        <LoginStack />
-      </NavigationContainer>
-    );
+      <LoginStack />
+    )
+  }
 }
 
 const mapStateToProps = state => {
@@ -357,27 +325,3 @@ const mapStateToProps = state => {
 };
 export default connect(mapStateToProps)(RootContainer);
 
-const styles = StyleSheet.create({
-  focusedTab: {
-    width: 60,
-    height: 38,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#1a72b9",
-    borderRadius: 6,
-    //borderWidth: 0.2,
-    //borderColor: "#aeaeae",
-    shadowColor: "#fff",
-    shadowOffset: {
-      width: 0.5,
-      height: 0.5,
-    },
-    shadowOpacity: 0.27,
-    shadowRadius: 0.65,
-
-    elevation: 6,
-  },
-  notFocusedTab: {
-
-  }
-});

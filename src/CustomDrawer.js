@@ -31,7 +31,7 @@ function CustomDrawer({navigation,userLogout}) {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={{ paddingLeft: 14 }}>
-                <Text style={styles.setting}>APP SETTINGS</Text>
+                <Text style={styles.setting}>SETTINGS</Text>
                 <View style={{ borderBottomWidth: 2, borderBottomColor: "#666670", paddingTop: 4, width: 22, }}></View>
             </View>
             <DrawerContentScrollView >
