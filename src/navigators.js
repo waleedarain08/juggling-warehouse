@@ -1,13 +1,11 @@
-import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { TabB, TabBDetails } from './pages/home/tabB';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import Login from './pages/login/login';
 import Signup from './pages/signup/signup';
 import search from './pages/search/search';
 import profile from './pages/profile/profile';
 import download from './pages/download/download';
 import list from './pages/list/list';
-import { NavigationContainer } from '@react-navigation/native';
 import NotificationsScreen from './pages/notificationsScreen/notificationScreen';
 import React from 'react';
 import HomeScreen from './pages/home/HomeScreen';
@@ -17,18 +15,17 @@ import { connect } from 'react-redux';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
-import { bindActionCreators } from 'redux';
-import { userLogout } from '../../redux/actions';
 import CustomTabBar from './CustomTabBar';
 
 const drawerButton = navigation => {
   return (
-    <Icon
-      name="menu"
-      size={24}
-      style={{ marginLeft: 10, color: "#fff" }}
-      onPress={() => navigation.toggleDrawer()}
-    />
+    <TouchableOpacity
+    onPress={() => navigation.toggleDrawer()}>
+      <Image 
+        source={require('./assets/menu-icon.png')}
+        style={{width: 20, height: 20, resizeMode: 'contain', marginLeft: 12}}
+      />
+    </TouchableOpacity>
   );
 };
 
@@ -41,7 +38,7 @@ const notificationIcon = navigation => {
       </View>
       <View style={{ flex: 1 }}>
         <Icon
-          name="notifications"
+          name="notifications-outline"
           size={24}
           style={{ marginRight: 10, color: "#fff" }}
           onPress={() => navigation.navigate("Notifications")}
@@ -61,8 +58,15 @@ const profiletionIcon = navigation => {
 };
 
 const Drawer = createDrawerNavigator();
-
 const LoginStackNav = createStackNavigator();
+const HomeTabAStackNav = createStackNavigator();
+const HomeDownloadStackNav = createStackNavigator();
+const HomeSearchStackNav = createStackNavigator();
+const HomeListStackNav = createStackNavigator();
+const HomeTabNav = createBottomTabNavigator();
+const HomeProfileStackNav = createStackNavigator();
+
+
 function LoginStack() {
   return (
     <LoginStackNav.Navigator screenOptions={{
@@ -74,7 +78,6 @@ function LoginStack() {
   );
 }
 
-const HomeTabAStackNav = createStackNavigator();
 function HomeTabAStack() {
   return (
     <HomeTabAStackNav.Navigator initialRouteName="HomeScreen" screenOptions={{
@@ -103,11 +106,22 @@ function HomeTabAStack() {
         })}
       />
       <HomeTabAStackNav.Screen name="About Motivation" component={DetailScreen} />
+      <HomeTabAStackNav.Screen name="Notifications" component={NotificationsScreen} 
+        options={({ navigation }) => ({
+          headerLeft: ()=> (
+            <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.goBack()} style={{}} >
+              <Image style={{width: 18, height: 18, marginLeft: 15, resizeMode: 'contain'}} source={require('./assets/back.png')} />
+            </TouchableOpacity>
+          ),
+          headerRight: ()=> (
+            <Image style={{width: 18, height: 18, marginRight: 15, resizeMode: 'contain'}} source={require('./assets/search.png')} />
+          )
+        })}
+      />
     </HomeTabAStackNav.Navigator>
   );
 }
 
-const HomeDownloadStackNav = createStackNavigator();
 function HomeDownloadStack() {
   return (
     <HomeDownloadStackNav.Navigator initialRouteName="download" screenOptions={{
@@ -126,12 +140,24 @@ function HomeDownloadStack() {
         fontFamily: 'Raleway-Regular'
       },
     }}>
-
       <HomeDownloadStackNav.Screen
         name="Downloads"
         component={download}
         options={({ navigation }) => ({
           headerLeft: () => drawerButton(navigation),
+          headerRight: () => notificationIcon(navigation)
+        })}
+      />
+      <HomeTabAStackNav.Screen name="Notifications" component={NotificationsScreen}
+        options={({ navigation }) => ({
+          headerLeft: ()=> (
+            <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.goBack()} style={{}} >
+              <Image style={{width: 18, height: 18, marginLeft: 15, resizeMode: 'contain'}} source={require('./assets/back.png')} />
+            </TouchableOpacity>
+          ),
+          headerRight: ()=> (
+            <Image style={{width: 18, height: 18, marginRight: 15, resizeMode: 'contain'}} source={require('./assets/search.png')} />
+          )
         })}
       />
       {/* <HomeDownloadStackNav.Screen name="TabBDetails" component={TabBDetails} /> */}
@@ -139,7 +165,6 @@ function HomeDownloadStack() {
   );
 }
 
-const HomeSearchStackNav = createStackNavigator();
 function HomeSearchStack() {
   return (
     <HomeSearchStackNav.Navigator initialRouteName="search" screenOptions={{
@@ -163,13 +188,26 @@ function HomeSearchStack() {
         component={search}
         options={({ navigation }) => ({
           headerLeft: () => drawerButton(navigation),
+          headerRight: () => notificationIcon(navigation)
+        })}
+      />
+      <HomeTabAStackNav.Screen name="Notifications" component={NotificationsScreen}
+        options={({ navigation }) => ({
+          headerLeft: ()=> (
+            <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.goBack()} style={{}} >
+              <Image style={{width: 18, height: 18, marginLeft: 15, resizeMode: 'contain'}} source={require('./assets/back.png')} />
+            </TouchableOpacity>
+          ),
+          headerRight: ()=> (
+            <Image style={{width: 18, height: 18, marginRight: 15, resizeMode: 'contain'}} source={require('./assets/search.png')} />
+          )
         })}
       />
       {/* <HomeSearchStackNav.Screen name="TabBDetails" component={TabBDetails} /> */}
     </HomeSearchStackNav.Navigator>
   );
 }
-const HomeListStackNav = createStackNavigator();
+
 function HomeListStack() {
   return (
     <HomeListStackNav.Navigator initialRouteName="list" screenOptions={{
@@ -193,13 +231,25 @@ function HomeListStack() {
         component={list}
         options={({ navigation }) => ({
           headerLeft: () => drawerButton(navigation),
+          headerRight: () => notificationIcon(navigation)
+        })}
+      />
+      <HomeTabAStackNav.Screen name="Notifications" component={NotificationsScreen}
+        options={({ navigation }) => ({
+          headerLeft: ()=> (
+            <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.goBack()} style={{}} >
+              <Image style={{width: 18, height: 18, marginLeft: 15, resizeMode: 'contain'}} source={require('./assets/back.png')} />
+            </TouchableOpacity>
+          ),
+          headerRight: ()=> (
+            <Image style={{width: 18, height: 18, marginRight: 15, resizeMode: 'contain'}} source={require('./assets/search.png')} />
+          )
         })}
       />
     </HomeListStackNav.Navigator>
   );
 }
 
-const HomeProfileStackNav = createStackNavigator();
 function HomeProfileStack() {
   return (
     <HomeProfileStackNav.Navigator initialRouteName="Profile" screenOptions={{
@@ -230,9 +280,6 @@ function HomeProfileStack() {
   );
 }
 
-
-const HomeTabNav = createBottomTabNavigator();
-
 function HomeTab() {
   return (
     <HomeTabNav.Navigator
@@ -240,10 +287,11 @@ function HomeTab() {
         tabBar={props => {
           return (
             <View style={{
-              position: 'absolute',
-              left: 0,
-              right: 0,
-              bottom: 0}}
+                position: 'absolute',
+                left: 0,
+                right: 0,
+                bottom: 0
+              }}
             >
               <CustomTabBar {...props} />
             </View>
@@ -256,35 +304,6 @@ function HomeTab() {
       <HomeTabNav.Screen name="List" component={HomeListStack} />
       <HomeTabNav.Screen name="Profile" component={HomeProfileStack} />
     </HomeTabNav.Navigator>
-  );
-}
-
-const NotificationStackNav = createStackNavigator();
-function NotificationsStack() {
-  return (
-    <NotificationStackNav.Navigator screenOptions={{
-      headerStyle: {
-        backgroundColor: '#0e101f',
-        shadowOpacity: 0.85,
-        shadowRadius: 0,
-        shadowOffset: {
-          width: 0,
-          height: 0,
-        },
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    }}>
-      <NotificationStackNav.Screen
-        name="Notfications"
-        component={NotificationsScreen}
-        options={({ navigation }) => ({
-          headerLeft: () => drawerButton(navigation),
-        })}
-      />
-    </NotificationStackNav.Navigator>
   );
 }
 
@@ -302,15 +321,11 @@ function RootContainer({ user }) {
         drawerStyle={{
           backgroundColor: '#0e101f',
           opacity: 0.9,
-          // display: initRender ? 'none' : 'flex',
           width: 280,
-          // height: initRender ? 0 : "90%",
-          // color: "#fff",
         }}
         drawerType="front"
       >
         <Drawer.Screen options={{ activeTintColor: "#fff" }} name="Home" component={HomeTab} />
-        <Drawer.Screen name="Notifications" component={NotificationsStack} />
       </Drawer.Navigator>
     )
   } else {
