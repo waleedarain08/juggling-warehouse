@@ -1,4 +1,5 @@
 import { Text, View, Image, TouchableOpacity } from 'react-native';
+import React, { Component, useState } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Login from './pages/login/login';
 import Signup from './pages/signup/signup';
@@ -7,7 +8,6 @@ import profile from './pages/profile/profile';
 import download from './pages/download/download';
 import list from './pages/list/list';
 import NotificationsScreen from './pages/notificationsScreen/notificationScreen';
-import React from 'react';
 import HomeScreen from './pages/home/HomeScreen';
 import DetailScreen from './pages/home/DetailScreen';
 import CustomDrawer from './CustomDrawer';
@@ -17,13 +17,25 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import CustomTabBar from './CustomTabBar';
 
+
+const useInitialRender = () => {
+  const [isInitialRender, setIsInitialRender] = useState(false)
+
+  if (!isInitialRender) {
+    setTimeout(() => setIsInitialRender(true), 1)
+    return true
+  }
+  return false
+}
+
+
 const drawerButton = navigation => {
   return (
     <TouchableOpacity
-    onPress={() => navigation.toggleDrawer()}>
-      <Image 
+      onPress={() => navigation.toggleDrawer()}>
+      <Image
         source={require('./assets/menu-icon.png')}
-        style={{width: 20, height: 20, resizeMode: 'contain', marginLeft: 12}}
+        style={{ width: 20, height: 20, resizeMode: 'contain', marginLeft: 12 }}
       />
     </TouchableOpacity>
   );
@@ -80,7 +92,7 @@ function LoginStack() {
 
 function HomeTabAStack() {
   return (
-    <HomeTabAStackNav.Navigator initialRouteName="HomeScreen" screenOptions={{
+    <HomeTabAStackNav.Navigator initialRouteName="Home" screenOptions={{
       headerBackTitleVisible: false,
       headerStyle: {
         backgroundColor: '#0e101f',
@@ -106,15 +118,15 @@ function HomeTabAStack() {
         })}
       />
       <HomeTabAStackNav.Screen name="About Motivation" component={DetailScreen} />
-      <HomeTabAStackNav.Screen name="Notifications" component={NotificationsScreen} 
+      <HomeTabAStackNav.Screen name="Notifications" component={NotificationsScreen}
         options={({ navigation }) => ({
-          headerLeft: ()=> (
-            <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.goBack()} style={{}} >
-              <Image style={{width: 18, height: 18, marginLeft: 15, resizeMode: 'contain'}} source={require('./assets/back.png')} />
+          headerLeft: () => (
+            <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.goBack()} style={{}} >
+              <Image style={{ width: 18, height: 18, marginLeft: 15, resizeMode: 'contain' }} source={require('./assets/back.png')} />
             </TouchableOpacity>
           ),
-          headerRight: ()=> (
-            <Image style={{width: 18, height: 18, marginRight: 15, resizeMode: 'contain'}} source={require('./assets/search.png')} />
+          headerRight: () => (
+            <Image style={{ width: 18, height: 18, marginRight: 15, resizeMode: 'contain' }} source={require('./assets/search.png')} />
           )
         })}
       />
@@ -124,7 +136,7 @@ function HomeTabAStack() {
 
 function HomeDownloadStack() {
   return (
-    <HomeDownloadStackNav.Navigator initialRouteName="download" screenOptions={{
+    <HomeDownloadStackNav.Navigator initialRouteName="Downloads" screenOptions={{
       headerStyle: {
         backgroundColor: '#0e101f',
         shadowOpacity: 0.85,
@@ -150,13 +162,13 @@ function HomeDownloadStack() {
       />
       <HomeTabAStackNav.Screen name="Notifications" component={NotificationsScreen}
         options={({ navigation }) => ({
-          headerLeft: ()=> (
-            <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.goBack()} style={{}} >
-              <Image style={{width: 18, height: 18, marginLeft: 15, resizeMode: 'contain'}} source={require('./assets/back.png')} />
+          headerLeft: () => (
+            <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.goBack()} style={{}} >
+              <Image style={{ width: 18, height: 18, marginLeft: 15, resizeMode: 'contain' }} source={require('./assets/back.png')} />
             </TouchableOpacity>
           ),
-          headerRight: ()=> (
-            <Image style={{width: 18, height: 18, marginRight: 15, resizeMode: 'contain'}} source={require('./assets/search.png')} />
+          headerRight: () => (
+            <Image style={{ width: 18, height: 18, marginRight: 15, resizeMode: 'contain' }} source={require('./assets/search.png')} />
           )
         })}
       />
@@ -167,7 +179,7 @@ function HomeDownloadStack() {
 
 function HomeSearchStack() {
   return (
-    <HomeSearchStackNav.Navigator initialRouteName="search" screenOptions={{
+    <HomeSearchStackNav.Navigator initialRouteName="Search" screenOptions={{
       headerStyle: {
         backgroundColor: '#0e101f',
         shadowOpacity: 0.85,
@@ -193,13 +205,13 @@ function HomeSearchStack() {
       />
       <HomeTabAStackNav.Screen name="Notifications" component={NotificationsScreen}
         options={({ navigation }) => ({
-          headerLeft: ()=> (
-            <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.goBack()} style={{}} >
-              <Image style={{width: 18, height: 18, marginLeft: 15, resizeMode: 'contain'}} source={require('./assets/back.png')} />
+          headerLeft: () => (
+            <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.goBack()} style={{}} >
+              <Image style={{ width: 18, height: 18, marginLeft: 15, resizeMode: 'contain' }} source={require('./assets/back.png')} />
             </TouchableOpacity>
           ),
-          headerRight: ()=> (
-            <Image style={{width: 18, height: 18, marginRight: 15, resizeMode: 'contain'}} source={require('./assets/search.png')} />
+          headerRight: () => (
+            <Image style={{ width: 18, height: 18, marginRight: 15, resizeMode: 'contain' }} source={require('./assets/search.png')} />
           )
         })}
       />
@@ -210,7 +222,7 @@ function HomeSearchStack() {
 
 function HomeListStack() {
   return (
-    <HomeListStackNav.Navigator initialRouteName="list" screenOptions={{
+    <HomeListStackNav.Navigator initialRouteName="MyList" screenOptions={{
       headerStyle: {
         backgroundColor: '#0e101f',
         shadowOpacity: 0.85,
@@ -227,7 +239,7 @@ function HomeListStack() {
       },
     }}>
       <HomeListStackNav.Screen
-        name="My List"
+        name="MyList"
         component={list}
         options={({ navigation }) => ({
           headerLeft: () => drawerButton(navigation),
@@ -236,13 +248,13 @@ function HomeListStack() {
       />
       <HomeTabAStackNav.Screen name="Notifications" component={NotificationsScreen}
         options={({ navigation }) => ({
-          headerLeft: ()=> (
-            <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.goBack()} style={{}} >
-              <Image style={{width: 18, height: 18, marginLeft: 15, resizeMode: 'contain'}} source={require('./assets/back.png')} />
+          headerLeft: () => (
+            <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.goBack()} style={{}} >
+              <Image style={{ width: 18, height: 18, marginLeft: 15, resizeMode: 'contain' }} source={require('./assets/back.png')} />
             </TouchableOpacity>
           ),
-          headerRight: ()=> (
-            <Image style={{width: 18, height: 18, marginRight: 15, resizeMode: 'contain'}} source={require('./assets/search.png')} />
+          headerRight: () => (
+            <Image style={{ width: 18, height: 18, marginRight: 15, resizeMode: 'contain' }} source={require('./assets/search.png')} />
           )
         })}
       />
@@ -252,7 +264,7 @@ function HomeListStack() {
 
 function HomeProfileStack() {
   return (
-    <HomeProfileStackNav.Navigator initialRouteName="Profile" screenOptions={{
+    <HomeProfileStackNav.Navigator initialRouteName="MyProfile" screenOptions={{
       headerStyle: {
         backgroundColor: '#0e101f',
         shadowOpacity: 0.85,
@@ -269,7 +281,7 @@ function HomeProfileStack() {
       },
     }}>
       <HomeProfileStackNav.Screen
-        name="My Profile"
+        name="MyProfile"
         component={profile}
         options={({ navigation }) => ({
           headerLeft: () => drawerButton(navigation),
@@ -284,20 +296,20 @@ function HomeTab() {
   return (
     <HomeTabNav.Navigator
       initialRouteName={"Home"}
-        tabBar={props => {
-          return (
-            <View style={{
-                position: 'absolute',
-                left: 0,
-                right: 0,
-                bottom: 0
-              }}
-            >
-              <CustomTabBar {...props} />
-            </View>
-          )
-        }}
-      >
+      tabBar={props => {
+        return (
+          <View style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            bottom: 0
+          }}
+          >
+            <CustomTabBar {...props} />
+          </View>
+        )
+      }}
+    >
       <HomeTabNav.Screen name="Download" component={HomeDownloadStack} />
       <HomeTabNav.Screen name="Search" component={HomeSearchStack} />
       <HomeTabNav.Screen name="Home" component={HomeTabAStack} />
@@ -308,31 +320,57 @@ function HomeTab() {
 }
 
 function RootContainer({ user }) {
-  if(user?.loggedin) {
-    return (
-      <Drawer.Navigator
-        drawerContent={props => <CustomDrawer {...props} />}
-        drawerContentOptions={{
-          activeTintColor: '#fff',
-          inactiveTintColor: '#aeaeae',
-          itemStyle: { marginVertical: 8, marginHorizontal: 8 },
-        }}
-        initialRouteName="Home"
-        drawerStyle={{
-          backgroundColor: '#0e101f',
-          opacity: 0.9,
-          width: 280,
-        }}
-        drawerType="front"
-      >
-        <Drawer.Screen options={{ activeTintColor: "#fff" }} name="Home" component={HomeTab} />
-      </Drawer.Navigator>
-    )
-  } else {
-    return (
-      <LoginStack />
-    )
-  }
+
+  return (
+    <Drawer.Navigator
+      drawerContent={props => <CustomDrawer {...props} />}
+      drawerContentOptions={{
+        activeTintColor: '#fff',
+        inactiveTintColor: '#aeaeae',
+        itemStyle: { marginVertical: 8, marginHorizontal: 8 },
+      }}
+      initialRouteName="Home"
+      drawerStyle={{
+        backgroundColor: '#0e101f',
+        opacity: 0.9
+      }}
+      drawerType="front"
+    >
+      <Drawer.Screen name="main">
+        {() =>
+          user?.loggedin ? HomeTab() : (
+              <LoginStack />
+
+            )
+        }
+      </Drawer.Screen>
+    </Drawer.Navigator>
+  )
+
+  // if(user?.loggedin) {
+  //   return (
+  //     <Drawer.Navigator
+  //       drawerContent={props => <CustomDrawer {...props} />}
+  //       drawerContentOptions={{
+  //         activeTintColor: '#fff',
+  //         inactiveTintColor: '#aeaeae',
+  //         itemStyle: { marginVertical: 8, marginHorizontal: 8 },
+  //       }}
+  //       initialRouteName="Home"
+  //       drawerStyle={{
+  //         backgroundColor: '#0e101f',
+  //         opacity: 0.9
+  //       }}
+  //       drawerType="front"
+  //     >
+  //        <Drawer.Screen options={{ activeTintColor: "#fff" }} name="Home" component={HomeTab} /> 
+  //     </Drawer.Navigator>
+  //   )
+  // } else {
+  //   return (
+  //     <LoginStack />
+  //   )
+  // }
 }
 
 const mapStateToProps = state => {

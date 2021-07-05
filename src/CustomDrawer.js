@@ -21,6 +21,14 @@ import { connect } from 'react-redux';
 
 
 function CustomDrawer({navigation,userLogout}) {
+
+    logout = () => {
+       // navigation.toggleDrawer();
+        //navigation.navigate("Login");
+        navigation.closeDrawer();
+        userLogout(null);
+    }
+
     const BASE_PATH =
         'https://raw.githubusercontent.com/AboutReact/sampleresource/master/';
     const proileImage = 'react_logo.png';
@@ -127,7 +135,7 @@ function CustomDrawer({navigation,userLogout}) {
             </DrawerContentScrollView>
             <View style={{ paddingLeft: 14, }}>
                 <View style={{ borderBottomWidth: 2, borderBottomColor: "#666670", width: 22, marginBottom: 4 }}></View>
-                <TouchableOpacity activeOpacity={0.8} onPress={()=>userLogout()} style={{ flexDirection: "row", }}>
+                <TouchableOpacity activeOpacity={0.8} onPress={()=>logout()} style={{ flexDirection: "row", }}>
                     <Image style={styles.logout} source={require('./assets/logout05.png')} />
                     <Text
                         style={{
