@@ -12,13 +12,13 @@ export default function NotificationsScreen({navigation}) {
 
   return (
     <View style={styles.container}>
-    <View style={styles.notification}>
+    {/* <View style={styles.notification}>
         <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.goBack()} style={styles.imgcard} >
             <Image style={styles.backpng} source={require('../../assets/back.png')} />
         </TouchableOpacity>
         <Image style={styles.search} source={require('../../assets/search.png')} />
         <Input style={styles.vlogers} placeholder="Notification" />
-    </View>
+    </View> */}
     <View style={styles.today}>
         <FlatList
             data={reason}

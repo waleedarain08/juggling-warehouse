@@ -4,7 +4,7 @@ import SplashScreen from 'react-native-splash-screen';
 import {Provider} from 'react-redux';
 import RootContainer from './src/navigators';
 import store from './src/redux/store';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer , DefaultTheme} from '@react-navigation/native';
 // export default function App() {
 //   SplashScreen.hide();
 //   return (
@@ -24,7 +24,7 @@ export class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <NavigationContainer>
+        <NavigationContainer theme={{...DefaultTheme,dark:false,colors:{'background':'#0e101f'}}}>
           <RootContainer />
         </NavigationContainer>
       </Provider>
