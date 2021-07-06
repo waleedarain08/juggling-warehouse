@@ -17,13 +17,13 @@ function Signup({ navigation, userInfo, userLogin }) {
 
     return (
         <SafeAreaView style={styles.safeArea}>
-             <KeyboardAwareScrollView style={styles.MainContainer} showsVerticalScrollIndicator={false}>
-                <View style={{height:Platform.OS==="ios"?750:"70%"}}>
-                <View style={styles.box1}>
+             <View style={styles.box1}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
                         <Image style={styles.back} source={require('../../assets/back.png')} />
                     </TouchableOpacity>
                 </View>
+             <KeyboardAwareScrollView style={styles.MainContainer} showsVerticalScrollIndicator={false}>
+                <View style={{height:Platform.OS==="ios"?750:"70%"}}>
                 <View style={styles.box2}>
                     <Image style={styles.logo} source={require('../../assets/juggling.png')} />
                     <Text style={styles.logindv}>SignUp</Text>
@@ -49,11 +49,7 @@ function Signup({ navigation, userInfo, userLogin }) {
                     <View>
                     
                         <Image style={styles.logo02} source={require('../../assets/lock.png')} />
-                        {/* <Input style={styles.email} 
-                        placeholder="Password" 
-                        secureTextEntry={hidePass ? true : false} 
-                        onChangeText={(text)=> 
-                        setPassword(text)}/> */}
+                        {/* <Input style={styles.email} placeholder="Password" secureTextEntry={true} /> */}
                         <Input style={styles.email}
                             color="#fff"
                             placeholder="Password"
@@ -177,11 +173,12 @@ const styles = StyleSheet.create({
         color:"#fff"
     },
     logo02: {
-        height: 14,
-        width: 10,
+        height: 15,
+        width: 14,
         position: "absolute",
         top: 16,
         left: 20,
+        resizeMode:"contain"
     },
     logo022: {
         height: 13,
@@ -246,15 +243,13 @@ const styles = StyleSheet.create({
     },
     loginhere: {
         flex: 1,
-        justifyContent: "flex-end",
+        justifyContent: "flex-start",
         alignItems: "center",
     },
     eyeicon:{
-        
         position:"absolute",
         left:"89%",
-        top:23,
-        
+        top:17,  
     },
 
 })
