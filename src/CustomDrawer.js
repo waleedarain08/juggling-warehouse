@@ -63,7 +63,7 @@ function CustomDrawer({navigation,userLogout}) {
                   </Text>
                         </View>
                         <View style={{ flex: 0.7 }}>
-                            <Switch style={{ transform: [{ scaleX: .6 }, { scaleY: .6 }] }} onValueChange={() => setToggle(!toggle)} value={!toggle} />
+                            <Switch style={{ transform: [{ scaleX: .7 }, { scaleY: .7 }] }} onValueChange={() => setToggle(!toggle)} value={!toggle} />
                         </View>
                     </View>
                     <View style={{ flexDirection: "row", alignItems: 'center', paddingVertical: 10 }}>
@@ -76,7 +76,7 @@ function CustomDrawer({navigation,userLogout}) {
                   </Text>
                         </View>
                         <View style={{ flex: 0.7 }}>
-                            <Switch style={{ transform: [{ scaleX: .6 }, { scaleY: .6 }] }} onValueChange={() => setWifi(!wifi)} value={!wifi} />
+                            <Switch style={{ transform: [{ scaleX: .7 }, { scaleY: .7 }] }} onValueChange={() => setWifi(!wifi)} value={!wifi} />
                         </View>
                     </View>
                     <View style={{ flexDirection: "row", alignItems: 'center', paddingVertical: 10 }}>
@@ -90,7 +90,7 @@ function CustomDrawer({navigation,userLogout}) {
                             <Text style={styles.para}>Complete episodes will be deleted and replaced with the next episodes, only Wi-fi</Text>
                         </View>
                         <View style={{ flex: 0.7 }}>
-                            <Switch style={{ transform: [{ scaleX: .6 }, { scaleY: .6 }] }} onValueChange={() => setSmart(!smart)} value={!smart} />
+                            <Switch style={{ transform: [{ scaleX: .7 }, { scaleY: .7 }] }} onValueChange={() => setSmart(!smart)} value={!smart} />
                         </View>
                     </View>
                     <View style={{ flexDirection: "row", alignItems: 'center', paddingVertical: 10 }}>

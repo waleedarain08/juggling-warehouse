@@ -12,7 +12,7 @@ export default function profile({ navigation }) {
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={{ height: 800,backgroundColor:"#0e101f" }}  showsVerticalScrollIndicator={false}>
-            <View style={{ flex: 4, }}>
+            <View style={{ flex: 2.5, }}>
                 <View style={styles.profilpage}>
                     <Image style={styles.man} source={require('../../assets/02-tile.png')} />
                     <Image style={styles.camera} source={require('../../assets/editcamera02.png')} />
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#0e101f",
     },
     profilpage: {
-        flex: 2,
+        flex: 2.5,
         justifyContent: "center",
         alignItems: "center",
     },
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
 
     },
     profiledetail: {
-        flex: 4, backgroundColor: "#0d0f1c",
+        flex: 2.5, backgroundColor: "#0d0f1c",
         paddingHorizontal: 20,
         borderRadius:12,
         shadowColor: "#ffffff80",
@@ -162,7 +162,6 @@ const styles = StyleSheet.create({
         shadowRadius: 0.84,
 
         elevation: 5,
-        paddingTop:30
     },
     user: {
         width: 13,
@@ -178,7 +177,7 @@ const styles = StyleSheet.create({
     },
     mandetail: {
         flexDirection: "row",
-        flex: 0.5,
+        flex: 0,
         paddingVertical: 30,
     },
     detaildv: {

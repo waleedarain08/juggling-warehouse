@@ -283,11 +283,10 @@ const styles = StyleSheet.create({
         resizeMode:"contain",
     },
     box4: {
-        flex: 2.5,
+        flex: 2.2,
     },
     para: {
         color: "#ffffff",
-        paddingVertical: 20,
         paddingHorizontal: 10,
         lineHeight:20,
     },
@@ -414,4 +413,3 @@ const styles = StyleSheet.create({
         resizeMode:"contain",
     }
 })
-

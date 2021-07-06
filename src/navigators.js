@@ -119,16 +119,9 @@ function HomeTabAStack() {
       />
       <HomeTabAStackNav.Screen name="About Motivation" component={DetailScreen} />
       <HomeTabAStackNav.Screen name="Notifications" component={NotificationsScreen}
-        options={({ navigation }) => ({
-          headerLeft: () => (
-            <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.goBack()} style={{}} >
-              <Image style={{ width: 18, height: 18, marginLeft: 15, resizeMode: 'contain' }} source={require('./assets/back.png')} />
-            </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <Image style={{ width: 18, height: 18, marginRight: 15, resizeMode: 'contain' }} source={require('./assets/search.png')} />
-          )
-        })}
+     options={({ navigation }) => ({
+      headerShown: false
+    })}
       />
     </HomeTabAStackNav.Navigator>
   );
@@ -161,16 +154,9 @@ function HomeDownloadStack() {
         })}
       />
       <HomeTabAStackNav.Screen name="Notifications" component={NotificationsScreen}
-        options={({ navigation }) => ({
-          headerLeft: () => (
-            <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.goBack()} style={{}} >
-              <Image style={{ width: 18, height: 18, marginLeft: 15, resizeMode: 'contain' }} source={require('./assets/back.png')} />
-            </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <Image style={{ width: 18, height: 18, marginRight: 15, resizeMode: 'contain' }} source={require('./assets/search.png')} />
-          )
-        })}
+     options={({ navigation }) => ({
+      headerShown: false
+    })}
       />
       {/* <HomeDownloadStackNav.Screen name="TabBDetails" component={TabBDetails} /> */}
     </HomeDownloadStackNav.Navigator>
@@ -204,16 +190,9 @@ function HomeSearchStack() {
         })}
       />
       <HomeTabAStackNav.Screen name="Notifications" component={NotificationsScreen}
-        options={({ navigation }) => ({
-          headerLeft: () => (
-            <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.goBack()} style={{}} >
-              <Image style={{ width: 18, height: 18, marginLeft: 15, resizeMode: 'contain' }} source={require('./assets/back.png')} />
-            </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <Image style={{ width: 18, height: 18, marginRight: 15, resizeMode: 'contain' }} source={require('./assets/search.png')} />
-          )
-        })}
+       options={({ navigation }) => ({
+        headerShown: false
+      })}
       />
       {/* <HomeSearchStackNav.Screen name="TabBDetails" component={TabBDetails} /> */}
     </HomeSearchStackNav.Navigator>
@@ -248,14 +227,7 @@ function HomeListStack() {
       />
       <HomeTabAStackNav.Screen name="Notifications" component={NotificationsScreen}
         options={({ navigation }) => ({
-          headerLeft: () => (
-            <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.goBack()} style={{}} >
-              <Image style={{ width: 18, height: 18, marginLeft: 15, resizeMode: 'contain' }} source={require('./assets/back.png')} />
-            </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <Image style={{ width: 18, height: 18, marginRight: 15, resizeMode: 'contain' }} source={require('./assets/search.png')} />
-          )
+          headerShown: false
         })}
       />
     </HomeListStackNav.Navigator>
