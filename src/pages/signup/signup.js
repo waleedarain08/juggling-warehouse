@@ -1,14 +1,19 @@
-import { Text, View, StyleSheet, Image, TouchableOpacity, ScrollView, SafeAreaView ,Platform} from 'react-native';
+import { Text, TextInput, View, StyleSheet, Image, TouchableOpacity, ScrollView, SafeAreaView ,Platform} from 'react-native';
 import React, { useState } from 'react';
 import { Input, Button } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { userLogin } from '../../redux/actions';
+import Icon from 'react-native-vector-icons/Entypo';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
+
+
 
 function Signup({ navigation, userInfo, userLogin }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [hidePass1, setHidePass1] = useState(true);
+    const [hidePass2, setHidePass2] = useState(true);
 
     return (
         <SafeAreaView style={styles.safeArea}>
@@ -42,12 +47,39 @@ function Signup({ navigation, userInfo, userLogin }) {
                         <Input style={styles.password} placeholder="Phone No." />
                     </View>
                     <View>
+                    
                         <Image style={styles.logo02} source={require('../../assets/lock.png')} />
-                        <Input style={styles.email} placeholder="Password" secureTextEntry={true} onChangeText={(text)=> setPassword(text)}/>
+                        {/* <Input style={styles.email} 
+                        placeholder="Password" 
+                        secureTextEntry={hidePass ? true : false} 
+                        onChangeText={(text)=> 
+                        setPassword(text)}/> */}
+                        <Input style={styles.email}
+                            color="#fff"
+                            placeholder="Password"
+                            autoCompleteType="password"
+                            secureTextEntry={hidePass1 ? true : false}
+                            />
+                        <Icon style={styles.eyeicon}
+                            name={hidePass1 ? 'eye-with-line' : 'eye'}
+                            size={16}
+                            color="#fff"
+                            onPress={() => setHidePass1(!hidePass1)}/>
                     </View>
                     <View>
                         <Image style={styles.logo02} source={require('../../assets/lock.png')} />
-                        <Input style={styles.password} placeholder="Comfirm Password" secureTextEntry={true} />
+                        {/* <Input style={styles.password} placeholder="Comfirm Password" secureTextEntry={true} /> */}
+                        <Input style={styles.email}
+                            color="#fff"
+                            placeholder="Confirm Password"
+                            autoCompleteType="password"
+                            secureTextEntry={hidePass2 ? true : false}
+                            />
+                        <Icon style={styles.eyeicon}
+                            name={hidePass2 ? 'eye-with-line' : 'eye'}
+                            size={16}
+                            color="#fff"
+                            onPress={() => setHidePass2(!hidePass2)}/>
                     </View>
                 </View>
                 <View style={styles.box4}>
@@ -216,6 +248,13 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "flex-end",
         alignItems: "center",
+    },
+    eyeicon:{
+        
+        position:"absolute",
+        left:"89%",
+        top:23,
+        
     },
 
 })
