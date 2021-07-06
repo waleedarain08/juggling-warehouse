@@ -8,17 +8,17 @@ import { userLogout } from '../../redux/actions';
 
 
 export default function NotificationsScreen({navigation}) {
-  const [reason, setReason] = useState([{ title: "Today", image: require('../../assets/01.png') },{ title: "def", image: require('../../assets/01.png') }, { title: "def", image: require('../../assets/02.png') }, { title: "jhi", image: require('../../assets/03.png') }, { title: "This Week", image: require('../../assets/04.png') }, { title: "abc", image: require('../../assets/01.png') }, { title: "abc", image: require('../../assets/02.png') },{ title: "abc", image: require('../../assets/03.png') },{ title: "abc", image: require('../../assets/04.png') },{ title: "abc", image: require('../../assets/01.png') }]);
+  const [reason, setReason] = useState([{ title: "Today", image: require('../../assets/01.png') },{ title: "def", image: require('../../assets/01.png') }, { title: "def", image: require('../../assets/02.png') }, { title: "jhi", image: require('../../assets/03.png') }, { title: "This Week", image: require('../../assets/04.png') }, { title: "abc", image: require('../../assets/01.png') }, { title: "abc", image: require('../../assets/02.png') },{ title: "abc", image: require('../../assets/03.png') },{ title: "abc", image: require('../../assets/04.png') },{ title: "abc", image: require('../../assets/01.png') },{ title: "abc", image: require('../../assets/02.png') }]);
 
   return (
     <View style={styles.container}>
-    {/* <View style={styles.notification}>
+    <View style={styles.notification}>
         <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.goBack()} style={styles.imgcard} >
             <Image style={styles.backpng} source={require('../../assets/back.png')} />
         </TouchableOpacity>
         <Image style={styles.search} source={require('../../assets/search.png')} />
         <Input style={styles.vlogers} placeholder="Notification" />
-    </View> */}
+    </View>
     <View style={styles.today}>
         <FlatList
             data={reason}
@@ -64,8 +64,8 @@ const styles = StyleSheet.create({
   },
   notification: {
       flex: 1,
-      paddingTop: 10,
-
+      marginTop:35,
+      paddingTop:10
   },
   backpng: {
       width: 18,
