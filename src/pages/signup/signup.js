@@ -58,7 +58,7 @@ function Signup({ navigation, userInfo, userLogin }) {
                             />
                         <Icon style={styles.eyeicon}
                             name={hidePass1 ? 'eye-with-line' : 'eye'}
-                            size={16}
+                            size={15}
                             color="#fff"
                             onPress={() => setHidePass1(!hidePass1)}/>
                     </View>
@@ -74,7 +74,7 @@ function Signup({ navigation, userInfo, userLogin }) {
                             
                         <Icon style={styles.eyeicon}
                             name={hidePass2 ? 'eye-with-line' : 'eye'}
-                            size={16}
+                            size={15}
                             color="#fff"
                             onPress={() => setHidePass2(!hidePass2)}/>
                     </View>
@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
   
     eyeicon:{
         position:"absolute",
-        left:"84%",
+        left:"83%",
         bottom:"39%",
         paddingHorizontal:"6%",
         paddingVertical:"2%",
