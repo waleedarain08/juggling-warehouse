@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Image ,TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image ,TouchableOpacity,Platform} from 'react-native';
 import { Input, Button, Card, SearchBar } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -48,7 +48,11 @@ export default function NotificationsScreen({navigation}) {
                         </View>
                     </View>
                 )
-            }}>
+                
+            }}  ListFooterComponent={()=> (
+                <View style={{height: 100}}></View>
+            )}>
+                
         </FlatList>
     </View>
 </View>
@@ -64,8 +68,8 @@ const styles = StyleSheet.create({
   },
   notification: {
       flex: 1,
-      marginTop:35,
-      paddingTop:10
+      paddingTop:10,
+      ...Platform.select({ios:{marginTop:35,}})
   },
   backpng: {
       width: 18,

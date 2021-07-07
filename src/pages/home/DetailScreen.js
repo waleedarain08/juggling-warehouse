@@ -94,7 +94,6 @@ function DetailScreen({ navigation }) {
                 </View>
                 {/* </View> */}
             </ScrollView>
-            <View style={{height:90,}}></View>
             <Modal
                 animationType="fade"
                 transparent={true}
@@ -292,15 +291,15 @@ const styles = StyleSheet.create({
     },
     box5: {
         flex: 1,
-        paddingTop: 10,
+        paddingTop: 5,
         position:"relative",
     },
     play:{
         position:"absolute",
         zIndex:1,
         height:10,width:10,
-        top:26,
         left:"32%",
+        top:"33%",
         resizeMode:"contain"
     },
     btn: {

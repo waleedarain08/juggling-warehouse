@@ -128,6 +128,7 @@ function HomeScreen({ navigation, user, userLogout }) {
             data={listhome}
             keyExtractor={(item, index) => index}
             showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{flex:1,justifyContent:"center"}}
             renderItem={({ item, index }) => {
               return (
                 <Text onPress={() => setModalVisible(false)}
@@ -179,7 +180,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     paddingHorizontal: 10,
-    paddingBottom: "2%",
+    paddingVertical:14
   },
   categores: {
     color: "#fffffd",
@@ -197,11 +198,11 @@ const styles = StyleSheet.create({
   },
   trending: {
     paddingLeft: 9,
-    paddingTop: 4,
     color: "#fffffd",
     fontSize: 12,
     fontWeight: 'bold',
-    fontFamily:'Raleway-Regular'
+    fontFamily:'Raleway-Regular',
+    paddingTop:8
   },
   tile: {
     width: 80,
@@ -258,7 +259,7 @@ const styles = StyleSheet.create({
   },
   top: {
     paddingLeft: 9,
-    paddingVertical: 10,
+    paddingVertical: 14,
     color: "#fffffd",
     fontSize: 12,
     fontWeight: 'bold',
@@ -282,8 +283,8 @@ const styles = StyleSheet.create({
     color: "#fffffd",
     fontSize: 12,
     paddingLeft: 10,
-    paddingTop: 8,
-    marginBottom: 10,
+    paddingTop: 14,
+    marginBottom: 15,
     fontWeight:"bold",
     fontFamily:'Raleway-bold'
   },
@@ -291,7 +292,9 @@ const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
     backgroundColor: "transparent",
-    paddingVertical: "20%",
+    alignItems:"center",
+    justifyContent:"center",
+    // paddingVertical: "20%",
   },
   homelist: {
     textAlign: "center",

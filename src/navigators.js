@@ -303,8 +303,8 @@ function RootContainer({ user }) {
       }}
       initialRouteName="Home"
       drawerStyle={{
-        backgroundColor: '#0e101f',
-        opacity: 0.9
+        // backgroundColor: '#0e101f',
+        opacity: 1
       }}
       drawerType="front"
     >

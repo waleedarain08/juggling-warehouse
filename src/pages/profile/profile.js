@@ -76,7 +76,6 @@ export default function profile({ navigation }) {
                     </View>
                 </View>
             </View>
-            <View style={{ flex: 1 }}></View>
             </ScrollView>
         </View>
      
@@ -91,7 +90,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#0e101f",
     },
     profilpage: {
-        flex: 2.5,
+        flex: 3,
         justifyContent: "center",
         alignItems: "center",
     },

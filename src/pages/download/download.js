@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, Dimensions, ScrollView, TextInput } from 'react-native';
 import { Input, Button, Card, SearchBar } from 'react-native-elements';
-import { bindActionCreators } from 'redux';
+import { SwipeListView } from 'react-native-swipe-list-view';
 import { connect } from 'react-redux';
 import { userLogout } from '../../redux/actions';
 
@@ -36,7 +36,7 @@ export default function download({ navigation }) {
                 />
             </View>
             <View style={{ flex: 3.5 }}>
-                <FlatList
+                {/* <FlatList
                     keyExtractor={(item, index) => index}
                     data={reason4}
                     vertical={true}
@@ -57,7 +57,36 @@ export default function download({ navigation }) {
                             </View>
                         )
                     }}>
-                </FlatList>
+                </FlatList> */}
+                <SwipeListView
+            data={reason4}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={(item, index) => index}
+            renderItem={ ({item} ) => (
+                <View style={styles.card}>
+                <View style={{ flex: 1, flexWrap: "wrap" }}>
+                    <Image style={styles.tile} source={item.image} />
+                </View>
+                <View style={{ flex: 3 }}>
+                    <Text style={styles.about}>About Motivation <Text style={styles.epi}>Episode 1</Text> </Text>
+                    <Text style={styles.may}>23 May 2019</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <Image style={styles.downpng} source={item.image1} />
+                </View>
+            </View>
+            )}
+            renderHiddenItem={ (data, rowMap) => (
+                <View style={styles.rowBack}>
+                   
+                </View>
+            )}
+            ListFooterComponent={()=> (
+                <View style={{height: 100}}></View>
+            )}
+            // leftOpenValue={75}
+            rightOpenValue={-75}
+        />
             </View>
         </View>
     );

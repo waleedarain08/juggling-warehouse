@@ -18,6 +18,7 @@ import { Switch } from 'react-native-elements';
 import {userLogout}  from './redux/actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { BlurView } from "@react-native-community/blur";
 
 
 function CustomDrawer({navigation,userLogout}) {
@@ -38,6 +39,11 @@ function CustomDrawer({navigation,userLogout}) {
     const [quality, setQuality] = useState(false);
     return (
         <SafeAreaView style={{ flex: 1 }}>
+             <BlurView style={styles.blurView}
+                blurType="dark"
+                blurAmount={1}
+                
+            />
             <View style={{ paddingLeft: 14 }}>
                 <Text style={styles.setting}>SETTINGS</Text>
                 <View style={{ borderBottomWidth: 2, borderBottomColor: "#666670", paddingTop: 4, width: 22, }}></View>
@@ -163,6 +169,14 @@ const styles = StyleSheet.create({
         borderRadius: 100 / 2,
         alignSelf: 'center',
     },
+    blurView: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        backgroundColor:"transparent"
+    },
     iconStyle: {
         width: 15,
         height: 15,
@@ -250,7 +264,7 @@ const styles = StyleSheet.create({
     deletelogo: {
         width: 10,
         height: 16,
-        marginVertical: 16,
+        marginVertical: 17,
         resizeMode:"contain",
     }
 });
