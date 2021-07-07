@@ -18,6 +18,7 @@ import { Switch } from 'react-native-elements';
 import {userLogout}  from './redux/actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { ThemeProvider } from '@react-navigation/native';
 
 
 function CustomDrawer({navigation,userLogout}) {
@@ -63,7 +64,7 @@ function CustomDrawer({navigation,userLogout}) {
                   </Text>
                         </View>
                         <View style={{ flex: 0.7 }}>
-                            <Switch style={{ transform: [{ scaleX: .7 }, { scaleY: .7 }] }} onValueChange={() => setToggle(!toggle)} value={!toggle} />
+                            <Switch style={{ transform: [{ scaleX: .7 }, { scaleY: .7 }] }} onValueChange={() => setToggle(!toggle)} value={!toggle} trackColor={{true: '#1974ba', false: 'grey'}} thumbColor='#fff'/>
                         </View>
                     </View>
                     <View style={{ flexDirection: "row", alignItems: 'center', paddingVertical: 10 }}>
@@ -76,7 +77,7 @@ function CustomDrawer({navigation,userLogout}) {
                   </Text>
                         </View>
                         <View style={{ flex: 0.7 }}>
-                            <Switch style={{ transform: [{ scaleX: .7 }, { scaleY: .7 }] }} onValueChange={() => setWifi(!wifi)} value={!wifi} />
+                            <Switch style={{ transform: [{ scaleX: .7 }, { scaleY: .7 }] }} onValueChange={() => setWifi(!wifi)} value={!wifi} trackColor={{true: '#1974ba', false: 'grey'}} thumbColor='#fff'/>
                         </View>
                     </View>
                     <View style={{ flexDirection: "row", alignItems: 'center', paddingVertical: 10 }}>
@@ -90,7 +91,7 @@ function CustomDrawer({navigation,userLogout}) {
                             <Text style={styles.para}>Complete episodes will be deleted and replaced with the next episodes, only Wi-fi</Text>
                         </View>
                         <View style={{ flex: 0.7 }}>
-                            <Switch style={{ transform: [{ scaleX: .7 }, { scaleY: .7 }] }} onValueChange={() => setSmart(!smart)} value={!smart} />
+                            <Switch style={{ transform: [{ scaleX: .7 }, { scaleY: .7 }] }} onValueChange={() => setSmart(!smart)} value={!smart} trackColor={{true: '#1974ba', false: 'grey'}} thumbColor='#fff' />
                         </View>
                     </View>
                     <View style={{ flexDirection: "row", alignItems: 'center', paddingVertical: 10 }}>
@@ -105,8 +106,8 @@ function CustomDrawer({navigation,userLogout}) {
 
                         </View>
 
-                        <View style={{ flex: 0.4 }}>
-                            <TouchableOpacity onPress={() => setQuality(!quality)}>
+                        <View style={{flex: 0.4,}}>
+                            <TouchableOpacity onPress={() => setQuality(!quality)} hitSlop={{top: 20, bottom: 20, left: 30, right: 30}}>
                                 <Image style={quality?styles.dropdown:styles.transform} source={require('./assets/dropdown01.png')} />
                             </TouchableOpacity>
                         </View>
