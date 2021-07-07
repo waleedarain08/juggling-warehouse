@@ -152,13 +152,6 @@ const styles = StyleSheet.create({
         flex: 2.5, backgroundColor: "#0d0f1c",
         paddingHorizontal: 20,
         borderRadius:12,
-        shadowColor: "#ffffff80",
-        shadowOffset: {
-            width: 0.5,
-            height: 0.5,
-        },
-        shadowOpacity: 0.45,
-        shadowRadius: 0.84,
 
         elevation: 5,
     },
