@@ -62,15 +62,16 @@ function Signup({ navigation, userInfo, userLogin }) {
                             color="#fff"
                             onPress={() => setHidePass1(!hidePass1)}/>
                     </View>
-                    <View>
+                    <View >
                         <Image style={styles.logo02} source={require('../../assets/lock.png')} />
-                        {/* <Input style={styles.password} placeholder="Comfirm Password" secureTextEntry={true} /> */}
-                        <Input style={styles.email}
+                        
+                         <Input style={styles.email}
                             color="#fff"
                             placeholder="Confirm Password"
                             autoCompleteType="password"
                             secureTextEntry={hidePass2 ? true : false}
                             />
+                            
                         <Icon style={styles.eyeicon}
                             name={hidePass2 ? 'eye-with-line' : 'eye'}
                             size={16}
@@ -246,10 +247,14 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         alignItems: "center",
     },
+  
     eyeicon:{
         position:"absolute",
-        left:"89%",
-        top:"28%",  
+        left:"84%",
+        bottom:"39%",
+        paddingHorizontal:"6%",
+        paddingVertical:"2%",
+        backgroundColor:"#0e101f",
     },
 
 })
