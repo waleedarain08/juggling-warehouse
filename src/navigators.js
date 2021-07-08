@@ -4,10 +4,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Login from './pages/login/login';
 import Signup from './pages/signup/signup';
 import search from './pages/search/search';
+import ForgatPassword from './pages/ForgatPassword/ForgatPassword';
 import profile from './pages/profile/profile';
 import download from './pages/download/download';
 import list from './pages/list/list';
 import NotificationsScreen from './pages/notificationsScreen/notificationScreen';
+import ChangePassword from './pages/ChangePassword/ChangePassword';
 import HomeScreen from './pages/home/HomeScreen';
 import DetailScreen from './pages/home/DetailScreen';
 import CustomDrawer from './CustomDrawer';
@@ -87,6 +89,7 @@ function LoginStack() {
     }} initialRouteName="Login">
       <LoginStackNav.Screen name="Login" component={Login} />
       <LoginStackNav.Screen name="Signup" component={Signup} />
+      <LoginStackNav.Screen name="ForgatPassword" component={ForgatPassword} />
     </LoginStackNav.Navigator>
   );
 }
@@ -125,6 +128,9 @@ function HomeTabAStack() {
       headerShown: false
     })}
       />
+      <HomeTabAStackNav.Screen name="ChangePassword" component={ChangePassword}  options={({ navigation }) => ({
+      headerShown: false
+    })}/>
     </HomeTabAStackNav.Navigator>
   );
 }
@@ -321,30 +327,6 @@ function RootContainer({ user }) {
     </Drawer.Navigator>
   )
 
-  // if(user?.loggedin) {
-  //   return (
-  //     <Drawer.Navigator
-  //       drawerContent={props => <CustomDrawer {...props} />}
-  //       drawerContentOptions={{
-  //         activeTintColor: '#fff',
-  //         inactiveTintColor: '#aeaeae',
-  //         itemStyle: { marginVertical: 8, marginHorizontal: 8 },
-  //       }}
-  //       initialRouteName="Home"
-  //       drawerStyle={{
-  //         backgroundColor: '#0e101f',
-  //         opacity: 0.9
-  //       }}
-  //       drawerType="front"
-  //     >
-  //        <Drawer.Screen options={{ activeTintColor: "#fff" }} name="Home" component={HomeTab} /> 
-  //     </Drawer.Navigator>
-  //   )
-  // } else {
-  //   return (
-  //     <LoginStack />
-  //   )
-  // }
 }
 
 const mapStateToProps = state => {

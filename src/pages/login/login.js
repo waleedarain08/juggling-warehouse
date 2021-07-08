@@ -49,7 +49,9 @@ function Login({ navigation, userInfo, userLogin }) {
           <Text style={styles.remember}>Remember</Text>
         </View>
         <View style={styles.forgetview}>
+          <TouchableOpacity onPress={() => navigation.navigate("ForgatPassword")}>
           <Text style={styles.forgettext}>Forget Password</Text>
+          </TouchableOpacity>
         </View>
       </View>
 

@@ -134,8 +134,15 @@ function CustomDrawer({ navigation, userLogout }) {
                     </View>
                     <View style={{ borderBottomWidth: 1, borderBottomColor: "#282a37", paddingTop: 4 }}></View>
                     <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                        <Text style={styles.password}>Change Password</Text>
-                        <Image style={styles.dropdownright} source={require('./assets/dropdown01.png')} />
+                        <Text style={styles.password}
+                         onPress={() => {
+                            navigation.navigate("ChangePassword")
+                        }}  >Change Password</Text>
+                        <TouchableOpacity onPress={() => {
+                            navigation.navigate("ChangePassword")
+                        }}>
+                        <Image  style={styles.dropdownright} source={require('./assets/dropdown01.png')} />
+                        </TouchableOpacity>
                     </View>
                 </View>
             </DrawerContentScrollView>

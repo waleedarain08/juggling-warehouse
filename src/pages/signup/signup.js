@@ -49,7 +49,6 @@ function Signup({ navigation, userInfo, userLogin }) {
                     <View>
                     
                         <Image style={styles.logo02} source={require('../../assets/lock.png')} />
-                        {/* <Input style={styles.email} placeholder="Password" secureTextEntry={true} /> */}
                         <Input style={styles.email}
                             color="#fff"
                             placeholder="Password"
