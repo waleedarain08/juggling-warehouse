@@ -16,6 +16,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import CustomTabBar from './CustomTabBar';
+import LiveNow from './pages/home/LiveNow';
 
 
 const useInitialRender = () => {
@@ -44,10 +45,10 @@ const drawerButton = navigation => {
 const notificationIcon = navigation => {
   return (
     <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
-      <View style={{ flex: 1, flexDirection: "row", backgroundColor: "red", alignItems: "center", padding: 4, borderRadius: 3, marginRight: 10 }}>
+      <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate("LiveNow")} style={{ flex: 1, flexDirection: "row", backgroundColor: "red", alignItems: "center", padding: 4, borderRadius: 3, marginRight: 10 }}>
         <View style={{ backgroundColor: "#fff", height: 6, width: 6, padding: 0, borderRadius: 3 }}></View>
         <Text style={{ color: "#fff", fontSize: 10, fontWeight: '800', marginLeft: 5 }}>Live Now</Text>
-      </View>
+      </TouchableOpacity>
       <View style={{ flex: 1 }}>
         <Icon
           name="notifications-outline"
@@ -118,6 +119,7 @@ function HomeTabAStack() {
         })}
       />
       <HomeTabAStackNav.Screen name="About Motivation" component={DetailScreen} />
+      <HomeTabAStackNav.Screen name="LiveNow" component={LiveNow} />
       <HomeTabAStackNav.Screen name="Notifications" component={NotificationsScreen}
      options={({ navigation }) => ({
       headerShown: false

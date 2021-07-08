@@ -15,24 +15,23 @@ import {
     DrawerItem,
 } from '@react-navigation/drawer';
 import { Switch } from 'react-native-elements';
-import {userLogout}  from './redux/actions';
+import { userLogout } from './redux/actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { BlurView } from "@react-native-community/blur";
 import { ThemeProvider } from '@react-navigation/native';
 
 
-function CustomDrawer({navigation,userLogout}) {
+function CustomDrawer({ navigation, userLogout }) {
 
     logout = () => {
-       // navigation.toggleDrawer();
+        // navigation.toggleDrawer();
         //navigation.navigate("Login");
         navigation.closeDrawer();
         userLogout(null);
     }
 
-    const BASE_PATH =
-        'https://raw.githubusercontent.com/AboutReact/sampleresource/master/';
+   
     const proileImage = 'react_logo.png';
     const [toggle, setToggle] = useState(false);
     const [wifi, setWifi] = useState(true);
@@ -40,10 +39,10 @@ function CustomDrawer({navigation,userLogout}) {
     const [quality, setQuality] = useState(false);
     return (
         <SafeAreaView style={{ flex: 1 }}>
-             <BlurView style={styles.blurView}
+            <BlurView style={styles.blurView}
                 blurType="dark"
                 blurAmount={1}
-                
+
             />
             <View style={{ paddingLeft: 14 }}>
                 <Text style={styles.setting}>SETTINGS</Text>
@@ -62,7 +61,7 @@ function CustomDrawer({navigation,userLogout}) {
                             <Image style={styles.iconlogo1} source={require('./assets/notification03.png')} />
                         </View>
                         <View style={{ flex: 3 }}>
-                            <Text style={{ color: "#fff", fontSize: 13, fontWeight: "bold"}}
+                            <Text style={{ color: "#fff", fontSize: 13, fontWeight: "bold" }}
                                 onPress={() => {
                                     navigation.navigate("Notifications")
                                 }}>
@@ -70,7 +69,7 @@ function CustomDrawer({navigation,userLogout}) {
                   </Text>
                         </View>
                         <View style={{ flex: 0.7 }}>
-                            <Switch style={{ transform: [{ scaleX: .8 }, { scaleY: .8 }] }} onValueChange={() => setToggle(!toggle)} value={!toggle} trackColor={{true: '#1974ba', false: 'grey'}} thumbColor='#fff'/>
+                            <Switch style={{ transform: [{ scaleX: .8 }, { scaleY: .8 }] }} onValueChange={() => setToggle(!toggle)} value={!toggle} trackColor={{ true: '#1974ba', false: 'grey' }} thumbColor='#fff' />
                         </View>
                     </View>
                     <View style={{ flexDirection: "row", alignItems: 'center', paddingVertical: 10 }}>
@@ -83,7 +82,7 @@ function CustomDrawer({navigation,userLogout}) {
                   </Text>
                         </View>
                         <View style={{ flex: 0.7 }}>
-                            <Switch style={{ transform: [{ scaleX: .8 }, { scaleY: .8 }] }} onValueChange={() => setWifi(!wifi)} value={!wifi} trackColor={{true: '#1974ba', false: 'grey'}} thumbColor='#fff'/>
+                            <Switch style={{ transform: [{ scaleX: .8 }, { scaleY: .8 }] }} onValueChange={() => setWifi(!wifi)} value={!wifi} trackColor={{ true: '#1974ba', false: 'grey' }} thumbColor='#fff' />
                         </View>
                     </View>
                     <View style={{ flexDirection: "row", alignItems: 'center', paddingVertical: 10 }}>
@@ -97,7 +96,7 @@ function CustomDrawer({navigation,userLogout}) {
                             <Text style={styles.para}>Complete episodes will be deleted and replaced with the next episodes, only Wi-fi</Text>
                         </View>
                         <View style={{ flex: 0.7 }}>
-                            <Switch style={{ transform: [{ scaleX: .8 }, { scaleY: .8 }] }} onValueChange={() => setSmart(!smart)} value={!smart} trackColor={{true: '#1974ba', false: 'grey'}} thumbColor='#fff' />
+                            <Switch style={{ transform: [{ scaleX: .8 }, { scaleY: .8 }] }} onValueChange={() => setSmart(!smart)} value={!smart} trackColor={{ true: '#1974ba', false: 'grey' }} thumbColor='#fff' />
                         </View>
                     </View>
                     <View style={{ flexDirection: "row", alignItems: 'center', paddingVertical: 10 }}>
@@ -112,9 +111,9 @@ function CustomDrawer({navigation,userLogout}) {
 
                         </View>
 
-                        <View style={{flex: 0.4,}}>
-                            <TouchableOpacity activeOpacity={0.8} onPress={() => setQuality(!quality)} hitSlop={{top: 20, bottom: 20, left: 30, right: 30}}>
-                                <Image style={quality?styles.dropdown:styles.transform} source={require('./assets/dropdown01.png')} />
+                        <View style={{ flex: 0.4, }}>
+                            <TouchableOpacity activeOpacity={0.8} onPress={() => setQuality(!quality)} hitSlop={{ top: 20, bottom: 20, left: 30, right: 30 }}>
+                                <Image style={quality ? styles.dropdown : styles.transform} source={require('./assets/dropdown01.png')} />
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -142,7 +141,7 @@ function CustomDrawer({navigation,userLogout}) {
             </DrawerContentScrollView>
             <View style={{ paddingLeft: 14, }}>
                 <View style={{ borderBottomWidth: 2, borderBottomColor: "#666670", width: 22, marginBottom: 4 }}></View>
-                <TouchableOpacity activeOpacity={0.8} onPress={()=>logout()} style={{ flexDirection: "row", }}>
+                <TouchableOpacity activeOpacity={0.8} onPress={() => logout()} style={{ flexDirection: "row", }}>
                     <Image style={styles.logout} source={require('./assets/logout05.png')} />
                     <Text
                         style={{
@@ -176,7 +175,7 @@ const styles = StyleSheet.create({
         left: 0,
         bottom: 0,
         right: 0,
-        backgroundColor:"transparent"
+        backgroundColor: "transparent"
     },
     iconStyle: {
         width: 15,
@@ -184,8 +183,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 5,
     },
     customItem: {
-        paddingHorizontal:14,
-        paddingVertical:10,
+        paddingHorizontal: 14,
+        paddingVertical: 10,
     },
     para: {
         color: "#b2b2b4",
@@ -266,15 +265,15 @@ const styles = StyleSheet.create({
         width: 10,
         height: 16,
         marginVertical: 17,
-        resizeMode:"contain",
+        resizeMode: "contain",
     }
 });
 
 const mapStateToProps = state => {
     return { userInfo: state?.userInfo };
-  };
-  
-  const mapDispatchToProps = dispatch =>
+};
+
+const mapDispatchToProps = dispatch =>
     bindActionCreators({ userLogout }, dispatch);
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(CustomDrawer);
+
+export default connect(mapStateToProps, mapDispatchToProps)(CustomDrawer);
