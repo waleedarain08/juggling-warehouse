@@ -215,6 +215,7 @@ export default class LiveStreaming extends Component<{}, State, any> {
   };
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
