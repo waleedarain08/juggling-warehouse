@@ -180,8 +180,8 @@ const styles = StyleSheet.create({
         left: 20,
     },
     userActive: {
-        width: 15,
-        height: 17,
+        width: 17,
+        height: 19,
         resizeMode: "contain",
         position: "absolute",
         top: 26,
@@ -189,10 +189,10 @@ const styles = StyleSheet.create({
         tintColor:"#1b74b8"
     },
     mailActive:{
-        width: 16,
-        height: 14, resizeMode: "contain",
+        width: 18,
+        height: 19, resizeMode: "contain",
         position: "absolute",
-        top: 28,
+        top: 26,
         left: 20,
         tintColor:"#1b74b8"
     },
