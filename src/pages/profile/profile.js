@@ -15,7 +15,6 @@ export default function profile({ navigation }) {
             <View style={{ flex: 2.5, }}>
                 <View style={styles.profilpage}>
                     <Image style={styles.man} source={require('../../assets/02-tile.png')} />
-                    <Image style={styles.camera} source={require('../../assets/editcamera02.png')} />
                     <Text style={styles.manname}>Donatella Nobatti</Text>
                     <Text style={styles.city}>Boston,MA 02101</Text>
                 </View>
@@ -176,11 +175,13 @@ const styles = StyleSheet.create({
         color: "#ffffff",
         textAlign: "right",
         fontSize: 10,
+        paddingTop:3,
     },
     fullname: {
         color: "#ffffff",
         fontSize: 10,
         paddingLeft: 8,
+        paddingTop:2,
         fontFamily:'Raleway-Regular'
 
     }

@@ -12,6 +12,7 @@ import NotificationsScreen from './pages/notificationsScreen/notificationScreen'
 import ChangePassword from './pages/ChangePassword/ChangePassword';
 import HomeScreen from './pages/home/HomeScreen';
 import DetailScreen from './pages/home/DetailScreen';
+import EditProfile from './pages/profile/EditProfile';
 import CustomDrawer from './CustomDrawer';
 import { connect } from 'react-redux';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -47,7 +48,7 @@ const drawerButton = navigation => {
 const notificationIcon = navigation => {
   return (
     <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
-      <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate("LiveNow")} style={{ flex: 1, flexDirection: "row", backgroundColor: "red", alignItems: "center", padding: 4, borderRadius: 3, marginRight: 10 }}>
+      <TouchableOpacity activeOpacity={0.8}  style={{ flex: 1, flexDirection: "row", backgroundColor: "red", alignItems: "center", padding: 4, borderRadius: 3, marginRight: 10 }}>
         <View style={{ backgroundColor: "#fff", height: 6, width: 6, padding: 0, borderRadius: 3 }}></View>
         <Text style={{ color: "#fff", fontSize: 10, fontWeight: '800', marginLeft: 5 }}>Live Now</Text>
       </TouchableOpacity>
@@ -63,8 +64,11 @@ const notificationIcon = navigation => {
   );
 };
 const profiletionIcon = navigation => {
+  goNext = () => {
+    navigation.navigate("EditProfile");
+  }
   return (
-    <TouchableOpacity>
+    <TouchableOpacity activeOpacity={0.9} onPress={() => goNext()}>
       <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
         <Image style={{ width: 13, height: 13, resizeMode: "contain", marginRight: 14 }} source={require('./assets/edit03.png')} />
       </View>
@@ -268,6 +272,9 @@ function HomeProfileStack() {
           headerRight: () => profiletionIcon(navigation)
         })}
       />
+          <LoginStackNav.Screen name="EditProfile" component={EditProfile}    options={({ navigation }) => ({
+      headerShown: false
+    })}/>
     </HomeProfileStackNav.Navigator>
   );
 }

@@ -38,8 +38,7 @@ export default function List({ navigation }) {
                 </View>
                 <ScrollView contentContainerStyle={{flexGrow:1,paddingBottom:20, }}
                 showsVerticalScrollIndicator={false}
-                >
-                    
+                > 
                     <View style={styles.movie}>
                     <Image style={styles.moviepng} source={require('../../assets/01-tile.png')} />
                     <Image style={styles.moviepng} source={require('../../assets/02-tile.png')} />
@@ -66,7 +65,7 @@ export default function List({ navigation }) {
                     <Image style={styles.moviepng} source={require('../../assets/03-tile.png')} />
                     </View>
                 </ScrollView>
-                <View style={{height:80}}></View>
+                <View style={{height:20}}></View>
             </View>
   );
 }

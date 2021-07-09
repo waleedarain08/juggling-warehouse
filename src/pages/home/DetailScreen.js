@@ -35,7 +35,8 @@ function DetailScreen({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <ScrollView contentContainerStyle={{ height: 700 }}  showsVerticalScrollIndicator={false}>
+            <ScrollView contentContainerStyle={{ height:700 }}  showsVerticalScrollIndicator={false}>
+                <View style={{flex:1,flexGrow:1}}>
                 <View style={styles.box2}>
                     <Image
                         style={{ width: "100%", height: 200 }}
@@ -92,7 +93,7 @@ function DetailScreen({ navigation }) {
                         }}>
                     </FlatList>
                 </View>
-                {/* </View> */}
+                </View>
             </ScrollView>
             <Modal
                 animationType="fade"
@@ -239,9 +240,9 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         flex: 1,
         justifyContent: "center",
-        paddingLeft: 10,
+        paddingLeft: 8,
         fontFamily:'Raleway-Regular',
-        paddingTop:6
+        paddingTop:2
     },
     downsec: {
         flexDirection: "row",
@@ -290,8 +291,8 @@ const styles = StyleSheet.create({
         lineHeight:20,
     },
     box5: {
-        flex: 1,
-        paddingTop: 5,
+        flex: 0.8,
+        paddingTop: 12,
         position:"relative",
     },
     play:{
@@ -299,7 +300,7 @@ const styles = StyleSheet.create({
         zIndex:1,
         height:10,width:10,
         left:"32%",
-        top:"33%",
+        top:"55%",
         resizeMode:"contain"
     },
     btn: {
