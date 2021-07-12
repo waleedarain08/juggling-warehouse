@@ -36,7 +36,7 @@ function CustomDrawer({navigation, userLogout}) {
   const [quality, setQuality] = useState(false);
   return (
     <SafeAreaView style={{flex: 1}}>
-      <DrawerContentScrollView style={{flex:1}}>
+      <DrawerContentScrollView style={{flex:1,flexGrow:1,}}>
         <BlurView style={styles.blurView} blurType="dark" blurAmount={5} />
         <View style={{paddingLeft: 14}}>
           <Text style={styles.setting}>SETTINGS</Text>
@@ -202,7 +202,7 @@ function CustomDrawer({navigation, userLogout}) {
               borderBottomColor: '#282a37',
               paddingTop: 4,
             }}></View>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between',}}>
             <Text
               style={styles.password}
               onPress={() => {
@@ -221,7 +221,7 @@ function CustomDrawer({navigation, userLogout}) {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={{paddingLeft: 14,marginTop:"32%"}}>
+        <View style={{paddingLeft: 14,marginTop:"64%"}}>
           <View
             style={{
               borderBottomWidth: 2,
@@ -281,6 +281,7 @@ const styles = StyleSheet.create({
   customItem: {
     paddingHorizontal: 14,
     paddingVertical: 10,
+    marginTop:"12%"
   },
   para: {
     color: '#b2b2b4',

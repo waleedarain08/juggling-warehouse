@@ -28,8 +28,7 @@ function ForgatPassword({ navigation, userInfo, userLogin }) {
              <Text style={styles.message}>A message will be sent to your address with further instructions</Text>
              <TouchableOpacity
             activeOpacity={0.8}
-            style={styles.LoginButton}
-            onPress={() => userLogin(username, password)}>
+            style={styles.LoginButton}>
             <Text style={styles.LoginButtonInside}>RECOVER PASSWORD</Text>
           </TouchableOpacity>
              </View>

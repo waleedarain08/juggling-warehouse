@@ -99,6 +99,7 @@ export default function EditProfile({ navigation }) {
                         </TouchableOpacity>
                     </View>
                     </View>
+                    <View style={{height:60}}></View>
                 </KeyboardAwareScrollView>
             </View>
         </SafeAreaView>
