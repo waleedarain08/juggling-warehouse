@@ -20,13 +20,17 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {BlurView} from '@react-native-community/blur';
 import {ThemeProvider} from '@react-navigation/native';
+import { useIsDrawerOpen } from '@react-navigation/drawer';
+
 
 function CustomDrawer({navigation, userLogout}) {
+  const isDrawerOpen = useIsDrawerOpen();
+
   logout = () => {
     // navigation.toggleDrawer();
     //navigation.navigate("Login");
-    navigation.closeDrawer();
-    userLogout(null);
+    navigation.toggleDrawer();
+    userLogout({});
   };
 
   const proileImage = 'react_logo.png';
@@ -35,8 +39,9 @@ function CustomDrawer({navigation, userLogout}) {
   const [smart, setSmart] = useState(false);
   const [quality, setQuality] = useState(false);
   return (
+    <>
     <SafeAreaView style={{flex: 1}}>
-              <BlurView style={styles.blurView} blurType="dark" blurAmount={1} />
+              <BlurView style={[styles.blurView,{opacity:isDrawerOpen?1:0}]} blurType="dark" blurAmount={1} ></BlurView>
 
       <View style={{paddingLeft: 14,paddingTop: 20}}>
           <Text style={styles.setting}>SETTINGS</Text>
@@ -257,7 +262,9 @@ function CustomDrawer({navigation, userLogout}) {
             </Text>
           </TouchableOpacity>
         </View>
+
     </SafeAreaView>
+    </>
   );
 }
 
@@ -279,7 +286,7 @@ const styles = StyleSheet.create({
     left: 0,
     bottom: 0,
     right: 0,
-    backgroundColor: '#0e101f80',
+   backgroundColor: '#0e101f90',
     
   },
   iconStyle: {

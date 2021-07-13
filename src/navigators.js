@@ -1,5 +1,5 @@
-import { Text, View, Image, TouchableOpacity } from 'react-native';
-import React, { Component, useState } from 'react';
+import {Text, View, Image, TouchableOpacity} from 'react-native';
+import React, {Component, useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Login from './pages/login/login';
 import Signup from './pages/signup/signup';
@@ -14,32 +14,35 @@ import HomeScreen from './pages/home/HomeScreen';
 import DetailScreen from './pages/home/DetailScreen';
 import EditProfile from './pages/profile/EditProfile';
 import CustomDrawer from './CustomDrawer';
-import { connect } from 'react-redux';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { createStackNavigator } from '@react-navigation/stack';
+import {connect} from 'react-redux';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {createStackNavigator} from '@react-navigation/stack';
+import {useIsDrawerOpen} from '@react-navigation/drawer';
 import CustomTabBar from './CustomTabBar';
 import LiveNow from './pages/home/LiveNow';
 
-
 const useInitialRender = () => {
-  const [isInitialRender, setIsInitialRender] = useState(false)
+  const [isInitialRender, setIsInitialRender] = useState(false);
 
   if (!isInitialRender) {
-    setTimeout(() => setIsInitialRender(true), 1)
-    return true
+    setTimeout(() => setIsInitialRender(true), 1);
+    return true;
   }
-  return false
-}
+  return false;
+};
 
+const toggleDrawer = navigation => {
+  // setOpacity(!opacity);
+  navigation.toggleDrawer();
+};
 
 const drawerButton = navigation => {
   return (
-    <TouchableOpacity
-      onPress={() => navigation.toggleDrawer()}>
+    <TouchableOpacity onPress={() => toggleDrawer(navigation)}>
       <Image
         source={require('./assets/menu-icon.png')}
-        style={{ width: 20, height: 20, resizeMode: 'contain', marginLeft: 12 }}
+        style={{width: 20, height: 20, resizeMode: 'contain', marginLeft: 12}}
       />
     </TouchableOpacity>
   );
@@ -47,17 +50,42 @@ const drawerButton = navigation => {
 
 const notificationIcon = navigation => {
   return (
-    <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
-      <TouchableOpacity activeOpacity={0.8}  style={{ flex: 1, flexDirection: "row", backgroundColor: "red", alignItems: "center", padding: 4, borderRadius: 3, marginRight: 10 }}>
-        <View style={{ backgroundColor: "#fff", height: 6, width: 6, padding: 0, borderRadius: 3 }}></View>
-        <Text style={{ color: "#fff", fontSize: 10, fontWeight: '800', marginLeft: 5 }}>Live Now</Text>
+    <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+          backgroundColor: 'red',
+          alignItems: 'center',
+          padding: 4,
+          borderRadius: 3,
+          marginRight: 10,
+        }}>
+        <View
+          style={{
+            backgroundColor: '#fff',
+            height: 6,
+            width: 6,
+            padding: 0,
+            borderRadius: 3,
+          }}></View>
+        <Text
+          style={{
+            color: '#fff',
+            fontSize: 10,
+            fontWeight: '800',
+            marginLeft: 5,
+          }}>
+          Live Now
+        </Text>
       </TouchableOpacity>
-      <View style={{ flex: 1 }}>
+      <View style={{flex: 1}}>
         <Icon
           name="notifications-outline"
           size={24}
-          style={{ marginRight: 10, color: "#fff" }}
-          onPress={() => navigation.navigate("Notifications")}
+          style={{marginRight: 10, color: '#fff'}}
+          onPress={() => navigation.navigate('Notifications')}
         />
       </View>
     </View>
@@ -65,12 +93,20 @@ const notificationIcon = navigation => {
 };
 const profiletionIcon = navigation => {
   goNext = () => {
-    navigation.navigate("EditProfile");
-  }
+    navigation.navigate('EditProfile');
+  };
   return (
     <TouchableOpacity activeOpacity={0.9} onPress={() => goNext()}>
-      <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
-        <Image style={{ width: 13, height: 13, resizeMode: "contain", marginRight: 14 }} source={require('./assets/edit03.png')} />
+      <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+        <Image
+          style={{
+            width: 13,
+            height: 13,
+            resizeMode: 'contain',
+            marginRight: 14,
+          }}
+          source={require('./assets/edit03.png')}
+        />
       </View>
     </TouchableOpacity>
   );
@@ -85,12 +121,13 @@ const HomeListStackNav = createStackNavigator();
 const HomeTabNav = createBottomTabNavigator();
 const HomeProfileStackNav = createStackNavigator();
 
-
 function LoginStack() {
   return (
-    <LoginStackNav.Navigator screenOptions={{
-      headerShown: false
-    }} initialRouteName="Login">
+    <LoginStackNav.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+      initialRouteName="Login">
       <LoginStackNav.Screen name="Login" component={Login} />
       <LoginStackNav.Screen name="Signup" component={Signup} />
       <LoginStackNav.Screen name="ForgatPassword" component={ForgatPassword} />
@@ -100,75 +137,91 @@ function LoginStack() {
 
 function HomeTabAStack() {
   return (
-    <HomeTabAStackNav.Navigator initialRouteName="Home" screenOptions={{
-      headerBackTitleVisible: false,
-      headerStyle: {
-        backgroundColor: '#0e101f',
-        shadowOpacity: 0.85,
-        shadowRadius: 0,
-        shadowOffset: {
-          width: 0,
-          height: 0,
+    <HomeTabAStackNav.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerBackTitleVisible: false,
+        headerStyle: {
+          backgroundColor: '#0e101f',
+          shadowOpacity: 0.85,
+          shadowRadius: 0,
+          shadowOffset: {
+            width: 0,
+            height: 0,
+          },
         },
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-        fontFamily: 'Raleway-Regular'
-      },
-    }}>
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          fontFamily: 'Raleway-Regular',
+        },
+      }}>
       <HomeTabAStackNav.Screen
         name="Home"
         component={HomeScreen}
-        options={({ navigation }) => ({
+        options={({navigation}) => ({
           headerLeft: () => drawerButton(navigation),
-          headerRight: () => notificationIcon(navigation)
+          headerRight: () => notificationIcon(navigation),
         })}
       />
-      <HomeTabAStackNav.Screen name="AboutMotivation" component={DetailScreen} />
-      <HomeTabAStackNav.Screen name="LiveNow" component={LiveNow} />
-      <HomeTabAStackNav.Screen name="Notifications" component={NotificationsScreen}
-     options={({ navigation }) => ({
-      headerShown: false
-    })}
+      <HomeTabAStackNav.Screen
+        name="AboutMotivation"
+        component={DetailScreen}
+        options={{ title: 'About Motivation' }}
       />
-      <HomeTabAStackNav.Screen name="ChangePassword" component={ChangePassword}  options={({ navigation }) => ({
-      headerShown: false
-    })}/>
+      <HomeTabAStackNav.Screen name="LiveNow" component={LiveNow} />
+      <HomeTabAStackNav.Screen
+        name="Notifications"
+        component={NotificationsScreen}
+        options={({navigation}) => ({
+          headerShown: false,
+        })}
+      />
+      <HomeTabAStackNav.Screen
+        name="ChangePassword"
+        component={ChangePassword}
+        options={({navigation}) => ({
+          headerShown: false,
+        })}
+      />
     </HomeTabAStackNav.Navigator>
   );
 }
 
 function HomeDownloadStack() {
   return (
-    <HomeDownloadStackNav.Navigator initialRouteName="Downloads" screenOptions={{
-      headerStyle: {
-        backgroundColor: '#0e101f',
-        shadowOpacity: 0.85,
-        shadowRadius: 0,
-        shadowOffset: {
-          width: 0,
-          height: 0,
+    <HomeDownloadStackNav.Navigator
+      initialRouteName="Downloads"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#0e101f',
+          shadowOpacity: 0.85,
+          shadowRadius: 0,
+          shadowOffset: {
+            width: 0,
+            height: 0,
+          },
         },
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-        fontFamily: 'Raleway-Regular'
-      },
-    }}>
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          fontFamily: 'Raleway-Regular',
+        },
+      }}>
       <HomeDownloadStackNav.Screen
         name="Downloads"
         component={download}
-        options={({ navigation }) => ({
+        options={({navigation}) => ({
           headerLeft: () => drawerButton(navigation),
-          headerRight: () => notificationIcon(navigation)
+          headerRight: () => notificationIcon(navigation),
         })}
       />
-      <HomeDownloadStackNav.Screen name="Notifications" component={NotificationsScreen}
-     options={({ navigation }) => ({
-      headerShown: false
-    })}
+      <HomeDownloadStackNav.Screen
+        name="Notifications"
+        component={NotificationsScreen}
+        options={({navigation}) => ({
+          headerShown: false,
+        })}
       />
       {/* <HomeDownloadStackNav.Screen name="TabBDetails" component={TabBDetails} /> */}
     </HomeDownloadStackNav.Navigator>
@@ -177,34 +230,38 @@ function HomeDownloadStack() {
 
 function HomeSearchStack() {
   return (
-    <HomeSearchStackNav.Navigator initialRouteName="Search" screenOptions={{
-      headerStyle: {
-        backgroundColor: '#0e101f',
-        shadowOpacity: 0.85,
-        shadowRadius: 0,
-        shadowOffset: {
-          width: 0,
-          height: 0,
+    <HomeSearchStackNav.Navigator
+      initialRouteName="Search"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#0e101f',
+          shadowOpacity: 0.85,
+          shadowRadius: 0,
+          shadowOffset: {
+            width: 0,
+            height: 0,
+          },
         },
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-        fontFamily: 'Raleway-Regular'
-      },
-    }}>
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          fontFamily: 'Raleway-Regular',
+        },
+      }}>
       <HomeSearchStackNav.Screen
         name="Search"
         component={search}
-        options={({ navigation }) => ({
+        options={({navigation}) => ({
           headerLeft: () => drawerButton(navigation),
-          headerRight: () => notificationIcon(navigation)
+          headerRight: () => notificationIcon(navigation),
         })}
       />
-      <HomeSearchStackNav.Screen name="Notifications" component={NotificationsScreen}
-       options={({ navigation }) => ({
-        headerShown: false
-      })}
+      <HomeSearchStackNav.Screen
+        name="Notifications"
+        component={NotificationsScreen}
+        options={({navigation}) => ({
+          headerShown: false,
+        })}
       />
       {/* <HomeSearchStackNav.Screen name="TabBDetails" component={TabBDetails} /> */}
     </HomeSearchStackNav.Navigator>
@@ -213,33 +270,37 @@ function HomeSearchStack() {
 
 function HomeListStack() {
   return (
-    <HomeListStackNav.Navigator initialRouteName="MyList" screenOptions={{
-      headerStyle: {
-        backgroundColor: '#0e101f',
-        shadowOpacity: 0.85,
-        shadowRadius: 0,
-        shadowOffset: {
-          width: 0,
-          height: 0,
+    <HomeListStackNav.Navigator
+      initialRouteName="MyList"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#0e101f',
+          shadowOpacity: 0.85,
+          shadowRadius: 0,
+          shadowOffset: {
+            width: 0,
+            height: 0,
+          },
         },
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-        fontFamily: 'Raleway-Regular'
-      },
-    }}>
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          fontFamily: 'Raleway-Regular',
+        },
+      }}>
       <HomeListStackNav.Screen
         name="MyList"
         component={list}
-        options={({ navigation }) => ({
+        options={({navigation}) => ({
           headerLeft: () => drawerButton(navigation),
-          headerRight: () => notificationIcon(navigation)
+          headerRight: () => notificationIcon(navigation),
         })}
       />
-      <HomeListStackNav.Screen name="Notifications" component={NotificationsScreen}
-        options={({ navigation }) => ({
-          headerShown: false
+      <HomeListStackNav.Screen
+        name="Notifications"
+        component={NotificationsScreen}
+        options={({navigation}) => ({
+          headerShown: false,
         })}
       />
     </HomeListStackNav.Navigator>
@@ -248,55 +309,61 @@ function HomeListStack() {
 
 function HomeProfileStack() {
   return (
-    <HomeProfileStackNav.Navigator initialRouteName="MyProfile" screenOptions={{
-      headerStyle: {
-        backgroundColor: '#0e101f',
-        shadowOpacity: 0.85,
-        shadowRadius: 0,
-        shadowOffset: {
-          width: 0,
-          height: 0,
+    <HomeProfileStackNav.Navigator
+      initialRouteName="MyProfile"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#0e101f',
+          shadowOpacity: 0.85,
+          shadowRadius: 0,
+          shadowOffset: {
+            width: 0,
+            height: 0,
+          },
         },
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-        fontFamily: 'Raleway-Regular'
-      },
-    }}>
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          fontFamily: 'Raleway-Regular',
+        },
+      }}>
       <HomeProfileStackNav.Screen
         name="MyProfile"
         component={profile}
-        options={({ navigation }) => ({
+        options={({navigation}) => ({
           headerLeft: () => drawerButton(navigation),
-          headerRight: () => profiletionIcon(navigation)
+          headerRight: () => profiletionIcon(navigation),
         })}
       />
-          <HomeProfileStackNav.Screen name="EditProfile" component={EditProfile}    options={({ navigation }) => ({
-      headerShown: false
-    })}/>
+      <HomeProfileStackNav.Screen
+        name="EditProfile"
+        component={EditProfile}
+        options={({navigation}) => ({
+          headerShown: false,
+        })}
+      />
     </HomeProfileStackNav.Navigator>
   );
 }
 
 function HomeTab() {
+  // alert(isDrawerOpen);
   return (
     <HomeTabNav.Navigator
-      initialRouteName={"Home"}
+      initialRouteName={'Home'}
       tabBar={props => {
         return (
-          <View style={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            bottom: 0
-          }}
-          >
+          <View
+            style={{
+              position: 'absolute',
+              left: 0,
+              right: 0,
+              bottom: 0,
+            }}>
             <CustomTabBar {...props} />
           </View>
-        )
-      }}
-    >
+        );
+      }}>
       <HomeTabNav.Screen name="Download" component={HomeDownloadStack} />
       <HomeTabNav.Screen name="Search" component={HomeSearchStack} />
       <HomeTabNav.Screen name="Home" component={HomeTabAStack} />
@@ -306,38 +373,31 @@ function HomeTab() {
   );
 }
 
-function RootContainer({ user }) {
-
+function RootContainer({user}) {
+  //const isDrawerOpen = useIsDrawerOpen();
   return (
     <Drawer.Navigator
       drawerContent={props => <CustomDrawer {...props} />}
       drawerContentOptions={{
-        activeTintColor: '#fff',
-        inactiveTintColor: '#aeaeae',
-        itemStyle: { marginVertical: 8, marginHorizontal: 8 },
+        itemStyle: {marginVertical: 8, marginHorizontal: 8},
       }}
       initialRouteName="Home"
-      drawerStyle={{
-        // backgroundColor: '#0e101f',
-        opacity: 1
-      }}
-      drawerType="front"
-    >
-      <Drawer.Screen name="main">
-        {() =>
-          user?.loggedin ? HomeTab() : (
-              <LoginStack />
-
-            )
+      drawerStyle={
+        {
+          //opacity:1,
+          //backgroundColor:'#0e101f'
         }
+      }
+      overlayColor="transparent"
+      drawerType="front">
+      <Drawer.Screen name="juggling">
+        {() => user.loggedin ? <HomeTab/> : <LoginStack />}
       </Drawer.Screen>
     </Drawer.Navigator>
-  )
-
+  );
 }
 
 const mapStateToProps = state => {
-  return { user: state?.user };
+  return {user: state?.user};
 };
 export default connect(mapStateToProps)(RootContainer);
-
