@@ -158,6 +158,7 @@ const styles = StyleSheet.create({
         paddingLeft: 35,
         fontSize: 12,
         color: "#57585d",
+        color:"#fff"
     },
     emailActive: {
         borderBottomColor:"#1b74b8"
@@ -181,8 +182,8 @@ const styles = StyleSheet.create({
         left: 20,
     },
     userActive: {
-        width: 17,
-        height: 19,
+        width: 19,
+        height: 21,
         resizeMode: "contain",
         position: "absolute",
         top: 26,

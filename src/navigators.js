@@ -125,7 +125,7 @@ function HomeTabAStack() {
           headerRight: () => notificationIcon(navigation)
         })}
       />
-      <HomeTabAStackNav.Screen name="About Motivation" component={DetailScreen} />
+      <HomeTabAStackNav.Screen name="AboutMotivation" component={DetailScreen} />
       <HomeTabAStackNav.Screen name="LiveNow" component={LiveNow} />
       <HomeTabAStackNav.Screen name="Notifications" component={NotificationsScreen}
      options={({ navigation }) => ({
@@ -165,7 +165,7 @@ function HomeDownloadStack() {
           headerRight: () => notificationIcon(navigation)
         })}
       />
-      <HomeTabAStackNav.Screen name="Notifications" component={NotificationsScreen}
+      <HomeDownloadStackNav.Screen name="Notifications" component={NotificationsScreen}
      options={({ navigation }) => ({
       headerShown: false
     })}
@@ -201,7 +201,7 @@ function HomeSearchStack() {
           headerRight: () => notificationIcon(navigation)
         })}
       />
-      <HomeTabAStackNav.Screen name="Notifications" component={NotificationsScreen}
+      <HomeSearchStackNav.Screen name="Notifications" component={NotificationsScreen}
        options={({ navigation }) => ({
         headerShown: false
       })}
@@ -237,7 +237,7 @@ function HomeListStack() {
           headerRight: () => notificationIcon(navigation)
         })}
       />
-      <HomeTabAStackNav.Screen name="Notifications" component={NotificationsScreen}
+      <HomeListStackNav.Screen name="Notifications" component={NotificationsScreen}
         options={({ navigation }) => ({
           headerShown: false
         })}
@@ -272,7 +272,7 @@ function HomeProfileStack() {
           headerRight: () => profiletionIcon(navigation)
         })}
       />
-          <LoginStackNav.Screen name="EditProfile" component={EditProfile}    options={({ navigation }) => ({
+          <HomeProfileStackNav.Screen name="EditProfile" component={EditProfile}    options={({ navigation }) => ({
       headerShown: false
     })}/>
     </HomeProfileStackNav.Navigator>

@@ -14,7 +14,7 @@ function HomeScreen({ navigation, user, userLogout }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [listhome, setlisthome] = useState([{ title: "abc", Text: "Home" }, { title: "def", Text: "My List" }, { title: "ghi", Text: "Available for Download" }, { title: "jkl", Text: "Action" }, { title: "mno", Text: "Anime" }, { title: "pqr", Text: "Children & Family" }, { title: "stu", Text: "Documentaries" }, { title: "vwx", Text: "Fantasy" }, { title: "yza", Text: "Reality" }, { title: "bcd", Text: "Stan-up" }, { title: "efg", Text: "Audio Description" }]);
   goNext = () => {
-    navigation.navigate("About Motivation");
+    navigation.navigate("AboutMotivation");
   }
 
   return (
@@ -39,7 +39,7 @@ function HomeScreen({ navigation, user, userLogout }) {
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => {
                 return (
-                  <TouchableOpacity activeOpacity={0.9} onPress={() => goNext()} style={{ width: 290 }}>
+                  <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.navigate("AboutMotivation")} style={{ width: 290 }}>
                     <Image style={styles.live} source={require('../../assets/live.png')} />
                     <Image
                       style={{ width: "100%", height: "100%", marginLeft: 3, resizeMode: "contain" }}

@@ -44,7 +44,7 @@ function DetailScreen({ navigation }) {
                 </View>
                 <View style={styles.box3}>
                     <View style={styles.downsec}>
-                        <View style={{ flex: 2, }}>
+                        <View style={{ flex: 3, }}>
                             <Text style={styles.motivation2}>About Motivations</Text></View>
                         <View style={{ flex: 1.5, alignItems: "flex-end", paddingLeft: 1, }}>
                             <Image style={styles.list} source={require('../../assets/list.png')} />
@@ -95,6 +95,7 @@ function DetailScreen({ navigation }) {
                 </View>
                 </View>
             </ScrollView>
+            <View style={{height:30}}></View>
             <Modal
                 animationType="fade"
                 transparent={true}
@@ -236,13 +237,13 @@ const styles = StyleSheet.create({
     },
     motivation2: {
         color: "#ffffff",
-        fontSize: 16,
+        fontSize: 15,
         fontWeight: "bold",
         flex: 1,
         justifyContent: "center",
         paddingLeft: 8,
         fontFamily:'Raleway-Regular',
-        paddingTop:2
+        paddingTop:0
     },
     downsec: {
         flexDirection: "row",
@@ -262,7 +263,8 @@ const styles = StyleSheet.create({
         color: "#ffffff",
         fontSize: 10,
         borderWidth: 1,
-        borderColor: "#ffffff",fontFamily:'Raleway-Regular'
+        borderColor: "#ffffff",fontFamily:'Raleway-Regular',
+        padding:1.5
 
     },
     list: {

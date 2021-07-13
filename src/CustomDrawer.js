@@ -36,9 +36,9 @@ function CustomDrawer({navigation, userLogout}) {
   const [quality, setQuality] = useState(false);
   return (
     <SafeAreaView style={{flex: 1}}>
-      <DrawerContentScrollView style={{flex:1,flexGrow:1,}}>
-        <BlurView style={styles.blurView} blurType="dark" blurAmount={5} />
-        <View style={{paddingLeft: 14}}>
+              <BlurView style={styles.blurView} blurType="dark" blurAmount={1} />
+
+      <View style={{paddingLeft: 14,paddingTop: 20}}>
           <Text style={styles.setting}>SETTINGS</Text>
           <View
             style={{
@@ -48,6 +48,9 @@ function CustomDrawer({navigation, userLogout}) {
               width: 22,
             }}></View>
         </View>
+      {/* <DrawerContentScrollView showsVerticalScrollIndicator={false} style={{height:100,backgroundColor:"red"}} > */}
+      {/* <View style={styles.textWrapper}> */}
+        
         <View style={styles.customItem}>
           <View
             style={{
@@ -221,7 +224,10 @@ function CustomDrawer({navigation, userLogout}) {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={{paddingLeft: 14,marginTop:"64%"}}>
+        
+        {/* </View> */}
+      {/* </DrawerContentScrollView> */}
+      <View style={{paddingLeft: 14,position:"absolute",bottom:"3%"}}>
           <View
             style={{
               borderBottomWidth: 2,
@@ -251,7 +257,6 @@ function CustomDrawer({navigation, userLogout}) {
             </Text>
           </TouchableOpacity>
         </View>
-      </DrawerContentScrollView>
     </SafeAreaView>
   );
 }
@@ -263,6 +268,10 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 100 / 2,
     alignSelf: 'center',
+  },
+  textWrapper: {
+   // height: hp('100%'), // 70% of height device screen
+    // width: wp('75%')   // 80% of width device screen
   },
   blurView: {
     position: 'absolute',
@@ -292,7 +301,6 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontSize: 14,
     fontWeight: 'bold',
-    paddingTop: 20,
     fontFamily: 'Raleway-Regular',
   },
   line: {
