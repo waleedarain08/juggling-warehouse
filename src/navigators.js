@@ -1,4 +1,4 @@
-import { Text, View, Image, TouchableOpacity, Modal } from 'react-native';
+import { Text, View, Image, TouchableOpacity, Modal,Platform } from 'react-native';
 import React, { Component, useState } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Login from './pages/login/login';
@@ -116,8 +116,8 @@ const profiletionIcon = navigation => {
 };
 
 enableScreens();
-const Stack = createNativeStackNavigator();
-//const Stack = createStackNavigator();
+//const Stack =createStackNavigator();
+const Stack = Platform.OS==="ios"?createNativeStackNavigator():createStackNavigator();
 const Drawer = createDrawerNavigator();
 const LoginStackNav = createStackNavigator();
 const HomeTabAStackNav = createStackNavigator();
