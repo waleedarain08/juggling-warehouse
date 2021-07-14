@@ -1,5 +1,5 @@
-import {Text, View, Image, TouchableOpacity} from 'react-native';
-import React, {Component, useState} from 'react';
+import { Text, View, Image, TouchableOpacity, Modal } from 'react-native';
+import React, { Component, useState } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Login from './pages/login/login';
 import Signup from './pages/signup/signup';
@@ -14,13 +14,16 @@ import HomeScreen from './pages/home/HomeScreen';
 import DetailScreen from './pages/home/DetailScreen';
 import EditProfile from './pages/profile/EditProfile';
 import CustomDrawer from './CustomDrawer';
-import {connect} from 'react-redux';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {createStackNavigator} from '@react-navigation/stack';
-import {useIsDrawerOpen} from '@react-navigation/drawer';
+import { connect } from 'react-redux';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createStackNavigator } from '@react-navigation/stack';
+import { enableScreens } from 'react-native-screens';
+import { createNativeStackNavigator } from 'react-native-screens/native-stack';
+import { useIsDrawerOpen } from '@react-navigation/drawer';
 import CustomTabBar from './CustomTabBar';
 import LiveNow from './pages/home/LiveNow';
+import { Card } from 'react-native-elements/dist/card/Card';
 
 const useInitialRender = () => {
   const [isInitialRender, setIsInitialRender] = useState(false);
@@ -42,7 +45,7 @@ const drawerButton = navigation => {
     <TouchableOpacity onPress={() => toggleDrawer(navigation)}>
       <Image
         source={require('./assets/menu-icon.png')}
-        style={{width: 20, height: 20, resizeMode: 'contain', marginLeft: 12}}
+        style={{ width: 20, height: 20, resizeMode: 'contain', marginLeft: 12 }}
       />
     </TouchableOpacity>
   );
@@ -50,7 +53,7 @@ const drawerButton = navigation => {
 
 const notificationIcon = navigation => {
   return (
-    <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
       <TouchableOpacity
         activeOpacity={0.8}
         style={{
@@ -80,11 +83,11 @@ const notificationIcon = navigation => {
           Live Now
         </Text>
       </TouchableOpacity>
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <Icon
           name="notifications-outline"
           size={24}
-          style={{marginRight: 10, color: '#fff'}}
+          style={{ marginRight: 10, color: '#fff' }}
           onPress={() => navigation.navigate('Notifications')}
         />
       </View>
@@ -97,7 +100,7 @@ const profiletionIcon = navigation => {
   };
   return (
     <TouchableOpacity activeOpacity={0.9} onPress={() => goNext()}>
-      <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+      <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
         <Image
           style={{
             width: 13,
@@ -112,6 +115,9 @@ const profiletionIcon = navigation => {
   );
 };
 
+enableScreens();
+const Stack = createNativeStackNavigator();
+//const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const LoginStackNav = createStackNavigator();
 const HomeTabAStackNav = createStackNavigator();
@@ -128,7 +134,7 @@ function LoginStack() {
         headerShown: false,
       }}
       initialRouteName="Login">
-      <LoginStackNav.Screen name="Login" component={Login} />
+      <LoginStackNav.Screen name="Login"  component={Login} />
       <LoginStackNav.Screen name="Signup" component={Signup} />
       <LoginStackNav.Screen name="ForgatPassword" component={ForgatPassword} />
     </LoginStackNav.Navigator>
@@ -159,7 +165,7 @@ function HomeTabAStack() {
       <HomeTabAStackNav.Screen
         name="Home"
         component={HomeScreen}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           headerLeft: () => drawerButton(navigation),
           headerRight: () => notificationIcon(navigation),
         })}
@@ -173,14 +179,14 @@ function HomeTabAStack() {
       <HomeTabAStackNav.Screen
         name="Notifications"
         component={NotificationsScreen}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           headerShown: false,
         })}
       />
       <HomeTabAStackNav.Screen
         name="ChangePassword"
         component={ChangePassword}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           headerShown: false,
         })}
       />
@@ -211,7 +217,7 @@ function HomeDownloadStack() {
       <HomeDownloadStackNav.Screen
         name="Downloads"
         component={download}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           headerLeft: () => drawerButton(navigation),
           headerRight: () => notificationIcon(navigation),
         })}
@@ -219,7 +225,7 @@ function HomeDownloadStack() {
       <HomeDownloadStackNav.Screen
         name="Notifications"
         component={NotificationsScreen}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           headerShown: false,
         })}
       />
@@ -251,7 +257,7 @@ function HomeSearchStack() {
       <HomeSearchStackNav.Screen
         name="Search"
         component={search}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           headerLeft: () => drawerButton(navigation),
           headerRight: () => notificationIcon(navigation),
         })}
@@ -259,7 +265,7 @@ function HomeSearchStack() {
       <HomeSearchStackNav.Screen
         name="Notifications"
         component={NotificationsScreen}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           headerShown: false,
         })}
       />
@@ -291,7 +297,7 @@ function HomeListStack() {
       <HomeListStackNav.Screen
         name="MyList"
         component={list}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           headerLeft: () => drawerButton(navigation),
           headerRight: () => notificationIcon(navigation),
         })}
@@ -299,7 +305,7 @@ function HomeListStack() {
       <HomeListStackNav.Screen
         name="Notifications"
         component={NotificationsScreen}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           headerShown: false,
         })}
       />
@@ -330,7 +336,7 @@ function HomeProfileStack() {
       <HomeProfileStackNav.Screen
         name="MyProfile"
         component={profile}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           headerLeft: () => drawerButton(navigation),
           headerRight: () => profiletionIcon(navigation),
         })}
@@ -338,7 +344,7 @@ function HomeProfileStack() {
       <HomeProfileStackNav.Screen
         name="EditProfile"
         component={EditProfile}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           headerShown: false,
         })}
       />
@@ -373,31 +379,30 @@ function HomeTab() {
   );
 }
 
-function RootContainer({user}) {
-  //const isDrawerOpen = useIsDrawerOpen();
+function MainDrawer() {
   return (
     <Drawer.Navigator
       drawerContent={props => <CustomDrawer {...props} />}
       drawerContentOptions={{
-        itemStyle: {marginVertical: 8, marginHorizontal: 8},
+        itemStyle: { marginVertical: 8, marginHorizontal: 8 },
       }}
       initialRouteName="Home"
-      drawerStyle={
-        {
-          //opacity:1,
-          //backgroundColor:'#0e101f'
-        }
-      }
       overlayColor="transparent"
       drawerType="front">
-      <Drawer.Screen name="juggling">
-        {() => user.loggedin ? <HomeTab/> : <LoginStack />}
-      </Drawer.Screen>
+      <Drawer.Screen options={{ activeTintColor: "#fff" }} name="Home" component={HomeTab} />
     </Drawer.Navigator>
+  )
+}
+
+function RootContainer({ user }) {
+  return (
+    <Stack.Navigator initialRouteName="Login"  screenOptions={{headerShown:false}} sdetachInactiveScreens={true}>
+      {user.loggedin ? <Stack.Screen name="MainDrawer" component={MainDrawer} /> : <Stack.Screen name="Login" component={LoginStack} />}
+    </Stack.Navigator>
   );
 }
 
 const mapStateToProps = state => {
-  return {user: state?.user};
+  return { user: state?.user };
 };
 export default connect(mapStateToProps)(RootContainer);

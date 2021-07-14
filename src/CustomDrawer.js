@@ -29,7 +29,7 @@ function CustomDrawer({navigation, userLogout}) {
   logout = () => {
     // navigation.toggleDrawer();
     //navigation.navigate("Login");
-    navigation.toggleDrawer();
+    //navigation.toggleDrawer();
     userLogout({});
   };
 

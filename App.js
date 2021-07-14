@@ -24,7 +24,7 @@ export class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <NavigationContainer theme={{...DefaultTheme,dark:false,colors:{'background':'#0e101f'}}}>
+        <NavigationContainer theme={{...DefaultTheme,dark:true,colors:{'background':'#0e101f'}}}>
           <RootContainer />
         </NavigationContainer>
       </Provider>
