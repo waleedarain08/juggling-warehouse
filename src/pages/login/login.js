@@ -11,7 +11,7 @@ function Login({ navigation, userInfo, userLogin }) {
   const [password, setPassword] = useState('');
   const [checked, setChecked] = useState(true);
 
-
+ 
 
   return (
     <KeyboardAvoidingView behavior={(Platform.OS === 'ios') ? "padding" : null} keyboardVerticalOffset={Platform.select({ ios: -250, android: -100 })}
