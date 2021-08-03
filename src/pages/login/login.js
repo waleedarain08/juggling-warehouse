@@ -5,11 +5,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { userLogin } from '../../redux/actions';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
+import { useForm, Controller } from "react-hook-form";
 
 function Login({ navigation, userInfo, userLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [checked, setChecked] = useState(true);
+  const { control, handleSubmit, formState: { errors } } = useForm();
+  const onSubmit = data => console.log(data);
 
  
 
@@ -29,11 +32,41 @@ function Login({ navigation, userInfo, userLogin }) {
       <View style={styles.Inputs}>
         <View>
           <Image style={styles.InputLogo} source={require("../../assets/user.png")} />
-          <Input style={styles.TextField} placeholder="Email Address" />
+          <Controller
+        control={control}
+        rules={{
+         required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Input style={styles.TextField}
+          onBlur={onBlur}
+          onChangeText={onChange}
+          value={value}
+        placeholder="Email Address" />
+        )}
+        name="firstName"
+        defaultValue=""
+      />
+            {errors.firstName && <Text style={{color:"#d73a49",position:"relative",bottom:"20%",fontSize:14,paddingLeft:15}}>Emter Email</Text>}
         </View>
         <View>
           <Image style={styles.InputLogo} source={require("../../assets/lock.png")} />
-          <Input style={styles.TextField} placeholder="Password" secureTextEntry={true} />
+          <Controller
+        control={control}
+        rules={{
+         required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Input style={styles.TextField}
+          onBlur={onBlur}
+          onChangeText={onChange}
+          value={value}
+          placeholder="Password" secureTextEntry={true} />
+        )}
+        name="firstName"
+        defaultValue=""
+      />
+      {errors.firstName && <Text style={{color:"#d73a49",position:"relative",bottom:"30%",fontSize:14,paddingLeft:15}}>Emter Password</Text>}
         </View>
       </View>
 
@@ -60,7 +93,8 @@ function Login({ navigation, userInfo, userLogin }) {
           <TouchableOpacity
             activeOpacity={0.8}
             style={styles.LoginButton}
-            onPress={() => userLogin(username, password)}
+            // onPress={() => userLogin(username, password)}
+            onPress={handleSubmit(onSubmit)}
           >
             <Text style={styles.LoginButtonInside}>LOGIN</Text>
           </TouchableOpacity>
