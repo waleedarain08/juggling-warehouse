@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { userLogin } from '../../redux/actions';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import { useForm, Controller } from "react-hook-form";
+import auth from '@react-native-firebase/auth';
+
 
 function Login({ navigation, userInfo, userLogin }) {
   const [username, setUsername] = useState('');
@@ -13,6 +15,7 @@ function Login({ navigation, userInfo, userLogin }) {
   const [checked, setChecked] = useState(true);
   const { control, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = data => console.log(data);
+
 
  
 

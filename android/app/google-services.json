@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "349391099954",
+    "project_id": "jugglingwherehouse-126be",
+    "storage_bucket": "jugglingwherehouse-126be.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349391099954:android:e06adfcfade3d9675d842b",
+        "android_client_info": {
+          "package_name": "com.jugglingwarehouse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "349391099954-ehvd2rjvr76a6r0fcm13i652o40kse7n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCENQNcw4WBsytzCZT3NUlWGSYZrnTQOFU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "349391099954-ehvd2rjvr76a6r0fcm13i652o40kse7n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
