@@ -1,4 +1,4 @@
-import { Text, TextInput, View, StyleSheet, Image, TouchableOpacity, ScrollView, SafeAreaView, Platform } from 'react-native';
+import { Text, TextInput, View, ActivityIndicator, StyleSheet, Image, TouchableOpacity, ScrollView, SafeAreaView, Platform } from 'react-native';
 import React, { useState } from 'react';
 import { Input, Button } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
@@ -7,16 +7,40 @@ import { userLogin } from '../../redux/actions';
 import Icon from 'react-native-vector-icons/Entypo';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import { useForm, Controller } from "react-hook-form";
+import auth from '@react-native-firebase/auth';
+
 
 
 function Signup({ navigation, userInfo, userLogin }) {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const [hidePass1, setHidePass1] = useState(true);
     const [hidePass2, setHidePass2] = useState(true);
     const { control, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    // const onSubmit = data => console.log(data);
+    //  onPress={() => navigation.goBack()}
 
+    const onSubmit = (data) => {
+        setIsLoading(true);
+        auth()
+            .createUserWithEmailAndPassword(data.Email, data.Password, data.firstName,data. LastName, data.Phone)
+            .then(() => { 
+                setIsLoading(false);
+                userLogin(() => navigation.goBack())
+            })
+            .catch(error => {
+                if (error.code === 'auth/email-already-in-use') {
+                    setIsLoading(false);
+                    alert('That email address is already in use!');
+                }
+
+                if (error.code === 'auth/invalid-email') {
+                    setIsLoading(false);
+                    alert('That email address is invalid!');
+                }
+                setIsLoading(false);
+                console.error(error);
+            });
+    };
 
     return (
         <SafeAreaView style={styles.safeArea}>
@@ -41,16 +65,16 @@ function Signup({ navigation, userInfo, userLogin }) {
                                     required: true,
                                 }}
                                 render={({ field: { onChange, onBlur, value } }) => (
-                                    <Input style={styles.email} 
-                                    onBlur={onBlur}
-                                    onChangeText={onChange}
-                                    value={value}
-                                   placeholder="First Name" />
+                                    <Input style={styles.email}
+                                        onBlur={onBlur}
+                                        onChangeText={onChange}
+                                        value={value}
+                                        placeholder="First Name" />
                                 )}
                                 name="firstName"
                                 defaultValue=""
                             />
-                            {errors.firstName && <Text style={{color:"#d73a49",paddingLeft:10,bottom:10}}>Enter First Name</Text>}
+                            {errors.firstName && <Text style={{ color: "#d73a49", paddingLeft: 10, bottom: 10 }}>Enter First Name</Text>}
                         </View>
                         <View>
                             <Image style={styles.logo02} source={require('../../assets/user.png')} />
@@ -60,16 +84,16 @@ function Signup({ navigation, userInfo, userLogin }) {
                                     required: true,
                                 }}
                                 render={({ field: { onChange, onBlur, value } }) => (
-                                    <Input style={styles.password} 
-                                    onBlur={onBlur}
-                                    onChangeText={onChange}
-                                    value={value}
-                                   placeholder="Last Name" />
+                                    <Input style={styles.password}
+                                        onBlur={onBlur}
+                                        onChangeText={onChange}
+                                        value={value}
+                                        placeholder="Last Name" />
                                 )}
-                                name="firstName"
+                                name="LastName"
                                 defaultValue=""
                             />
-                            {errors.firstName && <Text style={{color:"#d73a49",paddingLeft:10,bottom:10}}>Enter Last Name</Text>}
+                            {errors.LastName && <Text style={{ color: "#d73a49", paddingLeft: 10, bottom: 10 }}>Enter Last Name</Text>}
                         </View>
                         <View>
                             <Image style={styles.logo022} source={require('../../assets/email.png')} />
@@ -79,16 +103,16 @@ function Signup({ navigation, userInfo, userLogin }) {
                                     required: true,
                                 }}
                                 render={({ field: { onChange, onBlur, value } }) => (
-                                    <Input style={styles.email} 
-                                    onBlur={onBlur}
-                                    onChangeText={onChange}
-                                    value={value}
-                                   placeholder="Email Address" />
+                                    <Input style={styles.email}
+                                        onBlur={onBlur}
+                                        onChangeText={onChange}
+                                        value={value}
+                                        placeholder="Email Address" />
                                 )}
-                                name="firstName"
+                                name="Email"
                                 defaultValue=""
                             />
-                            {errors.firstName && <Text style={{color:"#d73a49",paddingLeft:10,bottom:10}}>Enter Email</Text>}
+                            {errors.Email && <Text style={{ color: "#d73a49", paddingLeft: 10, bottom: 10 }}>Enter Email</Text>}
                         </View>
                         <View>
                             <Image style={styles.logo02} source={require('../../assets/phone.png')} />
@@ -98,16 +122,16 @@ function Signup({ navigation, userInfo, userLogin }) {
                                     required: true,
                                 }}
                                 render={({ field: { onChange, onBlur, value } }) => (
-                                    <Input style={styles.password} 
-                                    onBlur={onBlur}
-                                    onChangeText={onChange}
-                                    value={value}
-                                   placeholder="Phone No." />
+                                    <Input style={styles.password}
+                                        onBlur={onBlur}
+                                        onChangeText={onChange}
+                                        value={value}
+                                        placeholder="Phone No." />
                                 )}
-                                name="firstName"
+                                name="Phone"
                                 defaultValue=""
                             />
-                            {errors.firstName && <Text style={{color:"#d73a49",paddingLeft:10,bottom:10}}>Enter Phone No</Text>}
+                            {errors.Phone && <Text style={{ color: "#d73a49", paddingLeft: 10, bottom: 10 }}>Enter Phone No</Text>}
                         </View>
                         <View>
 
@@ -118,19 +142,19 @@ function Signup({ navigation, userInfo, userLogin }) {
                                     required: true,
                                 }}
                                 render={({ field: { onChange, onBlur, value } }) => (
-                                    <Input style={styles.email} 
-                                    onBlur={onBlur}
-                                    onChangeText={onChange}
-                                    value={value}
-                                    color="#fff"
-                                    placeholder="Password"
-                                    autoCompleteType="password"
-                                    secureTextEntry={hidePass1 ? true : false}/>
+                                    <Input style={styles.email}
+                                        onBlur={onBlur}
+                                        onChangeText={onChange}
+                                        value={value}
+                                        color="#fff"
+                                        placeholder="Password"
+                                        autoCompleteType="password"
+                                        secureTextEntry={hidePass1 ? true : false} />
                                 )}
-                                name="firstName"
+                                name="Password"
                                 defaultValue=""
                             />
-                            {errors.firstName && <Text style={{color:"#d73a49",paddingLeft:10,bottom:10}}>Enter Password</Text>}
+                            {errors.Password && <Text style={{ color: "#d73a49", paddingLeft: 10, bottom: 10 }}>Enter Password</Text>}
                             <Icon style={styles.eyeicon}
                                 name={hidePass1 ? 'eye-with-line' : 'eye'}
                                 size={15}
@@ -145,19 +169,19 @@ function Signup({ navigation, userInfo, userLogin }) {
                                     required: true,
                                 }}
                                 render={({ field: { onChange, onBlur, value } }) => (
-                                    <Input style={styles.email} 
-                                    onBlur={onBlur}
-                                    onChangeText={onChange}
-                                    value={value}
-                                    color="#fff"
-                                    placeholder="Confirm Password"
-                                    autoCompleteType="password"
-                                    secureTextEntry={hidePass1 ? true : false}/>
+                                    <Input style={styles.email}
+                                        onBlur={onBlur}
+                                        onChangeText={onChange}
+                                        value={value}
+                                        color="#fff"
+                                        placeholder="Confirm Password"
+                                        autoCompleteType="password"
+                                        secureTextEntry={hidePass1 ? true : false} />
                                 )}
-                                name="firstName"
+                                name="Password"
                                 defaultValue=""
                             />
-                            {errors.firstName && <Text style={{color:"#d73a49",paddingLeft:10,bottom:10}}>Enter Confirm Password</Text>}
+                            {errors.Password && <Text style={{ color: "#d73a49", paddingLeft: 10, bottom: 10 }}>Enter Confirm Password</Text>}
 
                             <Icon style={styles.eyeicon}
                                 name={hidePass2 ? 'eye-with-line' : 'eye'}
@@ -173,6 +197,7 @@ function Signup({ navigation, userInfo, userLogin }) {
                             // onPress={() => navigation.goBack()}
                             onPress={handleSubmit(onSubmit)}
                         >
+                            {/* {isLoading ? <ActivityIndicator size="small" color="#0000ff" /> : <Text style={styles.LoginButtonInside}>SIGN UP</Text>} */}
                             <Text style={styles.LoginButtonInside}>SIGN UP</Text>
                         </TouchableOpacity>
                     </View>

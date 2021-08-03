@@ -1,5 +1,5 @@
-import { Text, View, StyleSheet, Image, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
-import React, { useState } from 'react';
+import { Text, View, ActivityIndicator ,StyleSheet, Image, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { Input, CheckBox } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -10,14 +10,34 @@ import auth from '@react-native-firebase/auth';
 
 
 function Login({ navigation, userInfo, userLogin }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [checked, setChecked] = useState(true);
   const { control, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+  
 
+  const onSubmit = (data) => {
+    setIsLoading(true);
+      auth()
+      .createUserWithEmailAndPassword(data.Email,data.Password)
+      .then(() => {
+        setIsLoading(false);
+        userLogin(data.Email,data.Password);
+      })
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+          setIsLoading(false);
+          alert('That email address is already in use!');
+        }
 
- 
+        if (error.code === 'auth/invalid-email') {
+          setIsLoading(false);
+          alert('That email address is invalid!');
+        }
+        setIsLoading(false);
+        console.error(error);
+      });
+  };
+  
 
   return (
     <KeyboardAvoidingView behavior={(Platform.OS === 'ios') ? "padding" : null} keyboardVerticalOffset={Platform.select({ ios: -250, android: -100 })}
@@ -36,40 +56,40 @@ function Login({ navigation, userInfo, userLogin }) {
         <View>
           <Image style={styles.InputLogo} source={require("../../assets/user.png")} />
           <Controller
-        control={control}
-        rules={{
-         required: true,
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <Input style={styles.TextField}
-          onBlur={onBlur}
-          onChangeText={onChange}
-          value={value}
-        placeholder="Email Address" />
-        )}
-        name="firstName"
-        defaultValue=""
-      />
-            {errors.firstName && <Text style={{color:"#d73a49",position:"relative",bottom:"20%",fontSize:14,paddingLeft:15}}>Emter Email</Text>}
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Input style={styles.TextField}
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+                placeholder="Email Address" />
+            )}
+            name="Email"
+            defaultValue=""
+          />
+          {errors.Email && <Text style={{ color: "#d73a49", position: "relative", bottom: "20%", fontSize: 14, paddingLeft: 15 }}>Enter Email</Text>}
         </View>
         <View>
           <Image style={styles.InputLogo} source={require("../../assets/lock.png")} />
           <Controller
-        control={control}
-        rules={{
-         required: true,
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <Input style={styles.TextField}
-          onBlur={onBlur}
-          onChangeText={onChange}
-          value={value}
-          placeholder="Password" secureTextEntry={true} />
-        )}
-        name="firstName"
-        defaultValue=""
-      />
-      {errors.firstName && <Text style={{color:"#d73a49",position:"relative",bottom:"30%",fontSize:14,paddingLeft:15}}>Emter Password</Text>}
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Input style={styles.TextField}
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+                placeholder="Password" secureTextEntry={true} />
+            )}
+            name="Password"
+            defaultValue=""
+          />
+          {errors.Password && <Text style={{ color: "#d73a49", position: "relative", bottom: "30%", fontSize: 14, paddingLeft: 15 }}>Emter Password</Text>}
         </View>
       </View>
 
@@ -86,7 +106,7 @@ function Login({ navigation, userInfo, userLogin }) {
         </View>
         <View style={styles.forgetview}>
           <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate("ForgatPassword")}>
-          <Text style={styles.forgettext}>Forget Password</Text>
+            <Text style={styles.forgettext}>Forget Password</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -96,10 +116,9 @@ function Login({ navigation, userInfo, userLogin }) {
           <TouchableOpacity
             activeOpacity={0.8}
             style={styles.LoginButton}
-            // onPress={() => userLogin(username, password)}
             onPress={handleSubmit(onSubmit)}
           >
-            <Text style={styles.LoginButtonInside}>LOGIN</Text>
+            {isLoading?<ActivityIndicator size="small" color="#0000ff" />:<Text style={styles.LoginButtonInside}>LOGIN</Text>}
           </TouchableOpacity>
         </View>
       </View>
