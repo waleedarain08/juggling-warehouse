@@ -24,8 +24,9 @@ function Signup({ navigation, userInfo, userLogin }) {
         auth()
             .createUserWithEmailAndPassword(data.Email, data.Password, data.firstName,data. LastName, data.Phone)
             .then(() => { 
-                setIsLoading(false);
-                userLogin(() => navigation.goBack())
+                setIsLoading(true);
+                Login(() => navigation.goBack())
+                //  onPress={() => navigation.goBack()}
             })
             .catch(error => {
                 if (error.code === 'auth/email-already-in-use') {
@@ -195,7 +196,8 @@ function Signup({ navigation, userInfo, userLogin }) {
                             activeOpacity={0.8}
                             style={styles.LoginButton}
                             // onPress={() => navigation.goBack()}
-                            onPress={handleSubmit(onSubmit)}
+                            onPress={handleSubmit(onSubmit) }
+
                         >
                             {/* {isLoading ? <ActivityIndicator size="small" color="#0000ff" /> : <Text style={styles.LoginButtonInside}>SIGN UP</Text>} */}
                             <Text style={styles.LoginButtonInside}>SIGN UP</Text>

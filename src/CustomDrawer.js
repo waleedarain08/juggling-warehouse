@@ -21,16 +21,22 @@ import {connect} from 'react-redux';
 import {BlurView} from '@react-native-community/blur';
 import {ThemeProvider} from '@react-navigation/native';
 import { useIsDrawerOpen } from '@react-navigation/drawer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 function CustomDrawer({navigation, userLogout}) {
   const isDrawerOpen = useIsDrawerOpen();
 
-  logout = () => {
-    // navigation.toggleDrawer();
-    //navigation.navigate("Login");
-    //navigation.toggleDrawer();
-    userLogout({});
+
+  const removeToken = async (token) => {
+
+    try {
+      await AsyncStorage.removeItem("token");
+      userLogout({});
+    } catch (e) {
+      // console.log(e);
+      // saving token failed
+    }
   };
 
   const proileImage = 'react_logo.png';
@@ -242,7 +248,7 @@ function CustomDrawer({navigation, userLogout}) {
             }}></View>
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={() => logout()}
+            onPress={() => removeToken()}
             style={{flexDirection: 'row'}}>
             <Image
               style={styles.logout}

@@ -1,4 +1,4 @@
-import { Text, View, ActivityIndicator ,StyleSheet, Image, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
+import { Text, View, ActivityIndicator, StyleSheet, Image, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Input, CheckBox } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
@@ -7,21 +7,32 @@ import { userLogin } from '../../redux/actions';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import { useForm, Controller } from "react-hook-form";
 import auth from '@react-native-firebase/auth';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
+import { LoginManager, AccessToken } from 'react-native-fbsdk';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 
 
 function Login({ navigation, userInfo, userLogin }) {
   const [isLoading, setIsLoading] = useState(false);
   const [checked, setChecked] = useState(true);
   const { control, handleSubmit, formState: { errors } } = useForm();
-  
+
+  GoogleSignin.configure({
+    webClientId: "349391099954-ehvd2rjvr76a6r0fcm13i652o40kse7n.apps.googleusercontent.com",
+  });
 
   const onSubmit = (data) => {
     setIsLoading(true);
-      auth()
-      .createUserWithEmailAndPassword(data.Email,data.Password)
-      .then(() => {
+    auth().createUserWithEmailAndPassword(data.Email, data.Password).then((userCredential) => {
         setIsLoading(false);
-        userLogin(data.Email,data.Password);
+        saveToken(userCredential.user.uid);
+        userLogin(userCredential.user.uid);
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
@@ -34,10 +45,67 @@ function Login({ navigation, userInfo, userLogin }) {
           alert('That email address is invalid!');
         }
         setIsLoading(false);
-        console.error(error);
+
+        
+        //console.error(error);
       });
   };
-  
+
+  async function onGoogleButtonPress() {
+    // Get the users ID token
+
+
+    const { idToken } = await GoogleSignin.signIn();
+
+    // Create a Google credential with the token
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+    // Sign-in the user with the credential
+    auth().signInWithCredential(googleCredential).then(() => {
+      saveToken(googleCredential.token);
+      userLogin(googleCredential.token);
+    }).catch(error => {
+      //console.error(error);
+    });
+  }
+
+  async function onFacebookButtonPress() {
+    // Attempt login with permissions
+    const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
+
+    if (result.isCancelled) {
+      throw 'User cancelled the login process';
+    }
+
+    // Once signed in, get the users AccesToken
+    const data = await AccessToken.getCurrentAccessToken();
+
+    if (!data) {
+      throw 'Something went wrong obtaining access token';
+    }
+
+    // Create a Firebase credential with the AccessToken
+    const facebookCredential = auth.FacebookAuthProvider.credential(data.accessToken);
+
+    // Sign-in the user with the credential
+    auth().signInWithCredential(facebookCredential).then(() => {
+      saveToken(facebookCredential.token);
+      userLogin(facebookCredential.token);
+    }).catch(error => {
+      console.error(error);
+    });
+  }
+
+  const saveToken = async (token) => {
+
+    try {
+      await AsyncStorage.setItem("token", token);
+    } catch (e) {
+      // console.log(e);
+      // saving token failed
+    }
+  };
+
 
   return (
     <KeyboardAvoidingView behavior={(Platform.OS === 'ios') ? "padding" : null} keyboardVerticalOffset={Platform.select({ ios: -250, android: -100 })}
@@ -58,7 +126,10 @@ function Login({ navigation, userInfo, userLogin }) {
           <Controller
             control={control}
             rules={{
-              required: true,
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "invalid email address"
+              }
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <Input style={styles.TextField}
@@ -70,7 +141,7 @@ function Login({ navigation, userInfo, userLogin }) {
             name="Email"
             defaultValue=""
           />
-          {errors.Email && <Text style={{ color: "#d73a49", position: "relative", bottom: "20%", fontSize: 14, paddingLeft: 15 }}>Enter Email</Text>}
+          {errors.Email && <Text style={{ color: "#d73a49", position: "relative", bottom: "20%", fontSize: 14, paddingLeft: 15 }}>Enter valid Email</Text>}
         </View>
         <View>
           <Image style={styles.InputLogo} source={require("../../assets/lock.png")} />
@@ -118,7 +189,7 @@ function Login({ navigation, userInfo, userLogin }) {
             style={styles.LoginButton}
             onPress={handleSubmit(onSubmit)}
           >
-            {isLoading?<ActivityIndicator size="small" color="#0000ff" />:<Text style={styles.LoginButtonInside}>LOGIN</Text>}
+            {isLoading ? <ActivityIndicator size="small" color="#0000ff" /> : <Text style={styles.LoginButtonInside}>LOGIN</Text>}
           </TouchableOpacity>
         </View>
       </View>
@@ -130,12 +201,13 @@ function Login({ navigation, userInfo, userLogin }) {
       <View style={styles.SocialButtons}>
         <TouchableOpacity
           activeOpacity={0.8}
+          onPress={() => onFacebookButtonPress()}
           style={styles.Buttonfb}>
           <Image style={styles.logo40} source={require("../../assets/facebook.png")} />
           <Text style={styles.ButtonInfb}>FACEBOOK</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          activeOpacity={0.8}
+          onPress={() => onGoogleButtonPress()} activeOpacity={0.8}
           style={styles.Buttongoogle}>
           <Image style={styles.logo50} source={require("../../assets/google.png")} />
           <Text style={styles.ButtonIngoogle}>GOOGLE</Text>

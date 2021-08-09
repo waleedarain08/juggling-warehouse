@@ -1,5 +1,5 @@
 import { Text, View, Image, TouchableOpacity, Modal,Platform } from 'react-native';
-import React, { Component, useState } from 'react';
+import React, {  useState, useEffect  } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Login from './pages/login/login';
 import Signup from './pages/signup/signup';
@@ -15,15 +15,16 @@ import DetailScreen from './pages/home/DetailScreen';
 import EditProfile from './pages/profile/EditProfile';
 import CustomDrawer from './CustomDrawer';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { userLogin } from './redux/actions';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import { enableScreens } from 'react-native-screens';
 import { createNativeStackNavigator } from 'react-native-screens/native-stack';
-import { useIsDrawerOpen } from '@react-navigation/drawer';
 import CustomTabBar from './CustomTabBar';
 import LiveNow from './pages/home/LiveNow';
-import { Card } from 'react-native-elements/dist/card/Card';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const useInitialRender = () => {
   const [isInitialRender, setIsInitialRender] = useState(false);
@@ -36,7 +37,6 @@ const useInitialRender = () => {
 };
 
 const toggleDrawer = navigation => {
-  // setOpacity(!opacity);
   navigation.toggleDrawer();
 };
 
@@ -394,7 +394,28 @@ function MainDrawer() {
   )
 }
 
-function RootContainer({ user }) {
+function RootContainer({ user,userLogin }) {
+  useEffect(() => {
+    // Fetch the token from storage then navigate to our appropriate place
+    const bootstrapAsync = async () => {
+      let token;
+
+      try {
+        token = await AsyncStorage.getItem("token");
+      } catch (e) {
+        // Restoring token failed
+      }
+
+      if (token !== null) {
+        setTimeout(() => {
+          userLogin(token);
+        }, 500);
+      } else {
+        
+      }
+    };
+    bootstrapAsync();
+  }, []);
   return (
     <Stack.Navigator initialRouteName="Login"  screenOptions={{headerShown:false}} sdetachInactiveScreens={true}>
       {user.loggedin ? <Stack.Screen name="MainDrawer" component={MainDrawer} /> : <Stack.Screen name="Login" component={LoginStack} />}
@@ -405,4 +426,6 @@ function RootContainer({ user }) {
 const mapStateToProps = state => {
   return { user: state?.user };
 };
-export default connect(mapStateToProps)(RootContainer);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ userLogin }, dispatch);
+  export default connect(mapStateToProps, mapDispatchToProps)(RootContainer);
