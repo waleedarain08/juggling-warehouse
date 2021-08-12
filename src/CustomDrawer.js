@@ -20,19 +20,19 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {BlurView} from '@react-native-community/blur';
 import {ThemeProvider} from '@react-navigation/native';
-import { useIsDrawerOpen } from '@react-navigation/drawer';
+import {useIsDrawerOpen} from '@react-navigation/drawer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import auth from '@react-native-firebase/auth';
 
 function CustomDrawer({navigation, userLogout}) {
   const isDrawerOpen = useIsDrawerOpen();
 
-
-  const removeToken = async (token) => {
-
+  const removeToken = async token => {
     try {
-      await AsyncStorage.removeItem("token");
-      userLogout({});
+      await AsyncStorage.removeItem('token');
+      auth()
+        .signOut()
+        .then(() => userLogout({}));
     } catch (e) {
       // console.log(e);
       // saving token failed
@@ -46,10 +46,13 @@ function CustomDrawer({navigation, userLogout}) {
   const [quality, setQuality] = useState(false);
   return (
     <>
-    <SafeAreaView style={{flex: 1}}>
-              <BlurView style={[styles.blurView,{opacity:isDrawerOpen?1:0}]} blurType="dark" blurAmount={1} ></BlurView>
+      <SafeAreaView style={{flex: 1}}>
+        <BlurView
+          style={[styles.blurView, {opacity: isDrawerOpen ? 1 : 0}]}
+          blurType="dark"
+          blurAmount={1}></BlurView>
 
-      <View style={{paddingLeft: 14,paddingTop: 20}}>
+        <View style={{paddingLeft: 14, paddingTop: 20}}>
           <Text style={styles.setting}>SETTINGS</Text>
           <View
             style={{
@@ -59,9 +62,9 @@ function CustomDrawer({navigation, userLogout}) {
               width: 22,
             }}></View>
         </View>
-      {/* <DrawerContentScrollView showsVerticalScrollIndicator={false} style={{height:100,backgroundColor:"red"}} > */}
-      {/* <View style={styles.textWrapper}> */}
-        
+        {/* <DrawerContentScrollView showsVerticalScrollIndicator={false} style={{height:100,backgroundColor:"red"}} > */}
+        {/* <View style={styles.textWrapper}> */}
+
         <View style={styles.customItem}>
           <View
             style={{
@@ -216,7 +219,7 @@ function CustomDrawer({navigation, userLogout}) {
               borderBottomColor: '#282a37',
               paddingTop: 4,
             }}></View>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between',}}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text
               style={styles.password}
               onPress={() => {
@@ -235,10 +238,10 @@ function CustomDrawer({navigation, userLogout}) {
             </TouchableOpacity>
           </View>
         </View>
-        
+
         {/* </View> */}
-      {/* </DrawerContentScrollView> */}
-      <View style={{paddingLeft: 14,position:"absolute",bottom:"3%"}}>
+        {/* </DrawerContentScrollView> */}
+        <View style={{paddingLeft: 14, position: 'absolute', bottom: '3%'}}>
           <View
             style={{
               borderBottomWidth: 2,
@@ -268,8 +271,7 @@ function CustomDrawer({navigation, userLogout}) {
             </Text>
           </TouchableOpacity>
         </View>
-
-    </SafeAreaView>
+      </SafeAreaView>
     </>
   );
 }
@@ -283,7 +285,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   textWrapper: {
-   // height: hp('100%'), // 70% of height device screen
+    // height: hp('100%'), // 70% of height device screen
     // width: wp('75%')   // 80% of width device screen
   },
   blurView: {
@@ -292,8 +294,7 @@ const styles = StyleSheet.create({
     left: 0,
     bottom: 0,
     right: 0,
-   backgroundColor: '#0e101f90',
-    
+    backgroundColor: '#0e101f90',
   },
   iconStyle: {
     width: 15,
@@ -303,7 +304,7 @@ const styles = StyleSheet.create({
   customItem: {
     paddingHorizontal: 14,
     paddingVertical: 10,
-    marginTop:"12%"
+    marginTop: '12%',
   },
   para: {
     color: '#b2b2b4',

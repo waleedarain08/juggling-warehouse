@@ -1,4 +1,4 @@
-import { Text, View, ActivityIndicator, StyleSheet, Image, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
+import { Text, View, ActivityIndicator, StyleSheet, Image,Alert, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Input, CheckBox } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
@@ -29,25 +29,31 @@ function Login({ navigation, userInfo, userLogin }) {
 
   const onSubmit = (data) => {
     setIsLoading(true);
-    auth().createUserWithEmailAndPassword(data.Email, data.Password).then((userCredential) => {
+    auth().signInWithEmailAndPassword(data.Email, data.Password).then((userCredential) => {
+        console.log(userCredential);
         setIsLoading(false);
         saveToken(userCredential.user.uid);
         userLogin(userCredential.user.uid);
       })
       .catch(error => {
-        if (error.code === 'auth/email-already-in-use') {
-          setIsLoading(false);
-          alert('That email address is already in use!');
-        }
-
-        if (error.code === 'auth/invalid-email') {
-          setIsLoading(false);
-          alert('That email address is invalid!');
-        }
+        
         setIsLoading(false);
 
+        if (error.code === 'auth/user-not-found') {
+         
+          Alert.alert('Sorry','User not found!');
+        }
+
+        else if (error.code === 'auth/invalid-email') {
+          
+          Alert.alert('Sorry','That email address is invalid!');
+        }
+
+        else if (error.code === 'auth/wrong-password') {
+         
+          Alert.alert('Sorry','Password is Incorrect!');
+        }
         
-        //console.error(error);
       });
   };
 
@@ -136,6 +142,7 @@ function Login({ navigation, userInfo, userLogin }) {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
+                autoCapitalize={"none"}
                 placeholder="Email Address" />
             )}
             name="Email"
@@ -160,7 +167,7 @@ function Login({ navigation, userInfo, userLogin }) {
             name="Password"
             defaultValue=""
           />
-          {errors.Password && <Text style={{ color: "#d73a49", position: "relative", bottom: "30%", fontSize: 14, paddingLeft: 15 }}>Emter Password</Text>}
+          {errors.Password && <Text style={{ color: "#d73a49", position: "relative", bottom: "30%", fontSize: 14, paddingLeft: 15 }}>Enter Password</Text>}
         </View>
       </View>
 
@@ -189,7 +196,7 @@ function Login({ navigation, userInfo, userLogin }) {
             style={styles.LoginButton}
             onPress={handleSubmit(onSubmit)}
           >
-            {isLoading ? <ActivityIndicator size="small" color="#0000ff" /> : <Text style={styles.LoginButtonInside}>LOGIN</Text>}
+            {isLoading ? <ActivityIndicator size="small" color="#ffffff" /> : <Text style={styles.LoginButtonInside}>LOGIN</Text>}
           </TouchableOpacity>
         </View>
       </View>

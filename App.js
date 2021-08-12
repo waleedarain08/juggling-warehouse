@@ -5,17 +5,27 @@ import {Provider} from 'react-redux';
 import RootContainer from './src/navigators';
 import store from './src/redux/store';
 import { NavigationContainer , DefaultTheme} from '@react-navigation/native';
-// export default function App() {
-//   SplashScreen.hide();
-//   return (
-//     <Provider store={store}>
-//       <RootContainer />
-//     </Provider>
-//   );
-// }
+import firebase from "@react-native-firebase/app";
+
+
+
+var firebaseConfig = {
+  apiKey: "AIzaSyBtXxgKam45yRIfDXNfECkoeuzv-MNfg5M",
+  authDomain: "jugglingwherehouse-126be.firebaseapp.com",
+  databaseURL: "",
+  projectId: "jugglingwherehouse-126be",
+  storageBucket: "",
+  messagingSenderId: "349391099954",
+  appId: "1:349391099954:ios:1235103ffd355a225d842b",
+  measurementId: "",
+};
+
+
+
 
 export class App extends Component {
   componentDidMount() {
+    firebase.initializeApp(firebaseConfig);
     setTimeout(() => {
       SplashScreen.hide();
     }, 1000);
