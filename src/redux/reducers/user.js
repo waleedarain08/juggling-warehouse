@@ -13,7 +13,7 @@ const userInfo = (state = initialState, action) => {
         ...state,
         loading: false,
         loggedin: true,
-        userData: {...action.userData},
+        userData: action.payload,
       };
     case USER_LOGOUT:
       return {

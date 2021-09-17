@@ -4,19 +4,23 @@ import { BlurView } from "@react-native-community/blur";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { userLogout } from '../../redux/actions';
+import { getCategory } from '../../redux/actions/content';
 
-
-function HomeScreen({ navigation, user, userLogout }) {
+function HomeScreen({ navigation, user, userLogout, state, route, getCategory, categories }) {
   const [reason, setReason] = useState([{ title: "abc", image: require('../../assets/vedio.png') }, { title: "def", image: require('../../assets/vedio.png') }, { title: "ghi", image: require('../../assets/vedio.png') },]);
   const [reason1, setReason1] = useState([{ title: "abc", image: require('../../assets/050.png') }, { title: "abc", image: require('../../assets/030.png') }, { title: "abc", image: require('../../assets/040.png') }, { title: "abc", image: require('../../assets/020.png') }, { title: "abc", image: require('../../assets/050.png') }, { title: "abc", image: require('../../assets/030.png') }]);
   const [reason2, setReason2] = useState([{ title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }, { title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }, { title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }]);
   const [reason3, setReason3] = useState([{ title: "abc", image: require('../../assets/images05.png') }, { title: "abc", image: require('../../assets/images06.png') }, { title: "abc", image: require('../../assets/images05.png') }, { title: "abc", image: require('../../assets/images06.png') }]);
   const [modalVisible, setModalVisible] = useState(false);
-  const [listhome, setlisthome] = useState([{ title: "abc", Text: "Home" }, { title: "def", Text: "My List" }, { title: "ghi", Text: "Available for Download" }, { title: "jkl", Text: "Action" }, { title: "mno", Text: "Anime" }, { title: "pqr", Text: "Children & Family" }, { title: "stu", Text: "Documentaries" }, { title: "vwx", Text: "Fantasy" }, { title: "yza", Text: "Reality" }, { title: "bcd", Text: "Stan-up" }, { title: "efg", Text: "Audio Description" }]);
+  const [listhome, setlisthome] = useState([  { title: "jkl", Text: "Action" }, { title: "mno", Text: "Anime" }, { title: "pqr", Text: "Children & Family" }, { title: "stu", Text: "Documentaries" }, { title: "vwx", Text: "Fantasy" }, { title: "yza", Text: "Reality" }]);
   goNext = () => {
     navigation.navigate("AboutMotivation");
   }
 
+  useEffect(() => {
+    getCategory()
+  }, [])
+  console.log("categories", categories)
   return (
     <View style={styles.container}>
       <View style={styles.cate}>
@@ -124,18 +128,33 @@ function HomeScreen({ navigation, user, userLogout }) {
             blurType="dark"
             blurAmount={15}
           />
-          <FlatList
-            data={listhome}
-            keyExtractor={(item, index) => index}
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{flex:1,justifyContent:"center"}}
-            renderItem={({ item, index }) => {
-              return (
-                <Text onPress={() => setModalVisible(false)}
-                  style={(index === 0 || index === listhome.length - 1) || (index === 1 || index === listhome.length - 2) ? styles.firstHeading : styles.homelist}>{item.Text}</Text>
-              )
-            }}>
-          </FlatList>
+          <View style={{flex:1, justifyContent:"center"}}>
+            <Text onPress={() => setModalVisible(false)} style={styles.firstHeading}>Home</Text>
+            <Text onPress={() => setModalVisible(false)} style={styles.firstHeading}>My List</Text>
+            <Text onPress={() => setModalVisible(false)} style={styles.homelist}>Available for Download</Text>
+            {/* <FlatList
+              style={{backgroundColor: 'red'}}
+              data={listhome}
+              keyExtractor={(item, index) => index}
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{backgroundColor: 'red'}}
+              renderItem={({ item, index }) => {
+                return (
+                  <Text onPress={() => setModalVisible(false)}
+                    style={styles.homelist}>{item.Text}</Text>
+                )
+              }}>
+              </FlatList> */}
+              {categories.map((item, index) => {
+                return (
+                  <Text onPress={() => setModalVisible(false)}
+                    style={styles.homelist}>{item.Text}</Text>
+                )
+              })}
+              <Text onPress={() => setModalVisible(false)} style={styles.firstHeading}>Stan-up</Text>
+              <Text onPress={() => setModalVisible(false)} style={styles.firstHeading}>Audio Description</Text>
+          </View>
+
         </View>
       </Modal>
     </View>
@@ -143,11 +162,14 @@ function HomeScreen({ navigation, user, userLogout }) {
 }
 
 const mapStateToProps = state => {
-  return { user: state?.user };
+  return { 
+    user: state?.user,
+    categories: state.content.categories
+   };
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ userLogout }, dispatch);
+  bindActionCreators({ userLogout, getCategory }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 
@@ -303,7 +325,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     paddingVertical: 20,
     fontFamily:'Raleway-Regular',
-    
   },
   firstHeading: {
     textAlign: "center",
@@ -312,7 +333,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     fontSize: 12.5,
     opacity:0.5,
-    fontFamily:'Raleway-Regular'
+    fontFamily:'Raleway-Regular',
   },
   blurView: {
     position: "absolute",
