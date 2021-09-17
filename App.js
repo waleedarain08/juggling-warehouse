@@ -25,7 +25,11 @@ var firebaseConfig = {
 
 export class App extends Component {
   componentDidMount() {
-    firebase.initializeApp(firebaseConfig);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+   }else {
+      firebase.app(); // if already initialized, use that one
+   }
     setTimeout(() => {
       SplashScreen.hide();
     }, 1000);

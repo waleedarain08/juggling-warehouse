@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { userLogin } from '../../redux/actions';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import { useForm, Controller } from "react-hook-form";
-import auth from '@react-native-firebase/auth';
+import auth, { firebase } from '@react-native-firebase/auth';
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -29,8 +29,8 @@ function Login({ navigation, userInfo, userLogin }) {
 
   const onSubmit = (data) => {
     setIsLoading(true);
-    auth().signInWithEmailAndPassword(data.Email, data.Password).then((userCredential) => {
-        console.log(userCredential);
+    auth().signInWithEmailAndPassword(data.Email, data.Password).then(async (userCredential) => {
+        console.log('userCredential', await userCredential.user.getIdToken(true));
         setIsLoading(false);
         saveToken(userCredential.user.uid);
         userLogin(userCredential.user.uid);

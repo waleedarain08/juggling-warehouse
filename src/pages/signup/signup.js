@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Input, Button } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { userLogin } from '../../redux/actions';
+import { userRegister } from '../../redux/actions';
 import Icon from 'react-native-vector-icons/Entypo';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import { useForm, Controller } from "react-hook-form";
@@ -11,7 +11,8 @@ import auth from '@react-native-firebase/auth';
 
 
 
-function Signup({ navigation, userInfo, userLogin }) {
+function Signup({ navigation, userInfo, userRegister }) {
+    const { loading } = userInfo;
     const [isLoading, setIsLoading] = useState(false);
     const [hidePass1, setHidePass1] = useState(true);
     const [hidePass2, setHidePass2] = useState(true);
@@ -22,11 +23,31 @@ function Signup({ navigation, userInfo, userLogin }) {
     const onSubmit = (data) => {
         setIsLoading(true);
         auth()
-            .createUserWithEmailAndPassword(data.Email, data.Password, data.firstName,data. LastName, data.Phone)
-            .then(() => { 
+            .createUserWithEmailAndPassword(data.Email, data.Password, data.firstName, data.LastName, data.Phone)
+            .then(async (res) => { 
+                var userObj = {
+                    "fullName": `${data.firstName} ${data.LastName}`,
+                    "contact": data.Phone,
+                    "email": data.Email,
+                    "dob": "",
+                    "profilePicture": "",
+                    "address": {
+                        "complete_address": "",
+                        "country": "",
+                        "state": "",
+                        "city": "",
+                        "zipcode": 0,
+                        "latitude": 0,
+                        "longitude": 0
+                    }
+                }
                 setIsLoading(true);
-                Login(() => navigation.goBack())
-                //  onPress={() => navigation.goBack()}
+                let token = await res.user.getIdToken()
+                let { status } = await userRegister(userObj, token)
+
+                if(status) {
+                    navigation.navigate('Login')
+                }
             })
             .catch(error => {
                 if (error.code === 'auth/email-already-in-use') {
@@ -39,10 +60,9 @@ function Signup({ navigation, userInfo, userLogin }) {
                     alert('That email address is invalid!');
                 }
                 setIsLoading(false);
-                console.error(error);
             });
     };
-
+    console.log("loading", loading)
     return (
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.box1}>
@@ -127,12 +147,13 @@ function Signup({ navigation, userInfo, userLogin }) {
                                         onBlur={onBlur}
                                         onChangeText={onChange}
                                         value={value}
+                                        keyboardType="phone-pad"
                                         placeholder="Phone No." />
                                 )}
                                 name="Phone"
                                 defaultValue=""
                             />
-                            {errors.Phone && <Text style={{ color: "#d73a49", paddingLeft: 10, bottom: 10 }}>Enter Phone No</Text>}
+                            {errors.Phone && <Text style={{ color: "#fff", paddingLeft: 10, bottom: 10 }}>Enter Phone No</Text>}
                         </View>
                         <View>
 
@@ -199,8 +220,8 @@ function Signup({ navigation, userInfo, userLogin }) {
                             onPress={handleSubmit(onSubmit) }
 
                         >
-                            {/* {isLoading ? <ActivityIndicator size="small" color="#0000ff" /> : <Text style={styles.LoginButtonInside}>SIGN UP</Text>} */}
-                            <Text style={styles.LoginButtonInside}>SIGN UP</Text>
+                            {loading ? <ActivityIndicator size="small" color="#0000ff" /> : <Text style={styles.LoginButtonInside}>SIGN UP</Text>}
+                            {/* <Text style={styles.LoginButtonInside}>SIGN UP</Text> */}
                         </TouchableOpacity>
                     </View>
                     <View style={styles.box5}>
@@ -219,11 +240,14 @@ function Signup({ navigation, userInfo, userLogin }) {
 
 
 const mapStateToProps = state => {
-    return { userInfo: state?.userInfo };
+    return { 
+        userInfo: state?.user,
+
+    };
 };
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ userLogin }, dispatch);
+    bindActionCreators({ userRegister }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);
 
