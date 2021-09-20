@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { Input, CheckBox } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { userLogin } from '../../redux/actions';
+import { userLogin, userSignin } from '../../redux/actions';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import { useForm, Controller } from "react-hook-form";
-import auth from '@react-native-firebase/auth';
+import auth, { firebase } from '@react-native-firebase/auth';
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -14,11 +14,12 @@ import {
 } from '@react-native-google-signin/google-signin';
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { saveDataInAsyncStorage } from '../../helper/utils';
 
 
 
 
-function Login({ navigation, userInfo, userLogin }) {
+function Login({ navigation, userInfo, userLogin, userSignin }) {
   const [isLoading, setIsLoading] = useState(false);
   const [checked, setChecked] = useState(true);
   const { control, handleSubmit, formState: { errors } } = useForm();
@@ -29,11 +30,12 @@ function Login({ navigation, userInfo, userLogin }) {
 
   const onSubmit = (data) => {
     setIsLoading(true);
-    auth().signInWithEmailAndPassword(data.Email, data.Password).then((userCredential) => {
-        console.log(userCredential);
+    auth().signInWithEmailAndPassword(data.Email, data.Password).then(async (userCredential) => {
+        let token = await userCredential.user.getIdToken(true)
+        console.log("token", token)
         setIsLoading(false);
-        saveToken(userCredential.user.uid);
-        userLogin(userCredential.user.uid);
+        saveDataInAsyncStorage("token", token)
+        userSignin(token);
       })
       .catch(error => {
         
@@ -61,15 +63,20 @@ function Login({ navigation, userInfo, userLogin }) {
     // Get the users ID token
 
 
-    const { idToken } = await GoogleSignin.signIn();
+    const { idToken, user } = await GoogleSignin.signIn();
 
     // Create a Google credential with the token
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
     // Sign-in the user with the credential
     auth().signInWithCredential(googleCredential).then(() => {
-      saveToken(googleCredential.token);
-      userLogin(googleCredential.token);
+      console.log("googleCredential", googleCredential)
+      var data = {
+        user: user, 
+        token: idToken
+      }
+      saveDataInAsyncStorage("token", JSON.stringify(data))
+      userLogin(data);
     }).catch(error => {
       //console.error(error);
     });
@@ -95,8 +102,10 @@ function Login({ navigation, userInfo, userLogin }) {
 
     // Sign-in the user with the credential
     auth().signInWithCredential(facebookCredential).then(() => {
-      saveToken(facebookCredential.token);
-      userLogin(facebookCredential.token);
+      console.log('facebookCredential', facebookCredential)
+      var data = {user: facebookCredential, token: facebookCredential.token}
+      saveDataInAsyncStorage("token", JSON.stringify(data))
+      userLogin(data);
     }).catch(error => {
       console.error(error);
     });
@@ -107,8 +116,7 @@ function Login({ navigation, userInfo, userLogin }) {
     try {
       await AsyncStorage.setItem("token", token);
     } catch (e) {
-      // console.log(e);
-      // saving token failed
+      console.error(e)
     }
   };
 
@@ -243,7 +251,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ userLogin }, dispatch);
+  bindActionCreators({ userLogin, userSignin }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 

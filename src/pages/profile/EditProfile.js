@@ -2,14 +2,33 @@ import React, { Component, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, Dimensions, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Input, Button, Card, SearchBar } from 'react-native-elements';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
+import { useDispatch, useSelector } from 'react-redux';
+import { updateProfile } from '../../redux/actions';
 
 
 export default function EditProfile({ navigation }) {
+    
+    const dispatch = useDispatch()
+    const userData = useSelector((state) => state.user.userData)
+
+    console.log("userData.user", userData.user.email, typeof userData)
+    
      const [toggleUser, setToggleUser] = useState(0)
      const [toggleUser1, setToggleUser1] = useState(0)
      const [toggleUser2, setToggleUser2] = useState(0)
      const [toggleUser3, setToggleUser3] = useState(0)
      const [toggleUser4, setToggleUser4] = useState(0)
+     const [fullName, setFullName] = useState(userData.user ? userData.user.name : '')
+     const [Email, setEmail] = useState(userData.user ? userData.user.email : '')
+     const [Phone, setPhone] = useState('')
+     const [Dob, setDob] = useState('')
+     const [Address, setAddress] = useState('')
+
+
+     const submit = () => {
+        dispatch(updateProfile({fullName: fullName, email: Email, contact: Phone, dob: Dob, address: Address}))
+     }
+
     return (
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.backicon}>
@@ -34,18 +53,23 @@ export default function EditProfile({ navigation }) {
                         labelStyle={styles.label}
                             label="Full Name"
                             placeholder='Donatella Nobatti'
+                        onChangeText={(e) => setFullName(e)}
+                        value={fullName}
                         />
                     </View>
                     <View>
                         <Image style={toggleUser1?styles.mailActive:styles.emailadd}  source={require('../../assets/mailIcon.png')} />
                         <Input
-                        inputContainerStyle={toggleUser1?styles.emailActive:styles.borderdv}
-                         onFocus={()=>setToggleUser1(1)}
-                         onBlur={()=>setToggleUser1(0)}
-                        style={styles.email}
-                        labelStyle={styles.label}
+                            inputContainerStyle={toggleUser1?styles.emailActive:styles.borderdv}
+                            onFocus={()=>setToggleUser1(1)}
+                            onBlur={()=>setToggleUser1(0)}
+                            style={styles.email}
+                            labelStyle={styles.label}
                             label="Email Address"
                             placeholder='Donatella-Nobatti@gmail.com'
+                            onChangeText={(e) => setEmail(e)}
+                            value={Email}
+
                         />
                     </View>
                     <View>
@@ -58,6 +82,8 @@ export default function EditProfile({ navigation }) {
                         labelStyle={styles.label}
                             label="Phone Number"
                             placeholder='2545426532'
+                        onChangeText={(e) => setPhone(e)}
+
                         />
                     </View>
                     <View>
@@ -70,6 +96,8 @@ export default function EditProfile({ navigation }) {
                         labelStyle={styles.label}
                             label="Date of Birth"
                             placeholder='March 08,1987'
+                        onChangeText={(e) => setDob(e)}
+
                         />
                     </View>
                     <View>
@@ -82,6 +110,8 @@ export default function EditProfile({ navigation }) {
                         labelStyle={styles.label}
                             label="Address"
                             placeholder='Boston,MA 02101'
+                        onChangeText={(e) => setAddress(e)}
+
                         />
                     </View>
                     <View style={{ flexDirection: "row", justifyContent: "center", paddingTop: 25 }}>
@@ -94,6 +124,7 @@ export default function EditProfile({ navigation }) {
                         <TouchableOpacity
                             activeOpacity={0.8}
                             style={styles.SaveButton}
+                            onPress={submit}
                         >
                             <Text style={styles.SaveButtonInside}>SAVE</Text>
                         </TouchableOpacity>
