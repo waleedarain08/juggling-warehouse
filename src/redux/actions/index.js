@@ -9,6 +9,7 @@ import { getDataFromAsyncStorage } from '../../helper/utils';
 // }
 
 export function userLogin(data) {
+  console.log('data', data)
   return dispatch => {
     dispatch({type: USER_LOGIN, payload: data});
 

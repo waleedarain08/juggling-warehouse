@@ -1,18 +1,54 @@
-import { Text, View, StyleSheet, Image, TouchableOpacity, KeyboardAvoidingView, Platform, SafeAreaView } from 'react-native';
+import { Text, View, StyleSheet, Image, ActivityIndicator, Alert,TouchableOpacity, KeyboardAvoidingView, Platform, SafeAreaView } from 'react-native';
 import React, { useState } from 'react';
-import { Input, CheckBox } from 'react-native-elements';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { userLogin } from '../../redux/actions';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
+import { Input } from 'react-native-elements';
+import auth from '@react-native-firebase/auth';
 
 
 
 export default function ChangePassword({ navigation }) {
+    // Ask signed in user for current password.
+    const [currentPassword, setcurrentPassword] = useState(null);
+    const [newPassword, setnewPassword] = useState(null);
+
+    // ResetPassword = () => {
+    //     const emailCred = auth.EmailAuthProvider.credential(
+    //         auth().currentUser, currentPassword);
+    //         auth().currentUser.reauthenticateWithCredential(emailCred)
+    //         .then((msg) => {
+    //             console.log(msg);
+    //             return auth().currentUser.updatePassword(newPassword);
+    //         })
+    //     .catch((error) => {
+    //       console.log(error)
+    //     });
+    // }
+
+    reauthenticate = () => {
+        var user = auth().currentUser;
+        var cred = auth.EmailAuthProvider.credential(
+            user.email, currentPassword);
+        return user.reauthenticateWithCredential(cred);
+      }
+
+    changePassword = () => {
+        reauthenticate().then(() => {
+          var user = auth().currentUser;
+          user.updatePassword(newPassword).then(() => {
+            Alert.alert(
+                "Congratulations!",
+                "Password Updated Successfully.",
+                [
+                  { text: "OK", onPress: () => navigation.navigate("Home") }
+                ]
+              );
+          }).catch((error) => { console.log(error); });
+        }).catch((error) => { Alert.alert("Sorry!"," The password is invalid or the user does not have a password.") });
+      }
+
     return (
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.backicon}>
-                <TouchableOpacity onPress={() => navigation.goBack()} hitSlop={{top:20, bottom:20, left:30, right:30}}>
+                <TouchableOpacity onPress={() => navigation.goBack()} hitSlop={{ top: 20, bottom: 20, left: 30, right: 30 }}>
                     <Image style={styles.back} source={require('../../assets/back.png')} />
                 </TouchableOpacity>
             </View>
@@ -23,16 +59,17 @@ export default function ChangePassword({ navigation }) {
                 <Text style={styles.forgat}>Reset Password</Text>
                 <View>
                     <Image style={styles.logo022} source={require('../../assets/lock.png')} />
-                    <Input style={styles.email} placeholder="Password" />
+                    <Input style={styles.email} onChangeText={(password) => setcurrentPassword(password)} placeholder="Current Password" secureTextEntry={true} />
                 </View>
                 <View>
                     <Image style={styles.logo022} source={require('../../assets/lock.png')} />
-                    <Input style={styles.email} placeholder="Confirm Password" />
+                    <Input style={styles.email} onChangeText={(password) => setnewPassword(password)} placeholder="New Password" secureTextEntry={true} />
                 </View>
                 <TouchableOpacity
                     activeOpacity={0.8}
+                    onPress={() => changePassword()}
                     style={styles.LoginButton}
-                   >
+                >
                     <Text style={styles.LoginButtonInside}>CHANGE PASSWORD</Text>
                 </TouchableOpacity>
             </View>
@@ -67,7 +104,7 @@ const styles = StyleSheet.create({
     forgat: {
         color: "#fff",
         textAlign: "center",
-        paddingVertical:15
+        paddingVertical: 15
     },
     logo022: {
         height: 13,

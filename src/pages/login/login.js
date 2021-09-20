@@ -71,8 +71,12 @@ function Login({ navigation, userInfo, userLogin, userSignin }) {
     // Sign-in the user with the credential
     auth().signInWithCredential(googleCredential).then(() => {
       console.log("googleCredential", googleCredential)
-      saveDataInAsyncStorage("token", googleCredential.token)
-      userLogin({user, idToken});
+      var data = {
+        user: user, 
+        token: idToken
+      }
+      saveDataInAsyncStorage("token", JSON.stringify(data))
+      userLogin(data);
     }).catch(error => {
       //console.error(error);
     });
@@ -99,8 +103,9 @@ function Login({ navigation, userInfo, userLogin, userSignin }) {
     // Sign-in the user with the credential
     auth().signInWithCredential(facebookCredential).then(() => {
       console.log('facebookCredential', facebookCredential)
-      saveDataInAsyncStorage("token", facebookCredential.token)
-      userLogin(facebookCredential);
+      var data = {user: facebookCredential, token: facebookCredential.token}
+      saveDataInAsyncStorage("token", JSON.stringify(data))
+      userLogin(data);
     }).catch(error => {
       console.error(error);
     });

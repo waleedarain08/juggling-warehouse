@@ -405,10 +405,10 @@ function RootContainer({ user,userLogin }) {
       } catch (e) {
         // Restoring token failed
       }
-
+      console.log("token in navigator", JSON.parse(token))
       if (token !== null) {
         setTimeout(() => {
-          userLogin(token);
+          userLogin( JSON.parse(token));
         }, 500);
       } else {
         

@@ -2,23 +2,29 @@ import React, { Component, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, Dimensions, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Input, Button, Card, SearchBar } from 'react-native-elements';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateProfile } from '../../redux/actions';
 
 
 export default function EditProfile({ navigation }) {
+    
+    const dispatch = useDispatch()
+    const userData = useSelector((state) => state.user.userData)
+
+    console.log("userData.user", userData.user.email, typeof userData)
+    
      const [toggleUser, setToggleUser] = useState(0)
      const [toggleUser1, setToggleUser1] = useState(0)
      const [toggleUser2, setToggleUser2] = useState(0)
      const [toggleUser3, setToggleUser3] = useState(0)
      const [toggleUser4, setToggleUser4] = useState(0)
-     const [fullName, setFullName] = useState('')
-     const [Email, setEmail] = useState('')
+     const [fullName, setFullName] = useState(userData.user ? userData.user.name : '')
+     const [Email, setEmail] = useState(userData.user ? userData.user.email : '')
      const [Phone, setPhone] = useState('')
      const [Dob, setDob] = useState('')
      const [Address, setAddress] = useState('')
 
-     const dispatch = useDispatch()
+
      const submit = () => {
         dispatch(updateProfile({fullName: fullName, email: Email, contact: Phone, dob: Dob, address: Address}))
      }
@@ -48,19 +54,21 @@ export default function EditProfile({ navigation }) {
                             label="Full Name"
                             placeholder='Donatella Nobatti'
                         onChangeText={(e) => setFullName(e)}
+                        value={fullName}
                         />
                     </View>
                     <View>
                         <Image style={toggleUser1?styles.mailActive:styles.emailadd}  source={require('../../assets/mailIcon.png')} />
                         <Input
-                        inputContainerStyle={toggleUser1?styles.emailActive:styles.borderdv}
-                         onFocus={()=>setToggleUser1(1)}
-                         onBlur={()=>setToggleUser1(0)}
-                        style={styles.email}
-                        labelStyle={styles.label}
+                            inputContainerStyle={toggleUser1?styles.emailActive:styles.borderdv}
+                            onFocus={()=>setToggleUser1(1)}
+                            onBlur={()=>setToggleUser1(0)}
+                            style={styles.email}
+                            labelStyle={styles.label}
                             label="Email Address"
                             placeholder='Donatella-Nobatti@gmail.com'
-                        onChangeText={(e) => setEmail(e)}
+                            onChangeText={(e) => setEmail(e)}
+                            value={Email}
 
                         />
                     </View>
