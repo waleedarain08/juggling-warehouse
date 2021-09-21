@@ -91,7 +91,7 @@ export default class LiveStreaming extends Component<{}, State, any> {
     // when joining channel. The channel name and uid used to calculate
     // the token has to match the ones used for channel join
     await this._engine.joinChannel(
-      config.token,
+      null,
       config.channelId,
       null,
       0,

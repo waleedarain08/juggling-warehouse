@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as ImagePicker  from 'react-native-image-picker'
 
 export const saveDataInAsyncStorage = async (key, value) => {
     try {
@@ -15,4 +16,26 @@ export const getDataFromAsyncStorage = async (key) => {
     } catch (error) {
         
     }
+}
+
+export const launchimageLibrary = async () => {
+  return new Promise((resolve, reject) => {
+    ImagePicker.launchImageLibrary({
+      maxHeight: 200,
+      maxWidth: 200,
+      selectionLimit: 0,
+      mediaType: 'photo',
+      includeBase64: false,
+    }, (response) => { 
+      if (response.didCancel) {
+          resolve({status: false, message: 'User cancelled image picker'})
+      } else if (response.error) {
+          resolve({status: false, message: response.error})
+      } else if (response.customButton) {
+          resolve({status: false, message: 'Something went wrong'})
+      } else {
+          resolve({status: true, message: 'Picture Selected', data: response.assets})
+      }
+  });
+  })
 }

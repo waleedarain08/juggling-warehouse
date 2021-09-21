@@ -2,20 +2,28 @@ import React, { Component, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, Dimensions, ScrollView } from 'react-native';
 import { Input, Button, Card, SearchBar } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { userLogout } from '../../redux/actions';
-
 
 
 export default function profile({ navigation }) {
     const [search, setSearch] = useState("");
+
+    const dispatch = useDispatch()
+    const userData = useSelector((state) => state.user.userData)
+
+     const [fullName, setFullName] = useState(userData.user ? userData.user.name : '')
+     const [Email, setEmail] = useState(userData.user ? userData.user.email : '')
+     const [Phone, setPhone] = useState('')
+     const [Dob, setDob] = useState('')
+     const [Address, setAddress] = useState('')
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={{ height: 800,backgroundColor:"#0e101f" }}  showsVerticalScrollIndicator={false}>
             <View style={{ flex: 2.5, }}>
                 <View style={styles.profilpage}>
                     <Image style={styles.man} source={require('../../assets/02-tile.png')} />
-                    <Text style={styles.manname}>Donatella Nobatti</Text>
+                    <Text style={styles.manname}>{fullName}</Text>
                     <Text style={styles.city}>Boston,MA 02101</Text>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -44,7 +52,7 @@ export default function profile({ navigation }) {
                         <Text style={styles.fullname}>FullName</Text>
                     </View>
                     <View style={{ flex: 1, justifyContent: "center" }}>
-                        <Text style={styles.detaildv}>Donatella Nobatti</Text>
+                        <Text style={styles.detaildv}>{fullName}</Text>
                     </View>
                 </View>
                 <View style={styles.detail}>
@@ -53,7 +61,7 @@ export default function profile({ navigation }) {
                         <Text style={styles.fullname}>Email Address</Text>
                     </View>
                     <View style={{ flex: 1, justifyContent: "center" }}>
-                        <Text style={styles.detaildv}>Donatella-Nobatti@gmail.com</Text>
+                        <Text style={styles.detaildv}>{Email}</Text>
                     </View>
                 </View>
                 <View style={styles.detail}>
@@ -62,7 +70,7 @@ export default function profile({ navigation }) {
                         <Text style={styles.fullname}>Phone Number</Text>
                     </View>
                     <View style={{ flex: 1, justifyContent: "center" }}>
-                        <Text style={styles.detaildv}>2545426532</Text>
+                        <Text style={styles.detaildv}>{Phone ? Phone : 'Not Added'}</Text>
                     </View>
                 </View>
                 <View style={styles.detail}>
@@ -71,7 +79,7 @@ export default function profile({ navigation }) {
                         <Text style={styles.fullname}>Date of Birth</Text>
                     </View>
                     <View style={{ flex: 1, justifyContent: "center" }}>
-                        <Text style={styles.detaildv}>March 08,1987</Text>
+                        <Text style={styles.detaildv}>{Dob ? Dob : 'Not Added'}</Text>
                     </View>
                 </View>
             </View>

@@ -4,6 +4,8 @@ import { Input, Button, Card, SearchBar } from 'react-native-elements';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProfile } from '../../redux/actions';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { launchimageLibrary } from '../../helper/utils';
 
 
 export default function EditProfile({ navigation }) {
@@ -23,23 +25,50 @@ export default function EditProfile({ navigation }) {
      const [Phone, setPhone] = useState('')
      const [Dob, setDob] = useState('')
      const [Address, setAddress] = useState('')
-
+     const [show, setShow] = useState(false)
 
      const submit = () => {
         dispatch(updateProfile({fullName: fullName, email: Email, contact: Phone, dob: Dob, address: Address}))
      }
 
+     const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || (Dob ? Dob : new Date(1598051730000));
+        setShow(!show);
+        setDob(currentDate);
+      };
+
+      async function pickImage() {
+        try {
+            const res = await launchimageLibrary()
+            console.log("status, data", res)
+        } catch (error) {
+            console.log("pickImage, error", error)
+        }
+      }
+
+      console.log("Dob", Dob)
     return (
         <SafeAreaView style={styles.safeArea}>
+            {show && (
+                <DateTimePicker
+                testID="dateTimePicker"
+                value={Dob ? Dob : new Date(1598051730000)}
+                mode={'date'}
+                is24Hour={true}
+                display="default" 
+
+                onChange={onChange}
+                />
+            )}
             <View style={styles.backicon}>
                 <TouchableOpacity onPress={() => navigation.goBack()} hitSlop={{ top: 20, bottom: 20, left: 30, right: 30 }}>
                     <Image style={styles.back} source={require('../../assets/back.png')} />
                 </TouchableOpacity>
             </View>
-            <View style={styles.profilpage}>
+            <TouchableOpacity activeOpacity={.8} onPress={() => pickImage()} style={styles.profilpage}>
                 <Image style={styles.man} source={require('../../assets/02-tile.png')} />
                 <Image style={styles.camera} source={require('../../assets/editcamera02.png')} />
-            </View>
+            </TouchableOpacity>
             <View style={styles.field}>
                 <KeyboardAwareScrollView style={styles.MainContainer} showsVerticalScrollIndicator={false}>
                 <View style={{height:Platform.OS==="ios"?540:"70%"}}>
@@ -86,20 +115,24 @@ export default function EditProfile({ navigation }) {
 
                         />
                     </View>
-                    <View>
+                    <TouchableOpacity activeOpacity={.8} 
+                        onPress={() => setShow(!show)}
+                        >
                         <Image style={toggleUser3?styles.userActive:styles.user} source={require('../../assets/calendarIcon.png')} />
                         <Input
                         inputContainerStyle={toggleUser3?styles.emailActive:styles.borderdv}
-                         onFocus={()=>setToggleUser3(1)}
+                        onFocus={()=>setToggleUser3(1)}
                         onBlur={()=>setToggleUser3(0)}
                         style={styles.email}
                         labelStyle={styles.label}
                             label="Date of Birth"
                             placeholder='March 08,1987'
                         onChangeText={(e) => setDob(e)}
+                        disabled
+                        value={Dob ? Dob.toString() : ''}
 
                         />
-                    </View>
+                    </TouchableOpacity>
                     <View>
                     <Image style={toggleUser4?styles.userActive:styles.user} source={require('../../assets/adress.png')} />
                         <Input

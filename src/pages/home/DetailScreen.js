@@ -15,19 +15,19 @@ function DetailScreen({ navigation }) {
     const [checked1, setChecked1] = useState(false);
     const [checked2, setChecked2] = useState(false);
 
-    handleCheckBox = (checkBox) => {
+    const handleCheckBox = (checkBox) => {
         setChecked(1);
         setChecked1(0);
         setChecked2(0);
     }
 
-    handleCheckBox1 = (checkBox) => {
+    const handleCheckBox1 = (checkBox) => {
         setChecked(0);
         setChecked1(1);
         setChecked2(0);
     }
 
-    handleCheckBox2 = (checkBox) => {
+    const handleCheckBox2 = (checkBox) => {
         setChecked(0);
         setChecked1(0);
         setChecked2(1);
@@ -71,6 +71,7 @@ function DetailScreen({ navigation }) {
                 <View  style={styles.box5}>
                 <Image style={styles.play} source={require('../../assets/playicon.png')} />
                     <Button
+                        onPress={() => navigation.navigate('Video')}
                         title="Watch Now"
                     />
                 </View>

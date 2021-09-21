@@ -25,6 +25,7 @@ import { createNativeStackNavigator } from 'react-native-screens/native-stack';
 import CustomTabBar from './CustomTabBar';
 import LiveNow from './pages/home/LiveNow';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { VideoPlayer } from './pages/video';
 
 const useInitialRender = () => {
   const [isInitialRender, setIsInitialRender] = useState(false);
@@ -56,6 +57,7 @@ const notificationIcon = navigation => {
     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
       <TouchableOpacity
         activeOpacity={0.8}
+        onPress={() => navigation.navigate('LiveNow')}
         style={{
           flex: 1,
           flexDirection: 'row',
@@ -168,6 +170,14 @@ function HomeTabAStack() {
         options={({ navigation }) => ({
           headerLeft: () => drawerButton(navigation),
           headerRight: () => notificationIcon(navigation),
+        })}
+      />
+      <HomeTabAStackNav.Screen
+        name="Video"
+        component={VideoPlayer}
+        options={({ navigation }) => ({
+          headerLeft: () => drawerButton(navigation),
+          // headerRight: () => notificationIcon(navigation),
         })}
       />
       <HomeTabAStackNav.Screen

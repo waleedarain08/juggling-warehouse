@@ -2,6 +2,7 @@ import {ERROR, FETCHED, FETCHING, USER_LOGIN, USER_LOGOUT, USER_REGISTER_PROCESS
 import base_url from '../api/base_url';
 import { getApi, patchApi, postApi } from '../api';
 import { getDataFromAsyncStorage } from '../../helper/utils';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // export function userLogin(username, password) {
 //   return dispatch => {
 //     dispatch({type: USER_LOGIN, userData: {username, password}});
@@ -18,6 +19,7 @@ export function userLogin(data) {
 
 export function userLogout() {
   return dispatch => {
+    AsyncStorage.clear()
     dispatch({type: USER_LOGOUT});
   };
 }
