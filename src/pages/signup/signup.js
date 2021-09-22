@@ -62,7 +62,7 @@ function Signup({ navigation, userInfo, userRegister }) {
                 setIsLoading(false);
             });
     };
-    console.log("loading", loading)
+    console.log("loading", loading, "errors", errors)
     return (
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.box1}>
@@ -84,6 +84,7 @@ function Signup({ navigation, userInfo, userRegister }) {
                                 control={control}
                                 rules={{
                                     required: true,
+                                    minLength:7,
                                 }}
                                 render={({ field: { onChange, onBlur, value } }) => (
                                     <Input style={styles.email}
@@ -198,7 +199,7 @@ function Signup({ navigation, userInfo, userRegister }) {
                                         color="#fff"
                                         placeholder="Confirm Password"
                                         autoCompleteType="password"
-                                        secureTextEntry={hidePass1 ? true : false} />
+                                        secureTextEntry={hidePass2 ? true : false} />
                                 )}
                                 name="Password"
                                 defaultValue=""

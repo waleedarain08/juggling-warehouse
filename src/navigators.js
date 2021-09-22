@@ -185,7 +185,9 @@ function HomeTabAStack() {
         component={DetailScreen}
         options={{ title: 'About Motivation' }}
       />
-      <HomeTabAStackNav.Screen name="LiveNow" component={LiveNow} />
+      <HomeTabAStackNav.Screen name="LiveNow" component={LiveNow} 
+        options={{ title: 'Live Now' }}
+        />
       <HomeTabAStackNav.Screen
         name="Notifications"
         component={NotificationsScreen}
@@ -399,6 +401,7 @@ function MainDrawer() {
       initialRouteName="Home"
       overlayColor="transparent"
       drawerType="front">
+      <Drawer.Screen options={{ activeTintColor: "#fff" }} name="LiveNow" component={LiveNow} />
       <Drawer.Screen options={{ activeTintColor: "#fff" }} name="Home" component={HomeTab} />
     </Drawer.Navigator>
   )
@@ -427,7 +430,7 @@ function RootContainer({ user,userLogin }) {
     bootstrapAsync();
   }, []);
   return (
-    <Stack.Navigator initialRouteName="Login"  screenOptions={{headerShown:false}} sdetachInactiveScreens={true}>
+    <Stack.Navigator  initialRouteName="Login"  screenOptions={{headerShown:false}} sdetachInactiveScreens={true}>
       {user.loggedin ? <Stack.Screen name="MainDrawer" component={MainDrawer} /> : <Stack.Screen name="Login" component={LoginStack} />}
     </Stack.Navigator>
   );

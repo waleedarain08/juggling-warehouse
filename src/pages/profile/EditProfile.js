@@ -13,8 +13,6 @@ export default function EditProfile({ navigation }) {
     const dispatch = useDispatch()
     const userData = useSelector((state) => state.user.userData)
 
-    console.log("userData.user", userData.user.email, typeof userData)
-    
      const [toggleUser, setToggleUser] = useState(0)
      const [toggleUser1, setToggleUser1] = useState(0)
      const [toggleUser2, setToggleUser2] = useState(0)
@@ -26,6 +24,7 @@ export default function EditProfile({ navigation }) {
      const [Dob, setDob] = useState('')
      const [Address, setAddress] = useState('')
      const [show, setShow] = useState(false)
+     const [profilePic, setProfilePic] = useState('')
 
      const submit = () => {
         dispatch(updateProfile({fullName: fullName, email: Email, contact: Phone, dob: Dob, address: Address}))
@@ -40,13 +39,12 @@ export default function EditProfile({ navigation }) {
       async function pickImage() {
         try {
             const res = await launchimageLibrary()
-            console.log("status, data", res)
+            setProfilePic(res.data)
         } catch (error) {
             console.log("pickImage, error", error)
         }
       }
 
-      console.log("Dob", Dob)
     return (
         <SafeAreaView style={styles.safeArea}>
             {show && (
@@ -66,7 +64,7 @@ export default function EditProfile({ navigation }) {
                 </TouchableOpacity>
             </View>
             <TouchableOpacity activeOpacity={.8} onPress={() => pickImage()} style={styles.profilpage}>
-                <Image style={styles.man} source={require('../../assets/02-tile.png')} />
+                <Image style={styles.man} source={profilePic ? {uri: profilePic.uri} : require('../../assets/02-tile.png')} />
                 <Image style={styles.camera} source={require('../../assets/editcamera02.png')} />
             </TouchableOpacity>
             <View style={styles.field}>

@@ -6,6 +6,9 @@ import {
   StyleSheet,
   View,
   Alert,
+  DeviceEventEmitter,
+  AppState,
+  BackHandler 
 } from 'react-native';
 
 import RtcEngine, {
@@ -56,7 +59,20 @@ export default class LiveStreaming extends Component<{}, State, any> {
   }
 
   componentWillUnmount() {
+    console.log("componentWillUnmount")
+    this._destroyEngine()
+    // this.appStateSubscription.remove();
+    this.routeSubscription.remove();
+  }
+
+  _destroyEngine = (route) => {
+    this.setState({isJoin: false})
     this._engine?.destroy();
+  }
+
+  componentDidMount() {
+    this.appStateSubscription = AppState.addEventListener("change",  this._destroyEngine);
+    this.routeSubscription = DeviceEventEmitter.addListener('routeStateChanged', this._destroyEngine);
   }
 
   _initEngine = async () => {
@@ -100,10 +116,10 @@ export default class LiveStreaming extends Component<{}, State, any> {
   };
   _addListeners = () => {
     this._engine?.addListener('Warning', (warningCode) => {
-      console.info('Warning', warningCode);
+      console.info('Warning', warningCode, this.state.role == ClientRole.Broadcaster ? "Broadcaster" : "Audience");
     });
     this._engine?.addListener('Error', (errorCode) => {
-      console.info('Error', errorCode);
+      console.log('Error', errorCode, this.state.role == ClientRole.Broadcaster ? "Broadcaster" : "Audience");
     });
     this._engine?.addListener('JoinChannelSuccess', (channel, uid, elapsed) => {
       console.info('JoinChannelSuccess', channel, uid, elapsed);
@@ -111,11 +127,16 @@ export default class LiveStreaming extends Component<{}, State, any> {
       this.setState({ isJoin: true });
     });
     this._engine?.addListener('UserJoined', async (uid, elapsed) => {
-      console.info('UserJoined', uid, elapsed);
+      console.info('UserJoined', uid, elapsed, this.state.role == ClientRole.Broadcaster ? "Broadcaster" : "Audience");
       this.setState({ remoteUid: uid });
     });
-    this._engine?.addListener('UserOffline', (uid, reason) => {
-      console.info('UserOffline', uid, reason);
+    this._engine?.addListener('LeaveChannel', (e) => {
+      console.info('UserOffline', e, this.state.role == ClientRole.Broadcaster ? "Broadcaster" : "Audience");
+      this.setState({ remoteUid: undefined });
+    });
+    this._engine?.addListener('ConnectionLost', (e,i) => {
+      alert('ConnectionLost')
+      console.info('UserOffline', e, this.state.role == ClientRole.Broadcaster ? "Broadcaster" : "Audience");
       this.setState({ remoteUid: undefined });
     });
   };

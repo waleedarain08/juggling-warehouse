@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { userLogout } from '../../redux/actions';
 import { getCategory } from '../../redux/actions/content';
+import { getDeviceToken } from '../../helper/utils';
 
 function HomeScreen({ navigation, user, userLogout, state, route, getCategory, categories }) {
   const [reason, setReason] = useState([{ title: "abc", image: require('../../assets/vedio.png') }, { title: "def", image: require('../../assets/vedio.png') }, { title: "ghi", image: require('../../assets/vedio.png') },]);
@@ -19,7 +20,11 @@ function HomeScreen({ navigation, user, userLogout, state, route, getCategory, c
 
   useEffect(() => {
     getCategory()
+    getDeviceToken()
+    .then(token => console.log("HOMESCREEN token", token))
+    .catch(err => console.log("HOMESCREEN err", err))
   }, [])
+  
   console.log("categories", categories)
   return (
     <View style={styles.container}>

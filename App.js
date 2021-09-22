@@ -6,6 +6,7 @@ import RootContainer from './src/navigators';
 import store from './src/redux/store';
 import { NavigationContainer , DefaultTheme} from '@react-navigation/native';
 import firebase from "@react-native-firebase/app";
+import { DeviceEventEmitter } from 'react-native';
 
 
 
@@ -34,11 +35,25 @@ export class App extends Component {
       SplashScreen.hide();
     }, 1000);
   }
+
+
+  componentWillUnmount() {
+    console.log("componentWillUnmount App.js")
+  }
+
+   onStateChange = (state) => {
+    //  console.log("state", state)
+    let route = state;
+    while (route.routes) {
+      route = route.routes[route.index];
+    }
+    DeviceEventEmitter.emit('routeStateChanged', route);
+  }
   
   render() {
     return (
       <Provider store={store}>
-        <NavigationContainer theme={{...DefaultTheme,dark:true,colors:{'background':'#0e101f'}}}>
+        <NavigationContainer onStateChange={this.onStateChange} theme={{...DefaultTheme,dark:true,colors:{'background':'#0e101f'}}}>
           <RootContainer />
         </NavigationContainer>
       </Provider>

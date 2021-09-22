@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as ImagePicker  from 'react-native-image-picker'
+import messages from  "@react-native-firebase/messaging"
 
 export const saveDataInAsyncStorage = async (key, value) => {
     try {
@@ -34,8 +35,17 @@ export const launchimageLibrary = async () => {
       } else if (response.customButton) {
           resolve({status: false, message: 'Something went wrong'})
       } else {
-          resolve({status: true, message: 'Picture Selected', data: response.assets})
+          resolve({status: true, message: 'Picture Selected', data: response.assets[0]})
       }
   });
   })
+}
+
+export const getDeviceToken = async () => {
+   try {
+      const fcmToken = await messages().getToken()
+      return fcmToken
+   } catch (error) {
+      throw error
+   }
 }
