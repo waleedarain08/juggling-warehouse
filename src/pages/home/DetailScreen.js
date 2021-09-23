@@ -4,6 +4,7 @@ import { Input, Button, CheckBox } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { userLogout } from '../redux/actions';
+import { downloadFile } from '../../helper/downloadFile';
 
 
 
@@ -177,7 +178,7 @@ function DetailScreen({ navigation }) {
                         </View>
                         <Pressable
                             style={[styles.button, styles.buttonClose]}
-                            onPress={() => setModalVisible(!modalVisible)}
+                            onPress={() => downloadFile()}
                         >
                             <Text style={styles.textStyle}>Download</Text>
                         </Pressable>

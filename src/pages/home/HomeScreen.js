@@ -4,11 +4,11 @@ import { BlurView } from "@react-native-community/blur";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { userLogout } from '../../redux/actions';
-import { getCategory } from '../../redux/actions/content';
+import { getCategory, getDownloadFilesCount } from '../../redux/actions/content';
 import { getDeviceToken } from '../../helper/utils';
 import { TrendingCard } from '../../components/Card/trendingCard';
 
-function HomeScreen({ navigation, user, userLogout, state, route, getCategory, categories }) {
+function HomeScreen({ navigation, user, userLogout, state, route, getCategory, categories, getDownloadFilesCount }) {
   const [reason, setReason] = useState([{ title: "abc", image: require('../../assets/vedio.png') }, { title: "def", image: require('../../assets/vedio.png') }, { title: "ghi", image: require('../../assets/vedio.png') },]);
   const [reason1, setReason1] = useState([{ title: "abc", image: require('../../assets/050.png') }, { title: "abc", image: require('../../assets/030.png') }, { title: "abc", image: require('../../assets/040.png') }, { title: "abc", image: require('../../assets/020.png') }, { title: "abc", image: require('../../assets/050.png') }, { title: "abc", image: require('../../assets/030.png') }]);
   const [reason2, setReason2] = useState([{ title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }, { title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }, { title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }]);
@@ -21,6 +21,7 @@ function HomeScreen({ navigation, user, userLogout, state, route, getCategory, c
 
   useEffect(() => {
     getCategory()
+    getDownloadFilesCount()
     // getDeviceToken()
     // .then(token => console.log("HOMESCREEN token", token))
     // .catch(err => console.log("HOMESCREEN err", err))
@@ -160,7 +161,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ userLogout, getCategory }, dispatch);
+  bindActionCreators({ userLogout, getCategory, getDownloadFilesCount }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 

@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, Dimensions, ScrollView } from 'react-native';
 import { Input, Button, Card, SearchBar } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
@@ -11,6 +11,8 @@ export default function profile({ navigation }) {
 
     const dispatch = useDispatch()
     const userData = useSelector((state) => state.user.userData)
+    const downloadCount = useSelector((state) => state.content.downloadCount)
+
 
      const [fullName, setFullName] = useState(userData.user ? userData.user.name : '')
      const [Email, setEmail] = useState(userData.user ? userData.user.email : '')
@@ -40,7 +42,7 @@ export default function profile({ navigation }) {
                         }}></View>
                         <View style={{ flex: 1 }}>
                             <Text style={styles.downloaddv}>My Downloads</Text>
-                            <Text style={styles.totaldownload}>06</Text>
+                            <Text style={styles.totaldownload}>{downloadCount}</Text>
                         </View>
                     </View>
                 </View>

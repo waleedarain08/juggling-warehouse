@@ -1,14 +1,18 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, Dimensions, ScrollView } from 'react-native';
 import { Input, Button, Card, SearchBar } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { userLogout } from '../../redux/actions';
 
+import RNFetchBlob from 'rn-fetch-blob';
+
 
 
 export default function List({ navigation }) {
     const [search, setSearch] = useState("");
+    const [files, setFiles] = useState([]);
+
   return (
     <View style={styles.container}>
                 {/* <View style={styles.list}> */}
@@ -36,6 +40,15 @@ export default function List({ navigation }) {
                     value={search}
                 />
                 </View>
+                {/* <FlatList 
+                    keyExtractor={(item, index) => index}
+                    data={files}
+                    numColumns={3}
+                    renderItem={({item, index}) => {
+                        console.log(`file://${RNFetchBlob.fs.dirs.DCIMDir}/Camera/${item}`)
+                        return  <Image key={index} style={styles.moviepng} source={{uri: `file://${RNFetchBlob.fs.dirs.DCIMDir}/Camera/${item}`}} />
+                    }}
+                /> */}
                 <ScrollView contentContainerStyle={{flexGrow:1,paddingBottom:20, }}
                 showsVerticalScrollIndicator={false}
                 > 
