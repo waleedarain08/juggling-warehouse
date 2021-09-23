@@ -59,7 +59,6 @@ export default class LiveStreaming extends Component<{}, State, any> {
   }
 
   componentWillUnmount() {
-    console.log("componentWillUnmount")
     this._destroyEngine()
     // this.appStateSubscription.remove();
     this.routeSubscription.remove();
@@ -76,7 +75,6 @@ export default class LiveStreaming extends Component<{}, State, any> {
   }
 
   _initEngine = async () => {
-    console.log("_initEngine")
     const { role } = this.state;
     if (Platform.OS === 'android') {
       await PermissionsAndroid.requestMultiple([
@@ -87,7 +85,6 @@ export default class LiveStreaming extends Component<{}, State, any> {
     this._engine = await RtcEngine.createWithConfig(
       new RtcEngineConfig(config.appId)
     );
-    console.log("this._engine", this._engine)
     this._addListeners();
 
     // enable video module and set up video encoding configs
@@ -187,7 +184,6 @@ export default class LiveStreaming extends Component<{}, State, any> {
 
   render() {
     const { isJoin, role, remoteUid } = this.state;
-    console.log(" role, remoteUid",  role, remoteUid, "isJoin", isJoin)
 
     return (
       <View style={styles.container}>
@@ -199,7 +195,6 @@ export default class LiveStreaming extends Component<{}, State, any> {
 
   _renderVideo = () => {
     const { role, remoteUid } = this.state;
-    console.log(" role, remoteUid",  role, remoteUid)
     return (
       <View style={styles.container}>
         {role === ClientRole.Broadcaster ? (

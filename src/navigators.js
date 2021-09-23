@@ -176,7 +176,7 @@ function HomeTabAStack() {
         name="Video"
         component={VideoPlayer}
         options={({ navigation }) => ({
-          headerLeft: () => drawerButton(navigation),
+          headerLeft: () => <Icon name="arrow-back" color="#fff" size={20} onPress={() => navigation.goBack()} style={{ marginLeft: 12 }} />,
           // headerRight: () => notificationIcon(navigation),
         })}
       />
@@ -185,9 +185,11 @@ function HomeTabAStack() {
         component={DetailScreen}
         options={{ title: 'About Motivation' }}
       />
-      <HomeTabAStackNav.Screen name="LiveNow" component={LiveNow} 
+      {/* <HomeTabAStackNav.Screen 
+        name="LiveNow" 
+        component={LiveNow} 
         options={{ title: 'Live Now' }}
-        />
+      /> */}
       <HomeTabAStackNav.Screen
         name="Notifications"
         component={NotificationsScreen}
@@ -382,6 +384,7 @@ function HomeTab() {
           </View>
         );
       }}>
+      {/* <HomeTabNav.Screen name="LiveNow" component={LiveNow}  /> */}
       <HomeTabNav.Screen name="Download" component={HomeDownloadStack} />
       <HomeTabNav.Screen name="Search" component={HomeSearchStack} />
       <HomeTabNav.Screen name="Home" component={HomeTabAStack} />
@@ -401,7 +404,15 @@ function MainDrawer() {
       initialRouteName="Home"
       overlayColor="transparent"
       drawerType="front">
-      <Drawer.Screen options={{ activeTintColor: "#fff" }} name="LiveNow" component={LiveNow} />
+      <Drawer.Screen 
+        options={({ navigation }) => ({
+          activeTintColor: "#fff", 
+          headerShown: true, 
+          headerTitleStyle:{color: "#fff"},
+          title: 'Live Now',
+          headerLeft: () => <Icon name="arrow-back" color="#fff" size={20} onPress={() => navigation.goBack()} style={{ marginLeft: 12 }} />,
+        })}
+        name="LiveNow" component={LiveNow} />
       <Drawer.Screen options={{ activeTintColor: "#fff" }} name="Home" component={HomeTab} />
     </Drawer.Navigator>
   )
@@ -418,7 +429,6 @@ function RootContainer({ user,userLogin }) {
       } catch (e) {
         // Restoring token failed
       }
-      console.log("token in navigator", JSON.parse(token))
       if (token !== null) {
         setTimeout(() => {
           userLogin( JSON.parse(token));

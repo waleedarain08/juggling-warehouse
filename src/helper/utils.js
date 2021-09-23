@@ -19,7 +19,7 @@ export const getDataFromAsyncStorage = async (key) => {
     }
 }
 
-export const launchimageLibrary = async () => {
+export const launchimageLibrary = () => {
   return new Promise((resolve, reject) => {
     ImagePicker.launchImageLibrary({
       maxHeight: 200,

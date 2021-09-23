@@ -20,9 +20,9 @@ function HomeScreen({ navigation, user, userLogout, state, route, getCategory, c
 
   useEffect(() => {
     getCategory()
-    getDeviceToken()
-    .then(token => console.log("HOMESCREEN token", token))
-    .catch(err => console.log("HOMESCREEN err", err))
+    // getDeviceToken()
+    // .then(token => console.log("HOMESCREEN token", token))
+    // .catch(err => console.log("HOMESCREEN err", err))
   }, [])
   
   console.log("categories", categories)

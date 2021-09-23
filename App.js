@@ -38,7 +38,6 @@ export class App extends Component {
 
 
   componentWillUnmount() {
-    console.log("componentWillUnmount App.js")
   }
 
    onStateChange = (state) => {

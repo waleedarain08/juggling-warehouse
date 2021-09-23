@@ -32,7 +32,6 @@ function Login({ navigation, userInfo, userLogin, userSignin }) {
     setIsLoading(true);
     auth().signInWithEmailAndPassword(data.Email, data.Password).then(async (userCredential) => {
         let token = await userCredential.user.getIdToken(true)
-        console.log("token", token)
         setIsLoading(false);
         saveDataInAsyncStorage("token", token)
         userSignin(token);
