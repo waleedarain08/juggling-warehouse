@@ -37,7 +37,7 @@ export const VideoPlayer = () => {
 
      
     return(
-            <Video source={{uri: "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4"}}   // Can be a URL or a local file.
+            <Video source={{uri: "https://firebasestorage.googleapis.com/v0/b/jugglingwherehouse-126be.appspot.com/o/1603987530-1-pixabay.mp4?alt=media&token=0bac7973-8a51-4f36-bc3c-0dd57fe955eb"}}   // Can be a URL or a local file.
                 ref={(ref) => {
                     // this.player = ref
                 }}                                      // Store reference

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { userLogout } from '../../redux/actions';
 import { getCategory } from '../../redux/actions/content';
 import { getDeviceToken } from '../../helper/utils';
+import { TrendingCard } from '../../components/Card/trendingCard';
 
 function HomeScreen({ navigation, user, userLogout, state, route, getCategory, categories }) {
   const [reason, setReason] = useState([{ title: "abc", image: require('../../assets/vedio.png') }, { title: "def", image: require('../../assets/vedio.png') }, { title: "ghi", image: require('../../assets/vedio.png') },]);
@@ -67,22 +68,7 @@ function HomeScreen({ navigation, user, userLogout, state, route, getCategory, c
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => {
-                return (
-                  <View style={styles.carddv}>
-                    <View style={{ flex: 2 }}>
-                    <Image style={styles.play01} source={require('../../assets/play01.png')} />
-                      <Image style={styles.tile} source={item.image} />
-                    </View>
-                    <View style={styles.rowdv}>
-                      <View style={{ flex: 2, flexDirection: "row", alignItems: "center" }}>
-                        <Image style={styles.mark} source={require('../../assets/ex-mark.png')} />
-                        <View style={{ width: 5 }}></View>
-                        <Text style={styles.worddv}>1h 56m</Text>
-                      </View>
-                      <Image style={styles.dots} source={require('../../assets/3-dots.png')} />
-                    </View>
-                  </View>
-                )
+                return <TrendingCard displayImage={item.image} />
               }}>
             </FlatList>
           </View>
@@ -218,11 +204,6 @@ const styles = StyleSheet.create({
   box2: {
     flex: 4,
   },
-  carddv: {
-    flex: 1,
-    backgroundColor: "#181a33",
-    marginLeft: 10, marginTop: 10,
-  },
   trending: {
     paddingLeft: 9,
     color: "#fffffd",
@@ -235,40 +216,6 @@ const styles = StyleSheet.create({
     width: 80,
     height: 90,
     resizeMode: "cover",
-  },
-  play01:{
-    width:20,
-    height:20,
-    resizeMode:"contain",
-    position:"absolute",
-    zIndex:1,
-    left:28
-    ,
-    top:35,
-  },
-  mark: {
-    width: 12,
-    height: 12,
-    paddingLeft: 6,
-  },
-  worddv: {
-    color: "#fffffd",
-    paddingRight: 6,
-    fontSize: 10,
-
-  },
-  dots: {
-    width: 3,
-    height: 12,
-  },
-  rowdv: {
-    flex: 0,
-    padding: 10,
-    paddingHorizontal: 4,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingVertical:5,
   },
   live: {
     width: 65,
