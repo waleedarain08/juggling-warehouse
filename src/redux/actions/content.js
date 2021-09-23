@@ -1,7 +1,8 @@
+import { getDownloadCount } from "../../helper/downloadFile"
 import { getDataFromAsyncStorage } from "../../helper/utils"
 import { getApi } from "../api"
 import base_url from "../api/base_url"
-import { CATEGORY_CONTENT_FETCHED, CATEGORY_FETCHED, CONTENT_DETAILS_FETCHED, ERROR, FETCHING } from "../constants"
+import { CATEGORY_CONTENT_FETCHED, CATEGORY_FETCHED, CONTENT_DETAILS_FETCHED, DOWNLOAD_COUNT_FETCHED, ERROR, FETCHING } from "../constants"
 
 
 
@@ -79,4 +80,16 @@ export const getContentDetails = (contentId) => {
       return Promise.reject({ status: false, message })
     }
   }
+}
+
+export const getDownloadFilesCount = () => {
+  return async (dispatch) => {
+   try {
+      const count = await getDownloadCount()
+      console.log("count", count.length)
+      dispatch({type: DOWNLOAD_COUNT_FETCHED, payload: count.length});
+   } catch (error) {
+      console.log("error getDownloadFilesCount", error)
+   }
+  };
 }
