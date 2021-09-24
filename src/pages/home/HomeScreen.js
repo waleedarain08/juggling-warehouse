@@ -7,6 +7,7 @@ import { userLogout } from '../../redux/actions';
 import { getCategory, getDownloadFilesCount } from '../../redux/actions/content';
 import { getDeviceToken } from '../../helper/utils';
 import { TrendingCard } from '../../components/Card/trendingCard';
+import { getStoragePermission } from '../../helper/requestPermission';
 
 function HomeScreen({ navigation, user, userLogout, state, route, getCategory, categories, getDownloadFilesCount }) {
   const [reason, setReason] = useState([{ title: "abc", image: require('../../assets/vedio.png') }, { title: "def", image: require('../../assets/vedio.png') }, { title: "ghi", image: require('../../assets/vedio.png') },]);
@@ -22,6 +23,7 @@ function HomeScreen({ navigation, user, userLogout, state, route, getCategory, c
   useEffect(() => {
     getCategory()
     getDownloadFilesCount()
+    getStoragePermission()
     // getDeviceToken()
     // .then(token => console.log("HOMESCREEN token", token))
     // .catch(err => console.log("HOMESCREEN err", err))
