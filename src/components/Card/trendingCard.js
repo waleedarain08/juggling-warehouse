@@ -5,24 +5,26 @@ import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native'
 
 export const TrendingCard = ({
     displayImage,
-    timeLength="1h 50m"
+    timeLength="1h 50m",
+    data,
+    navigation
 }) => {
 
     return (
         <View style={styles.carddv}>
-          <TouchableOpacity activeOpacity={.9} onPress={() => alert('play click')} style={{ flex: 2 }}>
+          <TouchableOpacity activeOpacity={.9} onPress={() => navigation.navigate("AboutMotivation", {data: data})} style={{ flex: 2 }}>
           <Image style={styles.play01} source={require('../../assets/play01.png')} />
-            <Image style={styles.tile} source={displayImage} />
+            <Image style={styles.tile} source={{uri :displayImage}} />
           </TouchableOpacity>
           <View style={styles.rowdv}>
             <View style={{ flex: 2, flexDirection: "row", alignItems: "center" }}>
               <Image style={styles.mark} source={require('../../assets/ex-mark.png')} />
               <View style={{ width: 5 }}></View>
-              <Text style={styles.worddv}>{timeLength}</Text>
+              <Text style={styles.worddv}>{timeLength} hrs</Text>
             </View>
-            <TouchableOpacity activeOpacity={.9} onPress={() => alert('three dots')}>
+            {/* <TouchableOpacity activeOpacity={.9} onPress={() => alert('three dots')}>
                 <Image style={styles.dots} source={require('../../assets/3-dots.png')} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
       )

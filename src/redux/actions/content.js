@@ -2,7 +2,7 @@ import { getDownloadCount } from "../../helper/downloadFile"
 import { getDataFromAsyncStorage } from "../../helper/utils"
 import { getApi } from "../api"
 import base_url from "../api/base_url"
-import { CATEGORY_CONTENT_FETCHED, CATEGORY_FETCHED, CONTENT_DETAILS_FETCHED, DOWNLOAD_COUNT_FETCHED, ERROR, FETCHING } from "../constants"
+import { CATEGORY_CONTENT_FETCHED, CATEGORY_FETCHED, CONTENT_DETAILS_FETCHED, DOWNLOAD_COUNT_FETCHED, ERROR, FETCHING, RECOMMENDED_CONTENT_FETCHED, TRENDING_CONTENT_FETCHED } from "../constants"
 
 
 
@@ -30,8 +30,6 @@ export const getCategory = () => {
   }
 }
 
-
-
 export const getCategoryContents = (catId, page = 1, count = 10) => {
   return async (dispatch) => {
     try {
@@ -55,8 +53,6 @@ export const getCategoryContents = (catId, page = 1, count = 10) => {
     }
   }
 }
-
-
 
 export const getContentDetails = (contentId) => {
   return async (dispatch) => {
@@ -92,4 +88,53 @@ export const getDownloadFilesCount = () => {
       console.log("error getDownloadFilesCount", error)
    }
   };
+}
+
+export const getRecommendedContent = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: FETCHING })
+        let token = await getDataFromAsyncStorage('token')
+        let { data } = await getApi(`${base_url}/recommended?page=1`, '', token)
+      
+      if (data.code == 200) {
+          dispatch({type: RECOMMENDED_CONTENT_FETCHED, payload: data});
+          return Promise.resolve({ status: true })
+      } else {
+        Alert.alert("error", data.message)
+         dispatch({ type: ERROR })
+        return Promise.resolve({ status: false })
+      }
+
+    } catch ({ message }) {
+      console.log("getRecommendedContent Error", message)
+      dispatch({ type: ERROR })
+      return Promise.reject({ status: false, message })
+    }
+  }
+}
+
+
+export const getTrendingContent = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: FETCHING })
+        let token = await getDataFromAsyncStorage('token')
+        let { data } = await getApi(`${base_url}/trendings?page=1`, '', token)
+      
+      if (data.code == 200) {
+          dispatch({type: TRENDING_CONTENT_FETCHED, payload: data});
+          return Promise.resolve({ status: true })
+      } else {
+        Alert.alert("error", data.message)
+         dispatch({ type: ERROR })
+        return Promise.resolve({ status: false })
+      }
+
+    } catch ({ message }) {
+      console.log("getTrendingContent Error", message)
+      dispatch({ type: ERROR })
+      return Promise.reject({ status: false, message })
+    }
+  }
 }

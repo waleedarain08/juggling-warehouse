@@ -28,6 +28,34 @@ function HomeScreen({ navigation, user, userLogout, state, route, getCategory, c
     // .then(token => console.log("HOMESCREEN token", token))
     // .catch(err => console.log("HOMESCREEN err", err))
   }, [])
+
+  const data =  [
+    {
+        "id": "k2fOcMV7tK76k4q0Ee3b",
+        "user": {
+            "id": "gjqHZ8v0ExScCa9dgR75YyNtC9Z2",
+            "userName": "aikshk akhkf",
+            "userProfile": "https://firebasestorage.googleapis.com/v0/b/jugglingwherehouse-126be.appspot.com/o/profiles%2Fpexels-photo-771742.jpeg?alt=media&token=bc5fc378-a53a-42fd-b2a4-2f8310acbf08"
+        },
+        "category": {
+            "categoryName": "comedy",
+            "id": "86xLrttAYTeVtUnobnPp"
+        },
+        "contentName": "The Bread",
+        "contentDescription": "Short animated film of The Bread",
+        "contentImage": {
+            "url": "https://firebasestorage.googleapis.com/v0/b/jugglingwherehouse-126be.appspot.com/o/contentImages%2Fthe_bread.PNG?alt=media&token=ce2c62ec-9c78-48ea-a387-74e56b272667"
+        },
+        "contentFile": {
+            "url": "https://firebasestorage.googleapis.com/v0/b/jugglingwherehouse-126be.appspot.com/o/contentFiles%2Fthe_bread.mp4?alt=media&token=fca2f59c-2381-49ac-bdf8-9115de6557b2"
+        },
+        "isTrending": false,
+        "isRecommended": true,
+        "contentTimeDuration": 3.4,
+        "createdOnDate": 1632748627105
+    },
+    
+  ]
   
   console.log("categories", categories)
   return (
@@ -52,7 +80,7 @@ function HomeScreen({ navigation, user, userLogout, state, route, getCategory, c
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => {
                 return (
-                  <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.navigate("AboutMotivation")} style={{ width: 290 }}>
+                  <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.navigate("LiveNow")} style={{ width: 290 }}>
                     <Image style={styles.live} source={require('../../assets/live.png')} />
                     <Image
                       style={{ width: "100%", height: "100%", marginLeft: 3, resizeMode: "contain" }}
@@ -66,12 +94,12 @@ function HomeScreen({ navigation, user, userLogout, state, route, getCategory, c
             <Text style={styles.trending}>Trending Now</Text>
             <FlatList
               showsVerticalScrollIndicator="none"
-              data={reason1}
+              data={data}
               keyExtractor={(item, index) => index}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => {
-                return <TrendingCard displayImage={item.image} />
+                return <TrendingCard displayImage={item.contentImage.url} timeLength={item.contentTimeDuration} data={item} navigation={navigation}/>
               }}>
             </FlatList>
           </View>
@@ -79,12 +107,14 @@ function HomeScreen({ navigation, user, userLogout, state, route, getCategory, c
             <Text style={styles.top}>Top Searches</Text>
             <FlatList
               keyExtractor={(item, index) => index}
-              data={reason2}
+              data={data}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => {
                 return (
-                  <Image style={styles.search} source={item.image} />
+                  <TouchableOpacity  onPress={() => navigation.navigate("AboutMotivation", {data: item})}>
+                      <Image style={styles.search} source={{uri: item.contentImage.url}} />
+                  </TouchableOpacity>
                 )
               }}>
             </FlatList>
@@ -92,17 +122,17 @@ function HomeScreen({ navigation, user, userLogout, state, route, getCategory, c
           <View style={styles.box5}>
             <Text style={styles.recomend}>Recommended</Text>
             <FlatList
-              data={reason3}
+              data={data}
               keyExtractor={(item, index) => index}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => {
                 return (
-                  <View style={{ width: 240, position: "relative", padding: 0, }}>
+                  <TouchableOpacity onPress={() => navigation.navigate("AboutMotivation", {data: item})} style={{ width: 240, position: "relative", padding: 0, }}>
                     <Image
                       style={styles.untitled}
-                      source={item.image} />
-                  </View>
+                      source={{uri: item.contentImage.url}} />
+                  </TouchableOpacity>
                 )
               }}>
             </FlatList>

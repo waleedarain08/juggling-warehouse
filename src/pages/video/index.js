@@ -7,10 +7,11 @@ import Video from 'react-native-video';
 // "background.mp4" in your project. You can include multiple videos
 // on a single screen if you like.
 
-export const VideoPlayer = () => {
+export const VideoPlayer = ({navigation, route}) => {
 
     const [orientation, setOrientation] = React.useState('landscape')
-
+    const [videoUrl, setVideoUrl] = React.useState(route.params ? route.params.url : "https://firebasestorage.googleapis.com/v0/b/jugglingwherehouse-126be.appspot.com/o/1603987530-1-pixabay.mp4?alt=media&token=0bac7973-8a51-4f36-bc3c-0dd57fe955eb")
+    console.log("route.params", route.params, route)
     React.useEffect(() => {
         detectOrientation()
         Dimensions.addEventListener('change', detectOrientation);
@@ -37,7 +38,7 @@ export const VideoPlayer = () => {
 
      
     return(
-            <Video source={{uri: "https://firebasestorage.googleapis.com/v0/b/jugglingwherehouse-126be.appspot.com/o/1603987530-1-pixabay.mp4?alt=media&token=0bac7973-8a51-4f36-bc3c-0dd57fe955eb"}}   // Can be a URL or a local file.
+            <Video source={{uri: videoUrl}}   // Can be a URL or a local file.
                 ref={(ref) => {
                     // this.player = ref
                 }}                                      // Store reference

@@ -1,9 +1,11 @@
-import { FETCHED, ERROR, FETCHING, CATEGORY_CONTENT_FETCHED, CATEGORY_FETCHED, CONTENT_DETAILS_FETCHED, DOWNLOAD_COUNT_FETCHED } from '../constants';
+import { FETCHED, ERROR, FETCHING, CATEGORY_CONTENT_FETCHED, CATEGORY_FETCHED, CONTENT_DETAILS_FETCHED, DOWNLOAD_COUNT_FETCHED, RECOMMENDED_CONTENT_FETCHED, TRENDING_CONTENT_FETCHED } from '../constants';
 
 const initialState = {
   loading: false,
   categories: [],
   categoryContents: [],
+  recommendedContent: [],
+  trendingContent: [],
   contenDetails: null,
   downloadCount: 0
 };
@@ -44,6 +46,16 @@ const content = (state = initialState, action) => {
       return {
         ...state,
         downloadCount: action.payload
+      }
+    case RECOMMENDED_CONTENT_FETCHED:
+      return {
+        ...state,
+        recommendedContent: action.payload
+      }
+    case TRENDING_CONTENT_FETCHED:
+      return {
+        ...state,
+        trendingContent: action.payload
       }
     default:
       return state;

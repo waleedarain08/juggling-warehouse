@@ -8,13 +8,14 @@ import { downloadFile } from '../../helper/downloadFile';
 
 
 
-function DetailScreen({ navigation }) {
+function DetailScreen({ navigation, state, route }) {
 
     const [reason, setReason] = useState([{ title: "abc", image: require('../../assets/01-tile.png') }, { title: "def", image: require('../../assets/02-tile.png') }, { title: "ghi", image: require('../../assets/03-tile.png') }, { title: "ghi", image: require('../../assets/01-tile.png') }, { title: "ghi", image: require('../../assets/02-tile.png') }, { title: "ghi", image: require('../../assets/03-tile.png') }]);
     const [modalVisible, setModalVisible] = useState(false);
     const [checked, setChecked] = useState(true);
     const [checked1, setChecked1] = useState(false);
     const [checked2, setChecked2] = useState(false);
+    const [data, setData] = useState(route.params ? route.params.data: {})
 
     const handleCheckBox = (checkBox) => {
         setChecked(1);
@@ -34,26 +35,27 @@ function DetailScreen({ navigation }) {
         setChecked2(1);
     }
 
+    console.log("state, route", route)
+
     return (
         <View style={styles.container}>
-            <ScrollView contentContainerStyle={{ height:700 }}  showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{flex:1,flexGrow:1}}>
                 <View style={styles.box2}>
                     <Image
                         style={{ width: "100%", height: 200 }}
-                        source={require('../../assets/vedio.png')} />
+                        source={{uri: data.contentImage.url}} />
                 </View>
                 <View style={styles.box3}>
                     <View style={styles.downsec}>
                         <View style={{ flex: 3, }}>
-                            <Text style={styles.motivation2}>About Motivations</Text></View>
+                            <Text style={styles.motivation2}>{data.contentName}</Text></View>
                         <View style={{ flex: 1.5, alignItems: "flex-end", paddingLeft: 1, }}>
                             <Image style={styles.list} source={require('../../assets/list.png')} />
                         </View>
                         <View style={{ flex: 1, alignItems: "center", paddingLeft: 3, }}>
-                            <Pressable onPress={() => setModalVisible(!modalVisible)}>
-                                <Image
-                                    style={styles.download} source={require('../../assets/downloadicon.png')} />
+                            <Pressable onPress={() => downloadFile(data.contentFile.url)}>
+                                <Image style={styles.download} source={require('../../assets/downloadicon.png')} />
                             </Pressable>
                         </View>
                     </View>
@@ -62,17 +64,17 @@ function DetailScreen({ navigation }) {
                         <Image style={styles.star} source={require('../../assets/rating.png')} />
                         <Text style={styles.rats}>20.5</Text>
                         <Image style={styles.star} source={require('../../assets/loading.png')} />
-                        <Text style={styles.rats}>152mins</Text>
+                        <Text style={styles.rats}>{data.contentTimeDuration} hrs</Text>
                         <Text style={styles.hdsc}>HD</Text>
                     </View>
                 </View>
                 <View style={styles.box4}>
-                    <Text style={styles.para}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero nulla temporibus ratione doloremque. Vero cum esse blanditiis quisquam omnis repellendus recusandae distinctio.Vel, quasi dolores blanditiis delectus nihil, Lorem ipsum dolor</Text>
+                    <Text style={styles.para}>{data.contentDescription}</Text>
                 </View>
                 <View  style={styles.box5}>
                 <Image style={styles.play} source={require('../../assets/playicon.png')} />
                     <Button
-                        onPress={() => navigation.navigate('Video')}
+                        onPress={() => navigation.navigate('Video', {url: data.contentFile.url})}
                         title="Watch Now"
                     />
                 </View>
@@ -98,93 +100,6 @@ function DetailScreen({ navigation }) {
                 </View>
             </ScrollView>
             <View style={{height:30}}></View>
-            <Modal
-                animationType="fade"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                    setModalVisible(!modalVisible);
-                }}
-            >
-                <View style={styles.centeredView}>
-                <TouchableOpacity  style={styles.cancel} onPress={() => setModalVisible(false)}>
-                <Image style={styles.cancel02} source={require("../../assets/cancel.png")} />
-                </TouchableOpacity>
-                    <View style={{ backgroundColor: "#24243c", paddingHorizontal: 61, paddingVertical: 28 }}>
-                        <View style={styles.popupicon}>
-                            <Image style={styles.popup} source={require("../../assets/popdownload.png")} />
-                        </View>
-                        <Text style={styles.modalText}>Download Film</Text>
-                    </View>
-                    <View style={{ backgroundColor: "#191931", padding: 10 }}>
-                    <View style={{ flexDirection: "row", alignItems:"center",paddingVertical:6,}}>
-                        <View style={{flexDirection:"row",justifyContent:"center",alignItems:"center",right:9}}>
-                            <CheckBox
-                            size={20}
-                            containerStyle={{ padding:0,width:18,height:20 }}
-                            checked={checked}
-                            onPress={()=>handleCheckBox()}
-                            />
-                            <View style={{ flexDirection: "row", paddingRight: 20 }}>
-                                <Text style={styles.hihtdv}>High</Text>
-                                <View style={{borderRightColor:"#fff",borderRightWidth:1,borderLeftWidth:1,borderLeftColor:"#fff",borderRadius:5}}>
-                                <Text style={styles.rate}>720</Text>
-                                </View>
-                            </View>
-                            </View>
-                            <View>
-                                <Text style={styles.soundgb}>3.5 GB</Text>
-                            </View>
-                        </View>
-                        <View style={{ flexDirection: "row", alignItems:"center",paddingVertical:6}}>
-                        <View style={{flexDirection:"row",justifyContent:"center",alignItems:"center",right:9}}>
-                            <CheckBox 
-                            size={20}
-                            containerStyle={{ padding:0,width:18,height:20, }}
-                            checked={checked1}
-                            onPress={()=>handleCheckBox1()}
-                            />
-                            <View style={{ flexDirection: "row", paddingRight: 20 }}>
-                                <Text style={styles.hihtdv}>Med</Text>
-                                <View style={{borderRightColor:"#fff",borderRightWidth:1,borderLeftWidth:1,borderLeftColor:"#fff",borderRadius:5}}>
-                                <Text style={styles.rate}>360</Text>
-                                </View>
-                            </View>
-                            </View>
-                            <View>
-                                <Text style={styles.soundgb}>3.5 GB</Text>
-                            </View>
-                        </View>
-                        <View style={{ flexDirection: "row", alignItems:"center",paddingVertical:6}}>
-                        <View style={{flexDirection:"row",justifyContent:"center",alignItems:"center",right:9}}>
-                            <CheckBox
-                            checked={useState.isChecked}
-                            onPress={useState.handlePressCheckedBox}
-                            size={20}
-                            containerStyle={{ padding:0,width:18,height:20, }}
-                            checked={checked2}
-                            onPress={()=>handleCheckBox2()}
-                            />
-                            <View style={{ flexDirection: "row", paddingRight: 20 }}>
-                                <Text style={styles.hihtdv}>Low</Text>
-                                <View style={{borderRightColor:"#fff",borderRightWidth:1,borderLeftWidth:1,borderLeftColor:"#fff",borderRadius:5}}>
-                                <Text style={styles.rate}>144</Text>
-                                </View>
-                            </View>
-                            </View>
-                            <View>
-                                <Text  style={{paddingLeft:47,  color: "#b2b1b6", fontSize: 12,}}>3.5 GB</Text>
-                            </View>
-                        </View>
-                        <Pressable
-                            style={[styles.button, styles.buttonClose]}
-                            onPress={() => downloadFile()}
-                        >
-                            <Text style={styles.textStyle}>Download</Text>
-                        </Pressable>
-                    </View>
-                </View>
-            </Modal>
         </View>
     );
 }
@@ -287,7 +202,9 @@ const styles = StyleSheet.create({
         resizeMode:"contain",
     },
     box4: {
-        flex: 2.2,
+        // flex: 1,
+        paddingVertical: 5,
+        marginTop: 15
     },
     para: {
         color: "#ffffff",

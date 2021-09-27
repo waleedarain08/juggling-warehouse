@@ -14,7 +14,8 @@ export const downloadFile = (url) => {
         description : 'Downloading Video.'
     }
     }
-    config(options).fetch('GET', 'https://firebasestorage.googleapis.com/v0/b/jugglingwherehouse-126be.appspot.com/o/1603987530-1-pixabay.mp4?alt=media&token=0bac7973-8a51-4f36-bc3c-0dd57fe955eb')
+    console.log("url", url)
+    config(options).fetch('GET', url)
     .then((res) => {
         // do some magic here
         console.log("image download response", res)
