@@ -22,6 +22,8 @@ import RtcEngine, {
   AudienceLatencyLevelType,
   RtcRemoteView,
 } from 'react-native-agora';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Item from '../../components/Item';
 
 const config = require('../../../agora.config.json');
@@ -34,7 +36,7 @@ interface State {
   isLowAudio: boolean;
 }
 
-export default class LiveStreaming extends Component<{}, State, any> {
+ class LiveStreaming extends Component<{}, State, any> {
   _engine?: RtcEngine;
 
   constructor(props: {}) {
@@ -76,6 +78,8 @@ export default class LiveStreaming extends Component<{}, State, any> {
 
   _initEngine = async () => {
     const { role } = this.state;
+    const { userInfo } = this.props
+    console.log('userInfo.user.id',typeof parseInt(userInfo.user.id), parseInt(userInfo.user.id), role)
     if (Platform.OS === 'android') {
       await PermissionsAndroid.requestMultiple([
         PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
@@ -112,6 +116,9 @@ export default class LiveStreaming extends Component<{}, State, any> {
     );
   };
   _addListeners = () => {
+    this._engine?.addListener('RtcStats', RTcStats => {
+      // console.info('RTcStats',  RTcStats,  this.state.role == ClientRole.Broadcaster ? "Broadcaster" : "Audience")
+    })
     this._engine?.addListener('Warning', (warningCode) => {
       console.info('Warning', warningCode, this.state.role == ClientRole.Broadcaster ? "Broadcaster" : "Audience");
     });
@@ -131,9 +138,8 @@ export default class LiveStreaming extends Component<{}, State, any> {
       console.info('UserOffline', e, this.state.role == ClientRole.Broadcaster ? "Broadcaster" : "Audience");
       this.setState({ remoteUid: undefined });
     });
-    this._engine?.addListener('ConnectionLost', (e,i) => {
-      alert('ConnectionLost')
-      console.info('UserOffline', e, this.state.role == ClientRole.Broadcaster ? "Broadcaster" : "Audience");
+    this._engine?.addListener('ConnectionLost', (e) => {
+      console.info('ConnectionLost', e, this.state.role == ClientRole.Broadcaster ? "Broadcaster" : "Audience");
       this.setState({ remoteUid: undefined });
     });
   };
@@ -235,7 +241,16 @@ export default class LiveStreaming extends Component<{}, State, any> {
   };
 }
 
+const mapStateToProps = state => {
+  return {
+    userInfo: state.user.userData
+  };
+};
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(LiveStreaming)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
