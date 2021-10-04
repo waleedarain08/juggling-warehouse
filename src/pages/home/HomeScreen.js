@@ -2,14 +2,14 @@ import React, { Component, useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, Dimensions, ScrollView, Pressable, TouchableOpacity, Modal } from 'react-native';
 import { BlurView } from "@react-native-community/blur";
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, useStore, useSelector } from 'react-redux';
 import { userLogout } from '../../redux/actions';
-import { getCategory, getDownloadFilesCount } from '../../redux/actions/content';
+import { getCategory, getDownloadFilesCount, getRecommendedContent } from '../../redux/actions/content';
 import { getDeviceToken } from '../../helper/utils';
 import { TrendingCard } from '../../components/Card/trendingCard';
 import { getStoragePermission } from '../../helper/requestPermission';
 
-function HomeScreen({ navigation, user, userLogout, state, route, getCategory, categories, getDownloadFilesCount }) {
+function HomeScreen({ navigation, user, userLogout, state, route, getCategory, categories, getDownloadFilesCount, getRecommendedContent }) {
   const [reason, setReason] = useState([{ title: "abc", image: require('../../assets/vedio.png') }, { title: "def", image: require('../../assets/vedio.png') }, { title: "ghi", image: require('../../assets/vedio.png') },]);
   const [reason1, setReason1] = useState([{ title: "abc", image: require('../../assets/050.png') }, { title: "abc", image: require('../../assets/030.png') }, { title: "abc", image: require('../../assets/040.png') }, { title: "abc", image: require('../../assets/020.png') }, { title: "abc", image: require('../../assets/050.png') }, { title: "abc", image: require('../../assets/030.png') }]);
   const [reason2, setReason2] = useState([{ title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }, { title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }, { title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }]);
@@ -24,10 +24,14 @@ function HomeScreen({ navigation, user, userLogout, state, route, getCategory, c
     getCategory()
     getDownloadFilesCount()
     getStoragePermission()
+    getRecommendedContent()
     // getDeviceToken()
     // .then(token => console.log("HOMESCREEN token", token))
     // .catch(err => console.log("HOMESCREEN err", err))
   }, [])
+
+  const recommendedContent = useSelector((state) => state.content.recommendedContent)
+  console.log("recommendedContent", recommendedContent)
 
   const data =  [
     {
@@ -57,7 +61,6 @@ function HomeScreen({ navigation, user, userLogout, state, route, getCategory, c
     
   ]
   
-  console.log("categories", categories)
   return (
     <View style={styles.container}>
       <View style={styles.cate}>
@@ -172,7 +175,7 @@ function HomeScreen({ navigation, user, userLogout, state, route, getCategory, c
               {categories.map((item, index) => {
                 return (
                   <Text onPress={() => setModalVisible(false)}
-                    style={styles.homelist}>{item.Text}</Text>
+                    style={styles.homelist}>{item.category_name}</Text>
                 )
               })}
               <Text onPress={() => setModalVisible(false)} style={styles.firstHeading}>Stan-up</Text>
@@ -193,7 +196,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ userLogout, getCategory, getDownloadFilesCount }, dispatch);
+  bindActionCreators({ userLogout, getCategory, getDownloadFilesCount, getRecommendedContent }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 

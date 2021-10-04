@@ -439,6 +439,7 @@ function RootContainer({ user,userLogin }) {
     };
     bootstrapAsync();
   }, []);
+  console.log("user user Navigator", user)
   return (
     <Stack.Navigator  initialRouteName="Login"  screenOptions={{headerShown:false}} sdetachInactiveScreens={true}>
       {user.loggedin ? <Stack.Screen name="MainDrawer" component={MainDrawer} /> : <Stack.Screen name="Login" component={LoginStack} />}

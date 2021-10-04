@@ -1,3 +1,4 @@
+import { Alert } from "react-native"
 import { getDownloadCount } from "../../helper/downloadFile"
 import { getDataFromAsyncStorage } from "../../helper/utils"
 import { getApi } from "../api"
@@ -10,9 +11,10 @@ export const getCategory = () => {
       dispatch({ type: FETCHING })
         let token = await getDataFromAsyncStorage('token')
         let { data } = await getApi(`${base_url}/category`, '', token)
-      
-      if (data.code == 200) {
-          dispatch({type: CATEGORY_FETCHED, payload: data});
+      console.log("data userSignin action", data)
+
+      if (data.isSuccess) {
+          dispatch({type: CATEGORY_FETCHED, payload: data.data});
           return Promise.resolve({ status: true })
       } else {
         Alert.alert("error", data.message)
@@ -35,7 +37,7 @@ export const getCategoryContents = (catId, page = 1, count = 10) => {
         let token = await getDataFromAsyncStorage('token')
         let { data } = await getApi(`${base_url}/content/category/${catId}?page=${page}&count=${count}`, '', token)
       
-      if (data.code == 200) {
+      if (data.isSuccess) {
           dispatch({type: CATEGORY_CONTENT_FETCHED, payload: data});
           return Promise.resolve({ status: true })
       } else {
@@ -59,7 +61,7 @@ export const getContentDetails = (contentId) => {
         let token = await getDataFromAsyncStorage('token')
         let { data } = await getApi(`${base_url}/content/${contentId}`, '', token)
       
-      if (data.code == 200) {
+      if (data.isSuccess) {
           dispatch({type: CONTENT_DETAILS_FETCHED, payload: data});
           return Promise.resolve({ status: true })
       } else {
@@ -95,7 +97,7 @@ export const getRecommendedContent = () => {
         let token = await getDataFromAsyncStorage('token')
         let { data } = await getApi(`${base_url}/content/recommended?page=1`, '', token)
       
-      if (data.code == 200) {
+      if (data.isSuccess) {
           dispatch({type: RECOMMENDED_CONTENT_FETCHED, payload: data});
           return Promise.resolve({ status: true })
       } else {
@@ -119,7 +121,7 @@ export const getTrendingContent = () => {
         let token = await getDataFromAsyncStorage('token')
         let { data } = await getApi(`${base_url}/content/trendings?page=1`, '', token)
       
-      if (data.code == 200) {
+      if (data.isSuccess) {
           dispatch({type: TRENDING_CONTENT_FETCHED, payload: data});
           return Promise.resolve({ status: true })
       } else {
@@ -143,7 +145,7 @@ export const searchContent = (searchKeyword) => {
         let token = await getDataFromAsyncStorage('token')
         let { data } = await getApi(`${base_url}/content/search?keyword=${searchKeyword}`, '', token)
       
-      if (data.code == 200) {
+      if (data.isSuccess) {
           dispatch({type: SEARCHED_CONTENT_FETCHED, payload: data});
           return Promise.resolve({ status: true })
       } else {

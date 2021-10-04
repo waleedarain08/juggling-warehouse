@@ -44,7 +44,7 @@ function Signup({ navigation, userInfo, userRegister }) {
                 setIsLoading(true);
                 let token = await res.user.getIdToken()
                 let { status } = await userRegister(userObj, token)
-
+                console.log("status userRegister", status)
                 if(status) {
                     navigation.navigate('Login')
                 }

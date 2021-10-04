@@ -31,7 +31,7 @@ export const postApi = async (url, data, auth) => {
         'Authorization': `Bearer ${auth}`, 
       }
     })
-    console.log(response, "response")
+    console.log("response",response)
     if (response.status == 200) {
       return Promise.resolve({
         status: 'success',
@@ -39,6 +39,7 @@ export const postApi = async (url, data, auth) => {
       })
     }
   } catch (e) {
+    console.log("error", "e")
     return Promise.reject(e)
   }
 }

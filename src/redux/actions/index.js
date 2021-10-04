@@ -3,6 +3,7 @@ import base_url from '../api/base_url';
 import { getApi, patchApi, postApi } from '../api';
 import { getDataFromAsyncStorage } from '../../helper/utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert } from 'react-native';
 // export function userLogin(username, password) {
 //   return dispatch => {
 //     dispatch({type: USER_LOGIN, userData: {username, password}});
@@ -29,9 +30,8 @@ export const userRegister = (user, token) => {
     try {
       dispatch({ type: FETCHING })
       let { data } = await postApi(`${base_url}/user/signup`, user, token)
-      
       dispatch({ type: FETCHED })
-      if (data.code == 200) {
+      if (data.isSuccess) {
           Alert.alert("Success", "User Registerd Successfully")
           return Promise.resolve({ status: true })
 
@@ -55,7 +55,7 @@ export const userSignin = (token) => {
       dispatch({ type: FETCHING })
       let { data } = await getApi(`${base_url}/user/signin`, '', token)
       
-      if (data.code == 200) {
+      if (data.isSuccess) {
           Alert.alert("Success", "User Signin Successfully")
           dispatch({type: USER_LOGIN, payload: data});
           return Promise.resolve({ status: true })
@@ -80,7 +80,7 @@ export const updateProfile = (obj) => {
       let { data } = await patchApi(`${base_url}/user/update`, obj, token)
       
       dispatch({ type: FETCHED })
-      if (data.code == 200) {
+      if (data.isSuccess) {
           Alert.alert("Success", "Profile Updated Successfully")
           return Promise.resolve({ status: true })
 
