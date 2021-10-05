@@ -35,8 +35,6 @@ function DetailScreen({ navigation, state, route }) {
         setChecked2(1);
     }
 
-    console.log("state, route", route)
-
     return (
         <View style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>

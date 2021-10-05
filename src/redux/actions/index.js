@@ -11,7 +11,6 @@ import { Alert } from 'react-native';
 // }
 
 export function userLogin(data) {
-  console.log('data', data)
   return dispatch => {
     dispatch({type: USER_LOGIN, payload: data});
 
@@ -77,7 +76,7 @@ export const updateProfile = (obj) => {
     try {
       dispatch({ type: FETCHING })
       let token = await getDataFromAsyncStorage('token')
-      let { data } = await patchApi(`${base_url}/user/update`, obj, token)
+      let { data } = await patchApi(`${base_url}/user/update`, obj, token.token)
       
       dispatch({ type: FETCHED })
       if (data.isSuccess) {

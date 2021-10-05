@@ -14,7 +14,6 @@ export const downloadFile = (url) => {
         description : 'Downloading Video.'
     }
     }
-    console.log("url", url)
     config(options).fetch('GET', url)
     .then((res) => {
         // do some magic here

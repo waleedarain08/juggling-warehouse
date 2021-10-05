@@ -33,7 +33,11 @@ function Login({ navigation, userInfo, userLogin, userSignin }) {
     auth().signInWithEmailAndPassword(data.Email, data.Password).then(async (userCredential) => {
         let token = await userCredential.user.getIdToken(true)
         setIsLoading(false);
-        saveDataInAsyncStorage("token", token)
+        var data = {
+          user: userCredential.user, 
+          token: token
+        }
+        saveDataInAsyncStorage("token", JSON.stringify(data))
         userSignin(token);
       })
       .catch(error => {
@@ -69,7 +73,6 @@ function Login({ navigation, userInfo, userLogin, userSignin }) {
 
     // Sign-in the user with the credential
     auth().signInWithCredential(googleCredential).then(() => {
-      console.log("googleCredential", googleCredential)
       var data = {
         user: user, 
         token: idToken
@@ -101,7 +104,6 @@ function Login({ navigation, userInfo, userLogin, userSignin }) {
 
     // Sign-in the user with the credential
     auth().signInWithCredential(facebookCredential).then(() => {
-      console.log('facebookCredential', facebookCredential)
       var data = {user: facebookCredential, token: facebookCredential.token}
       saveDataInAsyncStorage("token", JSON.stringify(data))
       userLogin(data);

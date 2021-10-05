@@ -26,6 +26,8 @@ import CustomTabBar from './CustomTabBar';
 import LiveNow from './pages/home/LiveNow';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { VideoPlayer } from './pages/video';
+import { getDataFromAsyncStorage, saveDataInAsyncStorage } from './helper/utils';
+import auth from '@react-native-firebase/auth'
 
 const useInitialRender = () => {
   const [isInitialRender, setIsInitialRender] = useState(false);
@@ -422,16 +424,22 @@ function RootContainer({ user,userLogin }) {
   useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
-      let token;
 
-      try {
-        token = await AsyncStorage.getItem("token");
-      } catch (e) {
-        // Restoring token failed
-      }
+      auth().onIdTokenChanged(async (user) => {
+        const idToken = await user.getIdToken(true)
+        var data = {
+          user: user, 
+          token: idToken
+        }
+        saveDataInAsyncStorage("token", JSON.stringify(data))
+      })
+
+      var token = await getDataFromAsyncStorage('token')
+      console.log("userData token", token)
+
       if (token !== null) {
         setTimeout(() => {
-          userLogin( JSON.parse(token));
+          userLogin(token);
         }, 500);
       } else {
         
@@ -439,7 +447,6 @@ function RootContainer({ user,userLogin }) {
     };
     bootstrapAsync();
   }, []);
-  console.log("user user Navigator", user)
   return (
     <Stack.Navigator  initialRouteName="Login"  screenOptions={{headerShown:false}} sdetachInactiveScreens={true}>
       {user.loggedin ? <Stack.Screen name="MainDrawer" component={MainDrawer} /> : <Stack.Screen name="Login" component={LoginStack} />}

@@ -13,7 +13,7 @@ export const saveDataInAsyncStorage = async (key, value) => {
 export const getDataFromAsyncStorage = async (key) => {
     try {
         var value = await AsyncStorage.getItem(key);
-        return value
+        return typeof value == "string" ? JSON.parse(value) : value
     } catch (error) {
         
     }

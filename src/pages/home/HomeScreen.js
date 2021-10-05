@@ -4,12 +4,12 @@ import { BlurView } from "@react-native-community/blur";
 import { bindActionCreators } from 'redux';
 import { connect, useStore, useSelector } from 'react-redux';
 import { userLogout } from '../../redux/actions';
-import { getCategory, getDownloadFilesCount, getRecommendedContent } from '../../redux/actions/content';
+import { getCategory, getDownloadFilesCount, getRecommendedContent, getTrendingContent } from '../../redux/actions/content';
 import { getDeviceToken } from '../../helper/utils';
 import { TrendingCard } from '../../components/Card/trendingCard';
 import { getStoragePermission } from '../../helper/requestPermission';
 
-function HomeScreen({ navigation, user, userLogout, state, route, getCategory, categories, getDownloadFilesCount, getRecommendedContent }) {
+function HomeScreen({ navigation, user, userLogout, state, route, getCategory, categories, getDownloadFilesCount, getRecommendedContent, getTrendingContent }) {
   const [reason, setReason] = useState([{ title: "abc", image: require('../../assets/vedio.png') }, { title: "def", image: require('../../assets/vedio.png') }, { title: "ghi", image: require('../../assets/vedio.png') },]);
   const [reason1, setReason1] = useState([{ title: "abc", image: require('../../assets/050.png') }, { title: "abc", image: require('../../assets/030.png') }, { title: "abc", image: require('../../assets/040.png') }, { title: "abc", image: require('../../assets/020.png') }, { title: "abc", image: require('../../assets/050.png') }, { title: "abc", image: require('../../assets/030.png') }]);
   const [reason2, setReason2] = useState([{ title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }, { title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }, { title: "abc", image: require('../../assets/01-tile.png') }, { title: "abc", image: require('../../assets/02-tile.png') }, { title: "abc", image: require('../../assets/03-tile.png') }]);
@@ -25,13 +25,14 @@ function HomeScreen({ navigation, user, userLogout, state, route, getCategory, c
     getDownloadFilesCount()
     getStoragePermission()
     getRecommendedContent()
+    getTrendingContent()
     // getDeviceToken()
     // .then(token => console.log("HOMESCREEN token", token))
     // .catch(err => console.log("HOMESCREEN err", err))
   }, [])
 
   const recommendedContent = useSelector((state) => state.content.recommendedContent)
-  console.log("recommendedContent", recommendedContent)
+  const trendingContent = useSelector((state) => state.content.trendingContent)
 
   const data =  [
     {
@@ -97,7 +98,7 @@ function HomeScreen({ navigation, user, userLogout, state, route, getCategory, c
             <Text style={styles.trending}>Trending Now</Text>
             <FlatList
               showsVerticalScrollIndicator="none"
-              data={data}
+              data={trendingContent}
               keyExtractor={(item, index) => index}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
@@ -125,7 +126,7 @@ function HomeScreen({ navigation, user, userLogout, state, route, getCategory, c
           <View style={styles.box5}>
             <Text style={styles.recomend}>Recommended</Text>
             <FlatList
-              data={data}
+              data={recommendedContent}
               keyExtractor={(item, index) => index}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
@@ -196,7 +197,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ userLogout, getCategory, getDownloadFilesCount, getRecommendedContent }, dispatch);
+  bindActionCreators({ userLogout, getCategory, getDownloadFilesCount, getRecommendedContent, getTrendingContent }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 

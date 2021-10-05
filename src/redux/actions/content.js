@@ -10,8 +10,7 @@ export const getCategory = () => {
     try {
       dispatch({ type: FETCHING })
         let token = await getDataFromAsyncStorage('token')
-        let { data } = await getApi(`${base_url}/category`, '', token)
-      console.log("data userSignin action", data)
+        let { data } = await getApi(`${base_url}/category`, '', token.token)
 
       if (data.isSuccess) {
           dispatch({type: CATEGORY_FETCHED, payload: data.data});
@@ -35,7 +34,7 @@ export const getCategoryContents = (catId, page = 1, count = 10) => {
     try {
       dispatch({ type: FETCHING })
         let token = await getDataFromAsyncStorage('token')
-        let { data } = await getApi(`${base_url}/content/category/${catId}?page=${page}&count=${count}`, '', token)
+        let { data } = await getApi(`${base_url}/content/category/${catId}?page=${page}&count=${count}`, '', token.token)
       
       if (data.isSuccess) {
           dispatch({type: CATEGORY_CONTENT_FETCHED, payload: data});
@@ -59,7 +58,7 @@ export const getContentDetails = (contentId) => {
     try {
       dispatch({ type: FETCHING })
         let token = await getDataFromAsyncStorage('token')
-        let { data } = await getApi(`${base_url}/content/${contentId}`, '', token)
+        let { data } = await getApi(`${base_url}/content/${contentId}`, '', token.token)
       
       if (data.isSuccess) {
           dispatch({type: CONTENT_DETAILS_FETCHED, payload: data});
@@ -82,7 +81,6 @@ export const getDownloadFilesCount = () => {
   return async (dispatch) => {
    try {
       const count = await getDownloadCount()
-      console.log("count", count.length)
       dispatch({type: DOWNLOAD_COUNT_FETCHED, payload: count.length});
    } catch (error) {
       console.log("error getDownloadFilesCount", error)
@@ -90,15 +88,14 @@ export const getDownloadFilesCount = () => {
   };
 }
 
-export const getRecommendedContent = () => {
+export const getRecommendedContent = (count = 10) => {
   return async (dispatch) => {
     try {
       dispatch({ type: FETCHING })
         let token = await getDataFromAsyncStorage('token')
-        let { data } = await getApi(`${base_url}/content/recommended?page=1`, '', token)
-      
+        let { data } = await getApi(`${base_url}/content/recommended?page=1&count=${count}`, '', token.token)
       if (data.isSuccess) {
-          dispatch({type: RECOMMENDED_CONTENT_FETCHED, payload: data});
+          dispatch({type: RECOMMENDED_CONTENT_FETCHED, payload: data.data.list});
           return Promise.resolve({ status: true })
       } else {
         Alert.alert("error", data.message)
@@ -114,15 +111,15 @@ export const getRecommendedContent = () => {
   }
 }
 
-export const getTrendingContent = () => {
+export const getTrendingContent = (count = 10) => {
   return async (dispatch) => {
     try {
       dispatch({ type: FETCHING })
         let token = await getDataFromAsyncStorage('token')
-        let { data } = await getApi(`${base_url}/content/trendings?page=1`, '', token)
+        let { data } = await getApi(`${base_url}/content/trendings?page=1&count=${count}`, '', token.token)
       
       if (data.isSuccess) {
-          dispatch({type: TRENDING_CONTENT_FETCHED, payload: data});
+          dispatch({type: TRENDING_CONTENT_FETCHED, payload: data.data.list});
           return Promise.resolve({ status: true })
       } else {
         Alert.alert("error", data.message)
@@ -143,7 +140,7 @@ export const searchContent = (searchKeyword) => {
     try {
       dispatch({ type: FETCHING })
         let token = await getDataFromAsyncStorage('token')
-        let { data } = await getApi(`${base_url}/content/search?keyword=${searchKeyword}`, '', token)
+        let { data } = await getApi(`${base_url}/content/search?keyword=${searchKeyword}`, '', token.token)
       
       if (data.isSuccess) {
           dispatch({type: SEARCHED_CONTENT_FETCHED, payload: data});

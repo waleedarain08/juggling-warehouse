@@ -22,7 +22,6 @@ export const getApi = async (url, data, token) => {
 }
 
 export const postApi = async (url, data, auth) => {
-  console.log(url, data, auth)
   try {
     let response = await axios.post(url, data, {
       headers: {
@@ -39,14 +38,12 @@ export const postApi = async (url, data, auth) => {
       })
     }
   } catch (e) {
-    console.log("error", "e")
     return Promise.reject(e)
   }
 }
 
 
 export const patchApi = async (url, data, auth) => {
-  console.log(url, data, auth)
   try {
     let response = await axios.patch(url, data, {
       headers: {
