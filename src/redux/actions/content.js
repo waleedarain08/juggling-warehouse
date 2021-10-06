@@ -37,7 +37,7 @@ export const getCategoryContents = (catId, page = 1, count = 10) => {
         let { data } = await getApi(`${base_url}/content/category/${catId}?page=${page}&count=${count}`, '', token.token)
       
       if (data.isSuccess) {
-          dispatch({type: CATEGORY_CONTENT_FETCHED, payload: data});
+          dispatch({type: CATEGORY_CONTENT_FETCHED, payload: data.data.list});
           return Promise.resolve({ status: true })
       } else {
         Alert.alert("error", data.message)
@@ -103,10 +103,10 @@ export const getRecommendedContent = (count = 10) => {
         return Promise.resolve({ status: false })
       }
 
-    } catch ({ message }) {
-      console.log("getRecommendedContent Error", message)
+    } catch (error) {
+      console.log("getRecommendedContent Error", error)
       dispatch({ type: ERROR })
-      return Promise.reject({ status: false, message })
+      return Promise.reject({ status: false, message: error.message })
     }
   }
 }

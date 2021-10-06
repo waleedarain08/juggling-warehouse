@@ -28,6 +28,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { VideoPlayer } from './pages/video';
 import { getDataFromAsyncStorage, saveDataInAsyncStorage } from './helper/utils';
 import auth from '@react-native-firebase/auth'
+import CategoryContent from './pages/CategoryContent/CategoryContent';
 
 const useInitialRender = () => {
   const [isInitialRender, setIsInitialRender] = useState(false);
@@ -103,7 +104,7 @@ const profiletionIcon = navigation => {
     navigation.navigate('EditProfile');
   };
   return (
-    <TouchableOpacity activeOpacity={0.9} onPress={() => goNext()}>
+    <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.navigate('EditProfile')}>
       <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
         <Image
           style={{
@@ -164,6 +165,7 @@ function HomeTabAStack() {
         headerTitleStyle: {
           fontWeight: 'bold',
           fontFamily: 'Raleway-Regular',
+          textTransform: 'capitalize'
         },
       }}>
       <HomeTabAStackNav.Screen
@@ -177,6 +179,14 @@ function HomeTabAStack() {
       <HomeTabAStackNav.Screen
         name="Video"
         component={VideoPlayer}
+        options={({ navigation }) => ({
+          headerLeft: () => <Icon name="arrow-back" color="#fff" size={20} onPress={() => navigation.goBack()} style={{ marginLeft: 12 }} />,
+          // headerRight: () => notificationIcon(navigation),
+        })}
+      />
+      <HomeTabAStackNav.Screen
+        name="CategoryContent"
+        component={CategoryContent}
         options={({ navigation }) => ({
           headerLeft: () => <Icon name="arrow-back" color="#fff" size={20} onPress={() => navigation.goBack()} style={{ marginLeft: 12 }} />,
           // headerRight: () => notificationIcon(navigation),
@@ -424,7 +434,7 @@ function RootContainer({ user,userLogin }) {
   useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
-
+      console.log("navigator useEffect")
       auth().onIdTokenChanged(async (user) => {
         const idToken = await user.getIdToken(true)
         var data = {

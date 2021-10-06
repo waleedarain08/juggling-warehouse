@@ -11,7 +11,9 @@ import { Alert } from 'react-native';
 // }
 
 export function userLogin(data) {
-  return dispatch => {
+  return async dispatch => {
+    const userData = await getApi(`${base_url}/user/signin`, '', data.token)
+    data.user = userData.data.data
     dispatch({type: USER_LOGIN, payload: data});
 
   };

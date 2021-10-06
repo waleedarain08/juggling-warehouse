@@ -18,7 +18,7 @@ export default function EditProfile({ navigation }) {
      const [toggleUser2, setToggleUser2] = useState(0)
      const [toggleUser3, setToggleUser3] = useState(0)
      const [toggleUser4, setToggleUser4] = useState(0)
-     const [fullName, setFullName] = useState(userData.user ? userData.user.name : '')
+     const [fullName, setFullName] = useState(userData.user ? userData.user.fullName : '')
      const [Email, setEmail] = useState(userData.user ? userData.user.email : '')
      const [Phone, setPhone] = useState('')
      const [Dob, setDob] = useState('')

@@ -8,7 +8,7 @@ export const saveDataInAsyncStorage = async (key, value) => {
     } catch (e) {
         console.error(e)
     }
-  };
+};
 
 export const getDataFromAsyncStorage = async (key) => {
     try {

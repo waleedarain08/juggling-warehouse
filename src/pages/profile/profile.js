@@ -13,8 +13,8 @@ export default function profile({ navigation }) {
     const userData = useSelector((state) => state.user.userData)
     const downloadCount = useSelector((state) => state.content.downloadCount)
 
-
-     const [fullName, setFullName] = useState(userData.user ? userData.user.name : '')
+    console.log("userData.user", userData)
+     const [fullName, setFullName] = useState(userData.user ? userData.user.fullName : '')
      const [Email, setEmail] = useState(userData.user ? userData.user.email : '')
      const [Phone, setPhone] = useState('')
      const [Dob, setDob] = useState('')

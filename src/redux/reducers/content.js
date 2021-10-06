@@ -31,37 +31,44 @@ const content = (state = initialState, action) => {
     case CATEGORY_FETCHED: 
       return {
         ...state,
-        categories: action.payload
+        categories: action.payload,
+        loading: false,
       }
     case CATEGORY_CONTENT_FETCHED: 
       return {
         ...state,
-        categoryContents: action.payload
+        categoryContents: action.payload,
+        loading: false,
       }
     case CONTENT_DETAILS_FETCHED: 
       return {
         ...state,
-        contenDetails: action.payload
+        contenDetails: action.payload,
+        loading: false,
       }
     case DOWNLOAD_COUNT_FETCHED:
       return {
         ...state,
-        downloadCount: action.payload
+        downloadCount: action.payload,
+        loading: false,
       }
     case RECOMMENDED_CONTENT_FETCHED:
       return {
         ...state,
-        recommendedContent: action.payload
+        recommendedContent: action.payload,
+        loading: false,
       }
     case TRENDING_CONTENT_FETCHED:
       return {
         ...state,
-        trendingContent: action.payload
+        trendingContent: action.payload,
+        loading: false,
       }
     case SEARCHED_CONTENT_FETCHED:
       return {
         ...state,
-        searchContent: action.payload
+        searchContent: action.payload,
+        loading: false,
       }
     default:
       return state;

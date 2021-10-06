@@ -2,7 +2,7 @@ import React, { Component, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, Modal, ScrollView, Pressable, TouchableOpacity } from 'react-native';
 import { Input, Button, CheckBox } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { userLogout } from '../redux/actions';
 import { downloadFile } from '../../helper/downloadFile';
 
@@ -16,6 +16,8 @@ function DetailScreen({ navigation, state, route }) {
     const [checked1, setChecked1] = useState(false);
     const [checked2, setChecked2] = useState(false);
     const [data, setData] = useState(route.params ? route.params.data: {})
+
+    const recommendedContent = useSelector((state) => state.content.recommendedContent)
 
     const handleCheckBox = (checkBox) => {
         setChecked(1);
@@ -83,13 +85,13 @@ function DetailScreen({ navigation, state, route }) {
                     </View>
                     <FlatList
                         keyExtractor={(item, index) => index}
-                        data={reason}
+                        data={recommendedContent}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         renderItem={({ item }) => {
                             return (
                                 <View style={{ height: 100, width: 100 }}>
-                                    <Image style={styles.tile} source={item.image} />
+                                    <Image style={styles.tile} source={{uri: item.contentImage.url}}  />
                                 </View>
                             )
                         }}>
@@ -210,16 +212,16 @@ const styles = StyleSheet.create({
         lineHeight:20,
     },
     box5: {
-        flex: 0.8,
+        // flex: 0.8,
         paddingTop: 12,
-        position:"relative",
+        // position:"relative",
     },
     play:{
-        position:"absolute",
+        // position:"absolute",
         zIndex:1,
         height:10,width:10,
-        left:"32%",
-        top:"55%",
+        left:"35%",
+        top:"50%",
         resizeMode:"contain"
     },
     btn: {
