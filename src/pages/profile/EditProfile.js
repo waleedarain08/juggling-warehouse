@@ -3,10 +3,11 @@ import { View, Text, StyleSheet, FlatList, Image, Dimensions, ScrollView, Toucha
 import { Input, Button, Card, SearchBar } from 'react-native-elements';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import { useDispatch, useSelector } from 'react-redux';
-import { updateProfile } from '../../redux/actions';
+import { updateProfile, updateProfilePicture } from '../../redux/actions';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { launchimageLibrary } from '../../helper/utils';
-
+import moment from 'moment'
+import { uploadImageToStorage } from '../../helper/uploadFile';
 
 export default function EditProfile({ navigation }) {
     
@@ -20,18 +21,19 @@ export default function EditProfile({ navigation }) {
      const [toggleUser4, setToggleUser4] = useState(0)
      const [fullName, setFullName] = useState(userData.user ? userData.user.fullName : '')
      const [Email, setEmail] = useState(userData.user ? userData.user.email : '')
-     const [Phone, setPhone] = useState('')
-     const [Dob, setDob] = useState('')
-     const [Address, setAddress] = useState('')
+     const [Phone, setPhone] = useState(userData.user ? userData.user.contact : '')
+     const [Dob, setDob] =  useState(userData.user ? userData.user.dob : '')
+     const [Address, setAddress] = useState(userData.user ? userData.user.address : '')
      const [show, setShow] = useState(false)
-     const [profilePic, setProfilePic] = useState('')
+     const [profilePic, setProfilePic] = useState(userData.user ? userData.user.profilePicture : '')
 
      const submit = () => {
         dispatch(updateProfile({fullName: fullName, email: Email, contact: Phone, dob: Dob, address: Address}))
      }
 
      const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || (Dob ? Dob : new Date(1598051730000));
+         console.log("event, selectedDate", event, selectedDate, "Dob", Dob)
+        const currentDate = selectedDate || (Dob ? Dob : new Date());
         setShow(!show);
         setDob(currentDate);
       };
@@ -39,7 +41,10 @@ export default function EditProfile({ navigation }) {
       async function pickImage() {
         try {
             const res = await launchimageLibrary()
-            setProfilePic(res.data)
+            const uri = await uploadImageToStorage(res.data.uri,  res.data.fileName)
+            dispatch(updateProfilePicture(uri.data))
+            setProfilePic(uri.data)
+            console.log("uploadImageToStorage uri",uri)
         } catch (error) {
             console.log("pickImage, error", error)
         }
@@ -50,7 +55,7 @@ export default function EditProfile({ navigation }) {
             {show && (
                 <DateTimePicker
                 testID="dateTimePicker"
-                value={Dob ? Dob : new Date(1598051730000)}
+                value={new Date()}
                 mode={'date'}
                 is24Hour={true}
                 display="default" 
@@ -64,7 +69,7 @@ export default function EditProfile({ navigation }) {
                 </TouchableOpacity>
             </View>
             <TouchableOpacity activeOpacity={.8} onPress={() => pickImage()} style={styles.profilpage}>
-                <Image style={styles.man} source={profilePic ? {uri: profilePic.uri} : require('../../assets/02-tile.png')} />
+                <Image style={styles.man} source={profilePic ? {uri: profilePic} : require('../../assets/02-tile.png')} />
                 <Image style={styles.camera} source={require('../../assets/editcamera02.png')} />
             </TouchableOpacity>
             <View style={styles.field}>
@@ -96,6 +101,7 @@ export default function EditProfile({ navigation }) {
                             placeholder='Donatella-Nobatti@gmail.com'
                             onChangeText={(e) => setEmail(e)}
                             value={Email}
+                            disabled
 
                         />
                     </View>
@@ -110,6 +116,7 @@ export default function EditProfile({ navigation }) {
                             label="Phone Number"
                             placeholder='2545426532'
                         onChangeText={(e) => setPhone(e)}
+                        value={Phone}
 
                         />
                     </View>
@@ -127,7 +134,7 @@ export default function EditProfile({ navigation }) {
                             placeholder='March 08,1987'
                         onChangeText={(e) => setDob(e)}
                         disabled
-                        value={Dob ? Dob.toString() : ''}
+                        value={Dob ? moment(Dob).format('MM/DD/YYYY') : ''}
 
                         />
                     </TouchableOpacity>
@@ -142,6 +149,7 @@ export default function EditProfile({ navigation }) {
                             label="Address"
                             placeholder='Boston,MA 02101'
                         onChangeText={(e) => setAddress(e)}
+                        value={Address}
 
                         />
                     </View>

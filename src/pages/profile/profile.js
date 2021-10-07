@@ -16,24 +16,26 @@ export default function profile({ navigation }) {
     console.log("userData.user", userData)
      const [fullName, setFullName] = useState(userData.user ? userData.user.fullName : '')
      const [Email, setEmail] = useState(userData.user ? userData.user.email : '')
-     const [Phone, setPhone] = useState('')
-     const [Dob, setDob] = useState('')
-     const [Address, setAddress] = useState('')
+     const [Phone, setPhone] = useState(userData.user ? userData.user.contact : '')
+     const [Dob, setDob] = useState(userData.user ? userData.user.dob : '')
+     const [Address, setAddress] = useState(userData.user ? userData.user.address : '')
+     const [profilePic, setProfilePic] = useState(userData.user ? userData.user.profilePicture : '')
+
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={{ height: 800,backgroundColor:"#0e101f" }}  showsVerticalScrollIndicator={false}>
             <View style={{ flex: 2.5, }}>
                 <View style={styles.profilpage}>
-                    <Image style={styles.man} source={require('../../assets/02-tile.png')} />
+                    <Image style={styles.man} source={profilePic ? {uri: profilePic} : require('../../assets/02-tile.png')}/>
                     <Text style={styles.manname}>{fullName}</Text>
-                    <Text style={styles.city}>Boston,MA 02101</Text>
+                    <Text style={styles.city}>{Address}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                     <View style={styles.myprofile}>
                         <View style={{ flex: 1, }}>
                             <Text style={styles.profiledv}>My Profile</Text>
                             <Text style={styles.totalprofile}>02</Text>
-                        </View>
+                        </View> 
                         <View style={{
                             width:20, marginTop: 13, backgroundColor: "#717171", height: 0.4, transform: [
                                 { rotateY: "60deg" },

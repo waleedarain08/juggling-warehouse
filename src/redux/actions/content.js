@@ -143,7 +143,7 @@ export const searchContent = (searchKeyword) => {
         let { data } = await getApi(`${base_url}/content/search?keyword=${searchKeyword}`, '', token.token)
       
       if (data.isSuccess) {
-          dispatch({type: SEARCHED_CONTENT_FETCHED, payload: data});
+          dispatch({type: SEARCHED_CONTENT_FETCHED, payload: data.data});
           return Promise.resolve({ status: true })
       } else {
         Alert.alert("error", data.message)
