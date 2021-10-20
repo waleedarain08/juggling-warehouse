@@ -49,7 +49,6 @@ export default function CategoryContent({ navigation, route }) {
         
       ]
     
-      console.log("loading", loading, "categoryContents", categoryContents)
   return (
     <View style={styles.container}>
         <Loader visible={loading} />

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Input, CheckBox } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { userLogin, userSignin } from '../../redux/actions';
+import { registerDevice, userLogin, userSignin } from '../../redux/actions';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import { useForm, Controller } from "react-hook-form";
 import auth, { firebase } from '@react-native-firebase/auth';
@@ -14,12 +14,12 @@ import {
 } from '@react-native-google-signin/google-signin';
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { saveDataInAsyncStorage } from '../../helper/utils';
+import { getDeviceToken, saveDataInAsyncStorage } from '../../helper/utils';
 
 
 
 
-function Login({ navigation, userInfo, userLogin, userSignin }) {
+function Login({ navigation, userInfo, userLogin, userSignin, registerDevice }) {
   const [isLoading, setIsLoading] = useState(false);
   const [checked, setChecked] = useState(true);
   const { control, handleSubmit, formState: { errors } } = useForm();
@@ -39,6 +39,8 @@ function Login({ navigation, userInfo, userLogin, userSignin }) {
         }
         saveDataInAsyncStorage("token", JSON.stringify(data))
         userSignin(token);
+        const fcmToken = await getDeviceToken()
+        registerDevice({fcmToken: fcmToken, userId: userCredential.user.uid, type: Platform.OS})
       })
       .catch(error => {
         
@@ -72,13 +74,15 @@ function Login({ navigation, userInfo, userLogin, userSignin }) {
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
     // Sign-in the user with the credential
-    auth().signInWithCredential(googleCredential).then(() => {
+    auth().signInWithCredential(googleCredential).then(async () => {
       var data = {
         user: user, 
         token: idToken
       }
       saveDataInAsyncStorage("token", JSON.stringify(data))
       userLogin(data);
+      const fcmToken = await getDeviceToken()
+      registerDevice({fcmToken: fcmToken, userId: user.id, type: Platform.OS})
     }).catch(error => {
       //console.error(error);
     });
@@ -103,10 +107,12 @@ function Login({ navigation, userInfo, userLogin, userSignin }) {
     const facebookCredential = auth.FacebookAuthProvider.credential(data.accessToken);
 
     // Sign-in the user with the credential
-    auth().signInWithCredential(facebookCredential).then(() => {
+    auth().signInWithCredential(facebookCredential).then(async () => {
       var data = {user: facebookCredential, token: facebookCredential.token}
       saveDataInAsyncStorage("token", JSON.stringify(data))
       userLogin(data);
+      const fcmToken = await getDeviceToken()
+      registerDevice({fcmToken: fcmToken, userId: facebookCredential.providerId, type: Platform.OS})
     }).catch(error => {
       console.error(error);
     });
@@ -252,7 +258,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ userLogin, userSignin }, dispatch);
+  bindActionCreators({ userLogin, userSignin, registerDevice }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 

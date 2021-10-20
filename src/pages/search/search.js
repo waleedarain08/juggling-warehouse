@@ -5,12 +5,13 @@ import { bindActionCreators } from 'redux';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { userLogout } from '../../redux/actions';
 import { searchContent } from '../../redux/actions/content';
-
+import Loader from '..//../components/loader/loader'
 
 
 export default function search({ navigation }) {
     const dispatch = useDispatch()
     const searchContentArr = useSelector(state => state.content.searchContent)
+    const fetching = useSelector(state => state.content.loading)
     const [search, setSearch] = useState("");
 
     const onSearch = async (text) => {
@@ -18,12 +19,13 @@ export default function search({ navigation }) {
         const result =  dispatch(searchContent(text))
     }
 
-    console.log("searchContent", searchContentArr)
+    console.log("searchContent", searchContentArr, fetching)
     return (
         <View style={styles.container}>
             {/* <View style={styles.searchbar}>
                 <Text style={styles.serc}>Search</Text>
             </View> */}
+            <Loader visible={fetching} />
             <View>
                 <SearchBar
                     platform="ios"

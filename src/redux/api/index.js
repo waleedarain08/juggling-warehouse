@@ -9,7 +9,7 @@ export const getApi = async (url, data, token) => {
         'Authorization': `Bearer ${token}`, 
       }
     })
-    console.log(response, "response")
+    // console.log(response, "response")
     if (response.status == 200) {
       return Promise.resolve({
         status: 'success',
@@ -30,7 +30,6 @@ export const postApi = async (url, data, auth) => {
         'Authorization': `Bearer ${auth}`, 
       }
     })
-    console.log("response",response)
     if (response.status == 200) {
       return Promise.resolve({
         status: 'success',
@@ -52,7 +51,7 @@ export const putApi = async (url, data, auth) => {
         'Authorization': `Bearer ${auth}`, 
       }
     })
-    console.log(response, "response")
+    // console.log(response, "response")
     if (response.status == 200) {
       return Promise.resolve({
         status: 'success',
@@ -73,7 +72,7 @@ export const patchApi = async (url, data, auth) => {
         'Authorization': `Bearer ${auth}`, 
       }
     })
-    console.log(response, "response")
+    // console.log(response, "response")
     if (response.status == 200) {
       return Promise.resolve({
         status: 'success',

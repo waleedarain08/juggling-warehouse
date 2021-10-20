@@ -133,3 +133,24 @@ export const updateProfilePicture = (uri) => {
     }
   }
 }
+
+export const registerDevice = (body) => {
+  return async (dispatch) => {
+    try {
+      dispatch({type: FETCHING})
+      let token = await getDataFromAsyncStorage('token')
+      const { data } =await postApi(`${base_url}/user/device`, body, token.token)
+      console.log("isSuccess registerDevice", data, body)
+
+      if (data.isSuccess) {
+
+     
+        } else {
+          console.log("error registerDevice", data.message)
+        }
+
+    } catch (error) {
+      console.log("error registerDevice", error)
+    }
+  }
+}

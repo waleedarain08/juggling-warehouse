@@ -52,9 +52,8 @@ export const VideoPlayer = ({navigation, route}) => {
                 onError={(e) => {console.log("onError", e)}}         // Callback when video cannot be loaded
                 style={styles.backgroundVideo}
                 onLoadStart={() => console.log("ONLOAD START")}
-                controls
                 onVideoEnd={(status) => {
-                    this.setState({ progress: 0, buttons: true })
+                    // this.setState({ progress: 0, buttons: true })
                 }}
             />
     )

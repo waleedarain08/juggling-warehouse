@@ -434,7 +434,6 @@ function RootContainer({ user,userLogin }) {
   useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
-      console.log("navigator useEffect")
       auth().onIdTokenChanged(async (user) => {
         const idToken = await user.getIdToken(true)
         var data = {
@@ -445,7 +444,6 @@ function RootContainer({ user,userLogin }) {
       })
 
       var token = await getDataFromAsyncStorage('token')
-      console.log("userData token", token)
 
       if (token !== null) {
         setTimeout(() => {
